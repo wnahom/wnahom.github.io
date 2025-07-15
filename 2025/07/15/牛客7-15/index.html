@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="mohan">
+
+
+
+
+
+<title>牛客7.15 | nahom&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">nahom&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tags">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">nahom&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tags">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">牛客7.15</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">mohan</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 15, 2025&nbsp;&nbsp;15:19:22</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="牛客笔记7-15"><a href="#牛客笔记7-15" class="headerlink" title="牛客笔记7.15"></a>牛客笔记7.15</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a><strong>问题描述</strong></h4><p>给定一个长度为 <code>n</code> 的数组，每天增大其中一个数的值。每次操作后，计算有多少数满足：在与其他所有数的比较中，至少输掉了 ⌈(n-1)&#x2F;2⌉ 次（即该数小于至少一半的其他数）。</p>
+<h4 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a><strong>核心思路</strong></h4><ol>
+<li><p><strong>观察</strong>：</p>
+<ul>
+<li>对于总元素数 <code>n</code>，⌈(n-1)&#x2F;2⌉ 等价于 <code>n - ⌊n/2⌋</code>。</li>
+<li>例如：<ul>
+<li><code>n=5</code> 时，⌈(5-1)&#x2F;2⌉ &#x3D; 2，即需要小于至少 2 个数。</li>
+<li><code>n=6</code> 时，⌈(6-1)&#x2F;2⌉ &#x3D; 3，即需要小于至少 3 个数。</li>
+</ul>
+</li>
+<li>因此，问题转化为：<strong>每次操作后，统计严格小于第 <code>m = n - ⌊n/2⌋</code> 小元素的数的数量</strong>。</li>
+</ul>
+</li>
+<li><p><strong>数据结构选择</strong>：</p>
+<p>使用 <code>ordered_set</code>维护动态有序集合。</p>
+<p>功能：</p>
+<p>​	插入 &#x2F; 删除元素：O (log n)</p>
+<p>​	查询第 k 小元素：<code>find_by_order(k)</code> → O(log n)</p>
+<p>​	查询元素排名：<code>order_of_key(key)</code> → O(log n)</p>
+</li>
+</ol>
+<h4 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ext/pb_ds/assoc_container.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ext/pb_ds/tree_policy.hpp&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> __gnu_pbds;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;ll, ll&gt; pll;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义比较函数：先按值比较，值相同时按唯一标识比较</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">comp</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> pll&amp; a, <span class="type">const</span> pll&amp; b)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (a.first != b.first) <span class="keyword">return</span> a.first &lt; b.first;</span><br><span class="line">        <span class="keyword">return</span> a.second &lt; b.second;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义支持顺序统计的有序集合</span></span><br><span class="line"><span class="keyword">typedef</span> tree&lt;pll, null_type, comp,rb_tree_tag,tree_order_statistics_node_update&gt; ordered_set;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="type">int</span> n, q;</span><br><span class="line">        cin &gt;&gt; n &gt;&gt; q;</span><br><span class="line">        <span class="function">vector&lt;ll&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) cin &gt;&gt; a[i];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 初始化有序集合，每个元素是&#123;值, 唯一标识&#125;</span></span><br><span class="line">        ordered_set o;</span><br><span class="line">        <span class="function">vector&lt;pll&gt; <span class="title">pp</span><span class="params">(n)</span></span>;</span><br><span class="line">        ll id = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            pll p = &#123;a[i], id++&#125;;</span><br><span class="line">            pp[i] = p;</span><br><span class="line">            o.<span class="built_in">insert</span>(p);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 计算关键参数m = n - ⌊n/2⌋</span></span><br><span class="line">        <span class="type">int</span> k = n / <span class="number">2</span>;</span><br><span class="line">        <span class="type">int</span> m = n - k;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 处理每次查询</span></span><br><span class="line">        <span class="keyword">while</span> (q--) &#123;</span><br><span class="line">            <span class="type">int</span> p;</span><br><span class="line">            ll v1;</span><br><span class="line">            cin &gt;&gt; p &gt;&gt; v1;</span><br><span class="line">            p--; <span class="comment">// 转换为0-based索引</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 移除旧值，插入新值</span></span><br><span class="line">            pll p1 = pp[p];</span><br><span class="line">            o.<span class="built_in">erase</span>(p1);</span><br><span class="line">            ll v2 = p<span class="number">1.f</span>irst + v1;</span><br><span class="line">            pll p2 = &#123;v2, id++&#125;;</span><br><span class="line">            o.<span class="built_in">insert</span>(p2);</span><br><span class="line">            pp[p] = p2;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 查询第m小的元素的值s</span></span><br><span class="line">            <span class="keyword">auto</span> it = o.<span class="built_in">find_by_order</span>(m);</span><br><span class="line">            ll s = it-&gt;first;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 统计严格小于s的元素数量</span></span><br><span class="line">            ll ans = o.<span class="built_in">order_of_key</span>(<span class="built_in">pll</span>(s, <span class="number">0</span>));</span><br><span class="line">            cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="关键步骤解析"><a href="#关键步骤解析" class="headerlink" title="关键步骤解析"></a><strong>关键步骤解析</strong></h4><ol>
+<li><strong>初始化阶段</strong>：<ul>
+<li>将每个元素存储为 <code>&#123;值, 唯一标识&#125;</code> 的形式，确保元素的唯一性。</li>
+<li>唯一标识通过递增的 <code>id</code> 生成，避免值相同的元素冲突。</li>
+</ul>
+</li>
+<li><strong>查询参数计算</strong>：<ul>
+<li><code>k = n / 2</code>：计算 ⌊n&#x2F;2⌋。</li>
+<li><code>m = n - k</code>：即 <code>n - ⌊n/2⌋</code>，表示需要找到的第 <code>m</code> 小的元素位置。</li>
+</ul>
+</li>
+<li><strong>动态更新</strong>：<ul>
+<li>每次更新时，先删除旧值，再插入新值（值增加后的结果）。</li>
+<li>通过 <code>find_by_order(m)</code> 查询第 <code>m</code> 小的元素的值 <code>s</code>。</li>
+</ul>
+</li>
+<li><strong>结果统计</strong>：<ul>
+<li>使用 <code>order_of_key(pll(s, 0))</code> 统计严格小于 <code>s</code> 的元素数量，即为答案。</li>
+</ul>
+</li>
+</ol>
+<h4 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a><strong>复杂度分析</strong></h4><ul>
+<li><strong>初始化</strong>：O (n log n)（插入 n 个元素）</li>
+<li><strong>单次查询</strong>：O (log n)（删除、插入、查询排名各一次）</li>
+<li><strong>总体复杂度</strong>：O(n log n + q log n)</li>
+</ul>
+<h4 id="ordered-set"><a href="#ordered-set" class="headerlink" title="ordered_set"></a><code>ordered_set</code></h4><p>基于红黑树实现，支持动态维护有序集合。</p>
+<p>核心操作：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">insert</span>(key)           <span class="comment">// 插入元素，O(log n)</span></span><br><span class="line"><span class="built_in">erase</span>(key)            <span class="comment">// 删除元素，O(log n)</span></span><br><span class="line"><span class="built_in">find_by_order</span>(k)      <span class="comment">// 查询第k小的元素，O(log n)</span></span><br><span class="line"><span class="built_in">order_of_key</span>(key)     <span class="comment">// 查询小于key的元素数量，O(log n)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="ordered-set模板"><a href="#ordered-set模板" class="headerlink" title="ordered_set模板"></a><code>ordered_set</code><strong>模板</strong></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> tree&lt;Key, Mapped, Compare, Tag, Node_Update&gt; ordered_set;</span><br><span class="line"><span class="keyword">typedef</span> tree&lt;pll, null_type, comp,rb_tree_tag,tree_order_statistics_node_update&gt; ordered_set;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>**<code>Key</code>**：存储的元素类型（如 <code>int</code>, <code>ll</code>, <code>pair&lt;ll, ll&gt;</code> 等）。</p>
+<ul>
+<li>示例：<code>tree&lt;int, null_type, ...&gt;</code> 存储整数。</li>
+</ul>
+</li>
+<li><p>**<code>Mapped</code>**：</p>
+<ul>
+<li><code>null_type</code>：表示这是一个集合（Set）。</li>
+<li>若为 <code>map</code>，可指定映射类型（如 <code>tree&lt;int, int, ...&gt;</code> 表示键值对）。</li>
+</ul>
+</li>
+<li><p>**<code>Compare</code>**：比较函数，定义元素的排序规则。</p>
+<ul>
+<li><p>升序排列</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">comp</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> <span class="type">int</span>&amp; a, <span class="type">const</span> <span class="type">int</span>&amp; b)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a &lt; b;  <span class="comment">// 升序排列</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>**<code>Tag</code>**：底层数据结构类型。</p>
+<ul>
+<li><code>rb_tree_tag</code>：红黑树（平衡二叉搜索树）。</li>
+<li><code>splay_tree_tag</code>：伸展树（自适应树）。</li>
+</ul>
+</li>
+<li><p>**<code>Node_Update</code>**：节点更新策略。</p>
+<ul>
+<li><code>tree_order_statistics_node_update</code>：启用顺序统计功能。</li>
+<li>提供两个关键方法：<ul>
+<li><code>order_of_key(k)</code>：返回小于 <code>k</code> 的元素数量。</li>
+<li><code>find_by_order(k)</code>：返回第 <code>k</code> 小的元素的迭代器（从 0 开始）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="ordered-set-的常用操作"><a href="#ordered-set-的常用操作" class="headerlink" title="ordered_set 的常用操作"></a><strong>ordered_set 的常用操作</strong></h4><p>以下是 <code>ordered_set</code> 的核心操作及时间复杂度：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>代码示例</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>插入元素</td>
+<td><code>os.insert(key)</code></td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>删除元素</td>
+<td><code>os.erase(key)</code></td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>查询元素是否存在</td>
+<td><code>os.find(key) != os.end()</code></td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>查询第 k 小的元素</td>
+<td><code>*os.find_by_order(k)</code></td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>查询小于 key 的元素数量</td>
+<td><code>os.order_of_key(key)</code></td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>查询元素的排名</td>
+<td><code>os.order_of_key(key)</code></td>
+<td>O(log n)</td>
+</tr>
+<tr>
+<td>获取集合大小</td>
+<td><code>os.size()</code></td>
+<td>O(1)</td>
+</tr>
+</tbody></table>
+<h4 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ext/pb_ds/assoc_container.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ext/pb_ds/tree_policy.hpp&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> __gnu_pbds;</span><br><span class="line"><span class="comment">// 定义存储int类型的ordered_set</span></span><br><span class="line"><span class="keyword">typedef</span> tree&lt;<span class="type">int</span>, null_type, less&lt;<span class="type">int</span>&gt;, rb_tree_tag,</span><br><span class="line">             tree_order_statistics_node_update&gt; ordered_set;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ordered_set os;</span><br><span class="line">    <span class="comment">// 插入元素</span></span><br><span class="line">    os.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">    os.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">    os.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">    <span class="comment">// 查询第 0 小的元素（最小元素）</span></span><br><span class="line">    cout &lt;&lt; *os.<span class="built_in">find_by_order</span>(<span class="number">0</span>) &lt;&lt; endl;  <span class="comment">// 输出: 1</span></span><br><span class="line">    <span class="comment">// 查询元素 2 的排名（小于 2 的元素数量）</span></span><br><span class="line">    cout &lt;&lt; os.<span class="built_in">order_of_key</span>(<span class="number">2</span>) &lt;&lt; endl;    <span class="comment">// 输出: 1</span></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    os.<span class="built_in">erase</span>(<span class="number">2</span>);</span><br><span class="line">    <span class="comment">// 验证元素是否存在</span></span><br><span class="line">    cout &lt;&lt; (os.<span class="built_in">find</span>(<span class="number">2</span>) != os.<span class="built_in">end</span>()) &lt;&lt; endl;  <span class="comment">// 输出: 0 (false)</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="pair-类型"><a href="#pair-类型" class="headerlink" title="pair 类型"></a><strong>pair 类型</strong></h4><p>在之前的算法中，我们使用 <code>pair&lt;ll, ll&gt;</code> 存储元素，确保值相同时通过唯一标识区分：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">comp</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> pair&lt;ll, ll&gt;&amp; a, <span class="type">const</span> pair&lt;ll, ll&gt;&amp; b)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (a.first != b.first) <span class="keyword">return</span> a.first &lt; b.first;  <span class="comment">// 优先按值排序</span></span><br><span class="line">        <span class="keyword">return</span> a.second &lt; b.second;      <span class="comment">// 值相同时按唯一标识排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> tree&lt;pair&lt;ll, ll&gt;, null_type, comp, rb_tree_tag,</span><br><span class="line">             tree_order_statistics_node_update&gt; ordered_set;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line">ordered_set os;</span><br><span class="line">ll id = <span class="number">0</span>;</span><br><span class="line">os.<span class="built_in">insert</span>(&#123;<span class="number">3</span>, id++&#125;);  <span class="comment">// &#123;值, 唯一标识&#125;</span></span><br><span class="line">os.<span class="built_in">insert</span>(&#123;<span class="number">1</span>, id++&#125;);</span><br><span class="line">os.<span class="built_in">insert</span>(&#123;<span class="number">3</span>, id++&#125;);  <span class="comment">// 两个值为3的元素通过id区分</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="对比其他数据结构"><a href="#对比其他数据结构" class="headerlink" title="对比其他数据结构"></a><strong>对比其他数据结构</strong></h4><table>
+<thead>
+<tr>
+<th>数据结构</th>
+<th>查询排名</th>
+<th>查询第 k 小</th>
+<th>插入 &#x2F; 删除</th>
+<th>支持重复元素</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ordered_set</code></td>
+<td>O(log n)</td>
+<td>O(log n)</td>
+<td>O(log n)</td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>std::set</code></td>
+<td>❌</td>
+<td>❌</td>
+<td>O(log n)</td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>std::multiset</code></td>
+<td>❌</td>
+<td>❌</td>
+<td>O(log n)</td>
+<td>是</td>
+</tr>
+<tr>
+<td>线段树</td>
+<td>O(log n)</td>
+<td>O(log n)</td>
+<td>O(log n)</td>
+<td>是</td>
+</tr>
+</tbody></table>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>mohan</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span><strong>Learning</strong> is a kind of <strong>FAITH</strong>!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AE%97%E6%B3%95/"># 算法</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/07/14/%E7%9B%AE%E6%A0%87%E6%98%AF%E6%AF%92%E5%A5%B6%E7%89%A7%E9%AB%98%E6%89%8B/">目标是毒奶牧高手</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© mohan | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
