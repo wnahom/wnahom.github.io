@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="mohan">
+
+
+
+
+
+<title>牛客7.17 | nahom&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">nahom&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tags">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">nahom&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tags">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">牛客7.17</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">mohan</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 18, 2025&nbsp;&nbsp;13:30:47</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="Problem-A-新太阳睡觉中心"><a href="#Problem-A-新太阳睡觉中心" class="headerlink" title="Problem A. 新太阳睡觉中心"></a><strong>Problem A.</strong> 新太阳睡觉中心</h3><p>Input file: standard input</p>
+<p>Output file: standard output</p>
+<p>Time limit: 2 seconds</p>
+<p>Memory limit: 512 megabytes</p>
+<p>’Cause morning rolls around, and it’s another day of sun!</p>
+<p>但是作为一个睡瘾患者，肖恩经常睡觉睡个半天，因此，当他醒来时，他甚至记不清今天是星期几。</p>
+<p>所以从某一天开始，他开始进行记录：每次他醒来的时候，他就会写下一个数字，表示此时外面是否有阳光。如果有，他会写一个 1；否则，他会写一个 0。在完成记录后，还没等太阳下山，或是太阳升起，他又再次入睡。假设每次肖恩醒来时，他看到的要么是阳光，要么是月光，但不会同时看到两者。</p>
+<p>这些记录下来的数字实际上形成了一个长度为 <em>n</em> 的数组：[<em>a</em>1*, a<em>2</em>, . . . , an] (<em>∀1 <em>≤</em> <em>i</em> <em>≤</em> <em>n,</em> 0 <em>≤</em> <em>ai</em> <em>≤</em> 1)，其中</em>ai* 表示肖恩写下的第 <em>i</em> 个数字。</p>
+<p>然而，随着时间的推移，一些写下的数字变得模糊不清，你无法判断它是 1 还是 0。如果有 <em>k</em> 个数字无法识别，则可能有 $2^k$ 种不同的数组。</p>
+<p>对于每个可能的数组，你都可以依据这个数组计算肖恩看到阳光的最小天数。如果将可能的不同数组的最小天数结果相加，得到的结果如何呢？由于答案可能很大，请将结果关于 998 244 353 取模后输出。</p>
+<p><strong>Input</strong></p>
+<p>每组测试包含多个测试用例。第一行是测试用例的数量 <em>T</em> (1 <em>≤</em> <em>T</em> <em>≤</em> $10^4$ )。</p>
+<p>每个测试用例由两行组成。</p>
+<p>第一行包含一个整数 <em>n</em> (2 <em>≤</em> <em>n</em> <em>≤</em> 5 <em>×</em> $10^5$ )，表示笔记的数量。</p>
+<p>第二行包含 <em>n</em> 个整数 <em>a</em>1*, a<em>2</em>, . . . , an* (<em>−</em>1 <em>≤</em> <em>ai</em> <em>≤</em> 1)，表示每个记录下来的数字。只有当 <em>ai</em> &#x3D; <em>−</em>1 时，数字是未知的。</p>
+<p>可以保证单组测试中， $\sum$<em>n</em> 不会超过 5 <em>×</em> $$10^5$$。</p>
+<p><strong>Output</strong></p>
+<p>对于每个测试用例，输出 1 个整数 — 不同数组的最小天数求和后，对 998 244 353 取模的结果。</p>
+<p><strong>Example</strong></p>
+<p><strong>standard input</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">3</span><br><span class="line">1 0 1</span><br><span class="line">3</span><br><span class="line">0 0 0</span><br><span class="line">3</span><br><span class="line">1 -1 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>standard output</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">0</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note</strong></p>
+<p>在第一个测试用例中，当肖恩记录第一个和第三个数字 1 时，他看到的阳光一定是两个不同的天的。</p>
+<p>在第二个测试用例中，肖恩从未看到阳光，因此答案是 0。</p>
+<p>在第三个测试用例中，数组可能是 [1*,* 1*,* 1] 或 [1*,* 0*,* 1]。如果数组是 [1*,* 1*,* 1]，那么这些数字可能都是同一天被记录下来的，因此结果是 1。如果数组是 [1*,* 0*,* 1]，那么与第一个测试用例一致，结果为 2。将两种情况的答案求和，结果是 1 + 2 &#x3D; 3。</p>
+<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>“最小阳光天数” 的总和相当于：所有位置在所有可能数组中作为 “新阳光段起始点” 的次数之和。</p>
+<p>而能作为起始点的位置<code>i</code>需满足：</p>
+<ol>
+<li>该位置的值为 1（或 - 1 替换为 1）；</li>
+<li>前一个位置<code>i-1</code>的值不为 1（或 - 1 替换为 0）（若<code>i=0</code>则无此限制）。</li>
+</ol>
+<p>累加每个位置作为起始点的次数即为答案。</p>
+<h4 id="1-预处理"><a href="#1-预处理" class="headerlink" title="1. 预处理"></a>1. 预处理</h4><p>由于 - 1 可替换为 0 或 1，总共有$2^k$种可能数组（<code>k</code>是 - 1 的数量）。预计算v[i] &#x3D; $2^i$ mod 998244353，可以快速得到当前位置的贡献的大小。</p>
+<h4 id="2-遍历每个位置计算贡献"><a href="#2-遍历每个位置计算贡献" class="headerlink" title="2. 遍历每个位置计算贡献"></a>2. 遍历每个位置计算贡献</h4><p>对每个位置<code>i</code>，计算起始点次数：</p>
+<p><strong>1.<code>i=0</code>（第一个元素）</strong><br>只需满足 i 位置为 1 ：</p>
+<ul>
+<li>若原数组<code>a[0] = 1</code>：所有<code>k</code>个 - 1 可任意替换，贡献为<code>v[k]</code>；</li>
+<li>若原数组<code>a[0] = -1</code>：需将其固定为 1，剩余<code>k-1</code>个 - 1 可任意替换，贡献为<code>v[k-1]</code>（若<code>k≥1</code>）；</li>
+<li>若原数组<code>a[0] = 0</code>：无法作为起始点，贡献为 0。</li>
+</ul>
+<p><strong>2.<code>i&gt;0</code>（非第一个元素）</strong><br>需满足  i 位置为 1 且 <code>i-1</code>不为 1 ：</p>
+<ul>
+<li>若前一个位置<code>a[i-1] = 1</code>：无法作为起始点，贡献为 0；</li>
+<li>否则，计算 “固定 - 1 的数量”：<ul>
+<li>若<code>a[i] = -1</code>：需固定为 1（+1）；</li>
+<li>若<code>a[i-1] = -1</code>：需固定为 0（+1）；</li>
+</ul>
+</li>
+<li>剩余可自由替换的 - 1 数量为<code>k - 固定数</code>，贡献为<code>v[剩余数]</code>（若剩余数≥0）。</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MOD=<span class="number">998244353</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAX=<span class="number">5e5</span><span class="number">+10</span>;</span><br><span class="line"><span class="function">vector&lt;ll&gt; <span class="title">v</span><span class="params">(MAX)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    v[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;MAX;++i) v[i]=(v[i<span class="number">-1</span>]*<span class="number">2</span>)%MOD;</span><br><span class="line">    <span class="type">int</span> T;cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">        <span class="function">vector&lt;ll&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="type">int</span> k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">            cin&gt;&gt;a[i];</span><br><span class="line">            <span class="keyword">if</span>(a[i]==<span class="number">-1</span>)k++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        ll ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i]==<span class="number">0</span>)<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(a[i]==<span class="number">1</span>)ans=(ans+v[k])%MOD;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(k&gt;=<span class="number">1</span>)ans=(ans+v[k<span class="number">-1</span>])%MOD;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                ll p=a[i<span class="number">-1</span>];</span><br><span class="line">                <span class="keyword">if</span>(p==<span class="number">1</span>)<span class="keyword">continue</span>;</span><br><span class="line">                ll c=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">if</span>(a[i]==<span class="number">-1</span>)c++;</span><br><span class="line">                <span class="keyword">if</span>(p==<span class="number">-1</span>)c++;</span><br><span class="line">                ll t=k-c;</span><br><span class="line">                <span class="keyword">if</span>(t&gt;=<span class="number">0</span>)ans=(ans+v[t])%MOD;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;ans%MOD&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度</strong>：<code>O(Tn)</code></p>
+<h3 id="Problem-B-位完美"><a href="#Problem-B-位完美" class="headerlink" title="Problem B. 位完美"></a><strong>Problem B.</strong> 位完美</h3><p>Input file: standard input</p>
+<p>Output file: standard output</p>
+<p>Time limit: 2 seconds</p>
+<p>Memory limit: 512 megabytes</p>
+<p>军蚁正在为一场残酷的战争做准备，但事情变得比他们想象的更复杂。</p>
+<p>队伍中有 <em>n</em> 只军蚁。最初，每只军蚁 <em>i</em> (1 <em>≤</em> <em>i</em> <em>≤</em> <em>n</em>) 的力量为 <em>ai</em>。</p>
+<p>然而，在战争期间会发生一些奇怪的事情：一股神秘力量会随机选择一个二元组 (<em>i, j</em>) (1 <em>≤</em> <em>i &lt; j</em> <em>≤</em> <em>n</em>)，</p>
+<p>而选择后，蚂蚁 <em>i</em> 和蚂蚁 <em>j</em> 会消失，并且一只新蚂蚁会替代它们神奇地出现，其力量为 <em>ai</em> <em>⊕</em> <em>aj</em>，即 <em>ai</em>和 <em>aj</em> 的按位异或（XOR）。</p>
+<p>这种情况非常罕见，在整个战争中最多只会发生一次。</p>
+<p>蚂蚁们认为整个队伍的总力量为$\sum_{i&#x3D;1}^{n}$ $2^{a_i}$ ，如果那件”奇怪的事”永远不会减少军队的整体力量，则这个军队被认为是 位完美 的。</p>
+<p>由于忙于练兵，蚂蚁们没有足够的时间来检查队伍是否位完美。你能帮帮他们吗？可能会有 <em>T</em> 支不同的军队。</p>
+<p><strong>Input</strong></p>
+<p>每组测试包含多个测试用例。第一行包含测试用例的数量 <em>T</em> (1 <em>≤</em> <em>T</em> <em>≤</em> 105 )。</p>
+<p>每个测试用例由两行组成。</p>
+<p>第一行包含一个整数 <em>n</em> (2 <em>≤</em> <em>n</em> <em>≤</em> 5 <em>×</em> 105 )，表示队伍中蚂蚁的数量。</p>
+<p>第二行包含 <em>n</em> 个整数 <em>a</em>1*, a<em>2</em>, . . . , an* (1 <em>≤</em> <em>ai</em> <em>≤</em> 1018)，表示每只蚂蚁的力量。</p>
+<p>保证在单组测试中， P<em>n</em> 不会超过 5 <em>×</em> 105。</p>
+<p><strong>Output</strong></p>
+<p>对于每个测试用例，如果该军队是 位完美 的，则输出 YES，否则输出 NO。你可以以任意大小写打印答案。</p>
+<p><strong>Input</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">2</span><br><span class="line">3 5</span><br><span class="line">4</span><br><span class="line">1 2 4 8</span><br><span class="line">3</span><br><span class="line">1 2 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">YES</span><br><span class="line">NO</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note</strong></p>
+<p>在第一个测试用例中，如果两只蚂蚁合并，由于 3 <em>⊕</em> 5 &#x3D; 6，整个队伍的总力量从 $2^3$ + $2^5$ &#x3D; 40 变为</p>
+<p>$2^6$ &#x3D; 64，因此该事件不会减少总力量。所以该队伍是<strong>位运算完美</strong>。</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>问题的核心在于：任意一对蚂蚁合并后阵容的总强度不会降低。</p>
+<ol>
+<li><strong>重复力量降低</strong>：使用 <code>set</code> 存储蚂蚁的力量值，检查是否存在重复的力量值。如果存在重复，那么合并后一定会降低阵容的总强度，故直接输出 “NO”。</li>
+<li><strong>枚举</strong>：对于每一对不同的蚂蚁 <code>(i, j)</code>，计算合并后的力量值 <code>a[i] ^ a[j]</code>。如果合并后总强度降低，则输出 “NO”。</li>
+<li><strong>结果</strong>：如果所有蚂蚁对合并后总强度都不降低，则输出 “YES”。</li>
+</ol>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> T;cin &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="type">int</span> n;</span><br><span class="line">        cin &gt;&gt; n;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">long</span> <span class="type">long</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;cin &gt;&gt; a[i];&#125;</span><br><span class="line">        <span class="function">set&lt;<span class="type">long</span> <span class="type">long</span>&gt; <span class="title">s</span><span class="params">(a.begin(), a.end())</span></span>;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">size</span>() != n) &#123;</span><br><span class="line">            cout&lt;&lt;<span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">bool</span> f = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n &amp;&amp; f; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">                ll x = <span class="built_in">min</span>(a[i], a[j]);</span><br><span class="line">                ll y = <span class="built_in">max</span>(a[i], a[j]);</span><br><span class="line">                ll d = y - x;</span><br><span class="line">                ll b = x &amp; y;</span><br><span class="line">                ll tt = y - <span class="number">2</span> * b;</span><br><span class="line">                <span class="keyword">if</span> (tt &lt; <span class="number">0</span> || (tt &gt;= <span class="number">0</span> &amp;&amp; tt &lt;= d)) &#123;</span><br><span class="line">                    f = <span class="literal">false</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (f) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><ul>
+<li><strong>时间复杂度</strong>： <strong>O($Tn^2$)</strong></li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>mohan</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span><strong>Learning</strong> is a kind of <strong>FAITH</strong>!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AE%97%E6%B3%95/"># 算法</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/07/15/%E7%89%9B%E5%AE%A27-15/">牛客7.15</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© mohan | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
