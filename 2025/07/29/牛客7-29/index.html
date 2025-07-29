@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="mohan">
+
+
+
+
+
+<title>牛客7.29 | nahom&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">nahom&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">nahom&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">牛客7.29</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">mohan</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 29, 2025&nbsp;&nbsp;13:47:03</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Problem-I-Block-Combination-Minimal-Perimeter"><a href="#Problem-I-Block-Combination-Minimal-Perimeter" class="headerlink" title="Problem I. Block Combination Minimal Perimeter"></a>Problem I. Block Combination Minimal Perimeter</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定 n 个矩形方块，其中第 i 个方块的尺寸为 (1 $\times$ i)（即宽为 1，长为i）。要求将所有方块无重叠、无空隙地组合成一个实心矩形，求出该矩形的最小周长。若无法组合（题目保证一定可以组合），无需额外处理。</p>
+<h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><ul>
+<li>第一行：整数 n，表示方块的数量。</li>
+</ul>
+<h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3><ul>
+<li>(1 $\leq n $$\leq 2 $$\times 10^5$)</li>
+</ul>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>组合成的矩形的最小周长。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="1-总面积计算"><a href="#1-总面积计算" class="headerlink" title="1. 总面积计算"></a>1. 总面积计算</h3><p>每个方块的面积为其长与宽的乘积，即第 i 个方块的面积为 (1$\times i &#x3D; i$)。因此，n 个方块的总面积 S 为前 n 个正整数的和，计算公式为：(S &#x3D; $\frac{n(n+1)}{2}$) 该面积也是组合后矩形的面积，即矩形的长 a 与宽 b 需满足 (a $\times$ b &#x3D; S)。</p>
+<h3 id="2-最小周长的核心逻辑"><a href="#2-最小周长的核心逻辑" class="headerlink" title="2. 最小周长的核心逻辑"></a>2. 最小周长的核心逻辑</h3><p>矩形的周长公式为 (2 $\times$ (a + b))。在面积固定时，a 与 b 越接近，(a + b) 的值越小，对应的周长也越小。因此，问题转化为寻找满足 (a $\times$ b &#x3D; S) 且 (a $\leq$ b) 的整数对 ((a, b))，使得 (a + b) 最小。</p>
+<h3 id="3-高效枚举因子对"><a href="#3-高效枚举因子对" class="headerlink" title="3. 高效枚举因子对"></a>3. 高效枚举因子对</h3><p>为找到最优的 a 和 b，需枚举所有可能的因子：</p>
+<ul>
+<li>枚举范围为 1 到 ($\sqrt{S}$)，对于每个整数 a，若 a 是 S 的因子，则对应的宽为 (b &#x3D; S &#x2F; a)。</li>
+<li>由于最大方块的尺寸为 ($1 \times n$)，组合后的矩形至少有一边不小于 n，因此枚举时需限制范围为 1 到 ($\min(\sqrt{S}, S&#x2F;n)$)，确保能容纳最大方块。</li>
+<li>跟踪所有有效因子对中 (a + b) 的最小值，其对应的周长即为结果。</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ll n;cin&gt;&gt;n;</span><br><span class="line">    ll s=n*(n<span class="number">+1</span>)/<span class="number">2</span>;</span><br><span class="line">    ll q=<span class="built_in">sqrt</span>(s);</span><br><span class="line">    ll a=<span class="built_in">min</span>(q, s/n);</span><br><span class="line">    ll ans=<span class="number">2</span>*(s<span class="number">+1</span>);</span><br><span class="line">    <span class="keyword">for</span>(ll h=<span class="number">1</span>;h&lt;=a;++h) &#123;</span><br><span class="line">        <span class="keyword">if</span>(s%h==<span class="number">0</span>) &#123;</span><br><span class="line">            ll w=s/h;</span><br><span class="line">            ll t=<span class="number">2</span>*(h+w);</span><br><span class="line">            <span class="keyword">if</span>(t&lt;ans) &#123;ans=t;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><ol>
+<li><strong>总面积计算</strong>：通过公式 (S &#x3D; $\frac{n(n+1)}{2}$) 计算所有方块的总面积，这是组合后矩形的面积基础。</li>
+<li><strong>枚举范围确定</strong>：为确保矩形能容纳最大的 (1 $\times$ n) 方块，枚举高度 h 时上限设为 ($\min$($\sqrt{S}, S&#x2F;n)$)，既保证因子对的有效性，又满足尺寸约束。</li>
+<li><strong>因子对检查</strong>：对每个可能的高度 h，检查其是否为 S 的因子，若是则计算对应的宽度 (w &#x3D; S &#x2F; h)，并更新最小周长。</li>
+<li><strong>结果输出</strong>：最终最小周长为最小 ((h + w)) 的 2 倍，即为组合矩形的最小周长。</li>
+</ol>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><ul>
+<li>时间复杂度：<strong>O</strong>($\sqrt{S}$)</li>
+</ul>
+<h1 id="Problem-E-Mysterious-XOR-Operation"><a href="#Problem-E-Mysterious-XOR-Operation" class="headerlink" title="Problem E. Mysterious XOR Operation"></a>Problem E. Mysterious XOR Operation</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>定义神秘异或操作 ($\oplus_{m}$) 如下：对于两个数 a 和 b，先计算常规异或结果 (c &#x3D; a $\oplus$ b)，再对 c 的二进制表示按以下规则处理：从最低有效位到最高有效位扫描，初始化计数器 (count &#x3D; 0)，每遇到 1 则将 count 加 1，若 count 为奇数则保留该位，为偶数则清除该位（设为 0）。</p>
+<p>给定一个长度为 N 的数组 A，计算所有无序对 ((i, j))（(i $\neq$ j)）的神秘异或结果之和，即 ($\sum_{i&#x3D;1}^{N} $$\sum_{j&gt;i}^{N}$ A_i $\oplus_{m}$ A_j) 。</p>
+<h3 id="输入-1"><a href="#输入-1" class="headerlink" title="输入"></a>输入</h3><ul>
+<li>第一行：整数 N（(2 $\leq$ N $\leq$ $10^5$)）。</li>
+<li>第二行：N 个整数 (a_i)（(0 $\leq$ a_i $\leq$ $10^8$)）。</li>
+</ul>
+<h3 id="输出-1"><a href="#输出-1" class="headerlink" title="输出"></a>输出</h3><p>所有无序对的神秘异或结果之和。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>神秘异或的结果是二进制数，每一位的贡献相互独立，因此可按位计算贡献后累加。对于第 k 位（从 0 开始计数），若能确定其在所有无序对神秘异或结果中为 1 的次数，则总贡献为该次数乘以 $2^k$。</p>
+<ol>
+<li><strong>按位分析</strong>：对于第 k 位，仅需关注常规异或结果中该位为 1，且低 (k+1) 位中 1 的总个数为奇数的情况（此时该位在神秘异或中保留为 1）。</li>
+<li><strong>分类计数</strong>：对每个数的低 (k+1) 位，统计两类信息：第 k 位的值（0 或 1）、低 (k+1) 位中 1 的个数的奇偶性（0 或 1），得到四类计数 (c00, c01, c10, c11)。</li>
+<li><strong>有效对计算</strong>：满足条件的无序对数量为 (c00 $\times$ c11 + c01 $\times$ c10)，即第 k 位为 1 的总次数，乘以 $2^k$即为该位的贡献。</li>
+</ol>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)cin&gt;&gt;a[i];</span><br><span class="line">    ll M=<span class="number">30</span>;</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;=M;++k)&#123;</span><br><span class="line">        ll c00=<span class="number">0</span>,c01=<span class="number">0</span>,c10=<span class="number">0</span>,c11=<span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> m=(<span class="number">1</span>&lt;&lt;(k<span class="number">+1</span>))<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> x:a)&#123;</span><br><span class="line">            <span class="type">int</span> v=x&amp;m,b=(v&gt;&gt;k)&amp;<span class="number">1</span>,p=<span class="number">0</span>,t=v;</span><br><span class="line">            <span class="keyword">while</span>(t)&#123;p^=<span class="number">1</span>;t&amp;=t<span class="number">-1</span>;&#125;</span><br><span class="line">            <span class="keyword">if</span>(b==<span class="number">0</span>)&#123;<span class="keyword">if</span>(p==<span class="number">0</span>)c00++;<span class="keyword">else</span> c01++;&#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;<span class="keyword">if</span>(p==<span class="number">0</span>)c10++;<span class="keyword">else</span> c11++;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ans+=c00*c11*(<span class="number">1</span>&lt;&lt;k)+c01*c10*(<span class="number">1</span>&lt;&lt;k);</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a><strong>时间复杂度</strong></h2><p><code>O(N)</code></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>mohan</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span><strong>Learning</strong> is a kind of <strong>FAITH</strong>!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AE%97%E6%B3%95/"># 算法</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2025/07/29/%E7%89%9B%E5%AE%A27-31/">牛客7.31</a>
+            
+            
+            <a class="next" rel="next" href="/2025/07/24/%E7%89%9B%E5%AE%A27-24/">牛客7.24</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© mohan | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
