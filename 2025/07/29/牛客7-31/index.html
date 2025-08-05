@@ -164,6 +164,68 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
@@ -186,7 +248,51 @@
         </header>
 
         <div class="post-content">
-            
+            <h1 id="Problem-C-Stack"><a href="#Problem-C-Stack" class="headerlink" title="Problem C. Stack"></a>Problem C. Stack</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>对于一个排列 P，定义 (f(P)) 如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function f(P):</span><br><span class="line">    stack = []</span><br><span class="line">    for element in P:</span><br><span class="line">        while stack is not empty and stack.top() &gt; element:</span><br><span class="line">            stack.pop()</span><br><span class="line">        stack.push(element)</span><br><span class="line">    return the size of stack</span><br></pre></td></tr></table></figure>
+
+<p>给定一个整数 n，求所有长度为 n 的排列 P 的 $f(P)^3$的和，对 998244353 取模。</p>
+<h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><p>本题有多组输入数据。 第一行输入一个正整数 ($T(1 \leq T \leq 10^5)$)，表示输入数据组数。 接下来的每组输入数据，输入一个正整数 ($n(1 \leq n \leq 5 \cdot 10^5)$)。</p>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>对于每组输入数据，输出一行一个整数，表示答案。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li><p><strong>理解栈的行为</strong>：函数 (f(P)) 实际上是计算排列 P 经过类似 “单调栈” 处理后的栈大小。对于每个元素，我们弹出栈中所有比它大的元素，然后将其入栈，最终栈的大小就是 (f(P)) 的值。</p>
+</li>
+<li><p><strong>数学期望与组合</strong>：由于需要计算所有排列的 ($(f(P))^3$) 之和，直接枚举所有排列是不可能的（n 最大为 ($5 \cdot 10^5$)。我们可以推出递推公式。</p>
+</li>
+<li><p><strong>递推关系</strong>：</p>
+<ul>
+<li>设 (f_3(n)) 表示所有长度为 n 的排列的 ($(f(P))^3 $) 之和</li>
+<li>设 (f_2(n)) 表示所有长度为 n 的排列的 ($(f(P))^2$) 之和</li>
+<li>设 (f_1(n)) 表示所有长度为 n 的排列的 (f(P)) 之和</li>
+</ul>
+<p>通过分析可以得到递推公式：</p>
+<ul>
+<li>(f_1(n) &#x3D; f_1(n-1) + $\frac{f_1(n-1) + (n-1)!}{n}$)</li>
+<li>(f_2(n) &#x3D; f_2(n-1) + $\frac{2 \cdot f_2(n-1) + 2 \cdot f_1(n-1) + (n-1)!}{n}$)</li>
+<li>(f_3(n) &#x3D; f_3(n-1) + $\frac{3 \cdot f_2(n-1) + 3 \cdot f_1(n-1) + (n-1)!}{n}$)</li>
+</ul>
+</li>
+<li><p><strong>预处理</strong>：我们预处理出所有可能的 n 对应的结果，然后直接返回。</p>
+</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"></span><br><span class="line">ll mod = <span class="number">998244353</span>;</span><br><span class="line">ll inv[<span class="number">500010</span>], fact[<span class="number">500010</span>];</span><br><span class="line">ll f1[<span class="number">500010</span>], f2[<span class="number">500010</span>], f3[<span class="number">500010</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 快速幂计算 a^b mod mod</span></span><br><span class="line"><span class="function">ll <span class="title">mo</span><span class="params">(ll a, ll b)</span> </span>&#123;</span><br><span class="line">    ll res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>) res = res * a % mod;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        a = a * a % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res % mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 预处理阶乘、逆元和f1, f2, f3数组</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">preprocess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 计算逆元</span></span><br><span class="line">    inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">500000</span>; i++) &#123;</span><br><span class="line">        inv[i] = <span class="built_in">mo</span>(i, mod - <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 计算阶乘</span></span><br><span class="line">    fact[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">500000</span>; i++) &#123;</span><br><span class="line">        fact[i] = fact[i - <span class="number">1</span>] * i % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化f1, f2, f3</span></span><br><span class="line">    f1[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    f2[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    f3[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 递推计算f1, f2, f3</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">500000</span>; i++) &#123;</span><br><span class="line">        f1[i] = (f1[i - <span class="number">1</span>] + inv[i] * (f1[i - <span class="number">1</span>] + fact[i - <span class="number">1</span>]) % mod) % mod;</span><br><span class="line">        </span><br><span class="line">        ll temp = (<span class="number">2</span> * f2[i - <span class="number">1</span>] + <span class="number">2</span> * f1[i - <span class="number">1</span>] + fact[i - <span class="number">1</span>]) % mod;</span><br><span class="line">        f2[i] = (f2[i - <span class="number">1</span>] + inv[i] * temp % mod) % mod;</span><br><span class="line">        </span><br><span class="line">        temp = (<span class="number">3</span> * f2[i - <span class="number">1</span>] + <span class="number">3</span> * f1[i - <span class="number">1</span>] + fact[i - <span class="number">1</span>]) % mod;</span><br><span class="line">        f3[i] = (f3[i - <span class="number">1</span>] + inv[i] * temp % mod) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">preprocess</span>();</span><br><span class="line">    <span class="type">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        <span class="type">int</span> n;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, f3[n]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><ol>
+<li><strong>预处理</strong>：<ul>
+<li>计算逆元：使用费马小定理，($inv[i] &#x3D; i^{mod-2} \mod mod$)</li>
+<li>计算阶乘：($fact[i] &#x3D; i! \mod mod$)</li>
+<li>计算 (f1, f2, f3)：根据递推公式，从 1 到 ($5 \cdot 10^5$) 预处理所有值</li>
+</ul>
+</li>
+<li><strong>查询处理</strong>：对于每个查询，直接返回预处理好的 ($f3[n]$)</li>
+<li><strong>时间复杂度</strong>：<ul>
+<li>预处理：($O(5 \cdot 10^5)$)</li>
+<li>每个查询：($O(1)$)</li>
+<li>总时间复杂度：($O(5 \cdot 10^5 + T)$)，能够满足题目要求</li>
+</ul>
+</li>
+</ol>
+
         </div>
 
         
@@ -226,6 +332,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2025/08/05/%E7%89%9B%E5%AE%A28-5/">牛客8.5</a>
             
             
             <a class="next" rel="next" href="/2025/07/29/%E7%89%9B%E5%AE%A27-29/">牛客7.29</a>

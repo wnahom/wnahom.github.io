@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="mohan">
+
+
+
+
+
+<title>牛客8.5 | nahom&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">nahom&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">nahom&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">牛客8.5</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">mohan</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 5, 2025&nbsp;&nbsp;21:21:49</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Problem-C-Forsaken-City"><a href="#Problem-C-Forsaken-City" class="headerlink" title="Problem C. Forsaken City"></a>Problem C. Forsaken City</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一个整数序列 a ，你可以执行以下操作：选择序列的任意一个子序列，并将子序列中的每个元素都减 1。</p>
+<p>请计算最少需要多少次操作才能使序列 a 变为非递减序列（即对于所有 ($1 \leq i &lt; n$)，都满足 ($a_i \leq a_{i+1}$)）。</p>
+<h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><ul>
+<li>第一行包含一个整数 t（$(1 \leq t \leq 10^4$)），表示测试用例的数量。</li>
+<li>每个测试用例的第一行包含一个整数 n（($1 \leq n \leq 2 \times 10^5$)）。</li>
+<li>接下来一行包含 n 个整数 ($a_1, a_2, \ldots, a_n$)（($0 \leq a_i \leq 10^9$)）。</li>
+</ul>
+<p>保证所有测试用例的 n 的总和不超过 ($2 \times 10^5$)。</p>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p>对于每个测试用例，输出最少需要的操作次数。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li><strong>问题分析</strong>：每次操作可以选择任意子序列减 1，这意味着对于每个元素，我们可以独立控制它被减多少次（只要不超过其初始值）。要使序列变为非递减，需要确保每个元素不大于它后面的元素。</li>
+<li><strong>核心观察</strong>：<ul>
+<li>我们需要确定每个元素最终的取值 ($b_i$)，使得 ($b_i \leq a_i$) 且序列 b 是非递减的。</li>
+<li>最少操作次数等于最大的 ($a_i - b_i$)（因为每个元素需要被减的次数就是 ($a_i - b_i$)）。</li>
+</ul>
+</li>
+<li><strong>贪心策略</strong>：从后往前遍历序列：<ul>
+<li>最后一个元素的最终值可以保持不变（即 (b_n &#x3D; a_n)）。</li>
+<li>对于前面的元素 (a_i)，其最终值 (b_i) 最多只能是 (b_{i+1})（以保证非递减），同时不能超过 (a_i)。</li>
+<li>当 ($a_i &gt; b_{i+1}$) 时，需要将 ($a_i$) 减到 ($b_{i+1}$)，此时产生的操作次数为($a_i &gt; b_{i+1}$) </li>
+<li>当 ($a_i \leq b_{i+1}$) 时，无需操作，直接将 ($b_i$) 设为 ($a_i$)。</li>
+</ul>
+</li>
+<li><strong>结果计算</strong>：在遍历过程中记录最大的操作次数，这就是最少需要的总操作次数。</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> endl <span class="string">&#x27;\n&#x27;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> min_val = a[n<span class="number">-1</span>];  <span class="comment">// 从最后一个元素开始</span></span><br><span class="line">    <span class="type">int</span> max_operations = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n<span class="number">-1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i] &gt; min_val) &#123;</span><br><span class="line">            <span class="comment">// 需要将a[i]减到min_val，计算操作次数</span></span><br><span class="line">            max_operations = <span class="built_in">max</span>(max_operations, a[i] - min_val);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 更新最小值为当前元素</span></span><br><span class="line">            min_val = a[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; max_operations &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="type">int</span> t;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度</strong>：($O(n)$) ，其中 n 是序列的长度。我们只需要遍历一次序列即可得到结果。</p>
+<h1 id="Problem-F-The-Correlation"><a href="#Problem-F-The-Correlation" class="headerlink" title="Problem F. The Correlation"></a>Problem F. The Correlation</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一个长度为 n 的整数序列 ($a_1, a_2, \ldots, a_n$)。你可以执行不超过 n 次操作：选择一个整数 v，并将每个数 ($a_i$) 更新为 ($|a_i - v|$)。</p>
+<p>请找出执行一些操作后，序列中所有不同元素对的绝对差之和的最小值，即最小化 ($\sum_{1 \leq i &lt; j \leq n} |a_i - a_j|$)。</p>
+<p>由于答案可能很大，请输出这个最小和对 998244353 取模的结果。</p>
+<h3 id="输入-1"><a href="#输入-1" class="headerlink" title="输入"></a>输入</h3><ul>
+<li>第一行包含一个整数 n（($1 \leq n \leq 2 \times 10^5$)）。</li>
+<li>第二行包含 n 个整数 ($a_1, a_2, \ldots, a_n$)（($0 \leq a_i \leq 10^9$)）。</li>
+</ul>
+<h3 id="输出-1"><a href="#输出-1" class="headerlink" title="输出"></a>输出</h3><p>输出最小可能的和对 998244353 取模的结果。</p>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><ol>
+<li><strong>奇偶性不变性</strong>：核心发现是每次操作 ($|a_i - v|$) 不会改变 ($a_i$) 的奇偶性。这是因为：<ul>
+<li>偶数减去任何整数，结果的奇偶性不变</li>
+<li>奇数减去任何整数，结果的奇偶性不变</li>
+</ul>
+</li>
+<li><strong>最小和的构成</strong>：<ul>
+<li>设序列中奇数的数量为 b，则偶数的数量为 (n-b)</li>
+<li>奇数与偶数的差的绝对值至少为 1</li>
+<li>奇数之间和偶数之间的差可以通过操作变为 0</li>
+<li>因此最小可能的和为 ($b \times (n-b)$)</li>
+</ul>
+</li>
+<li><strong>实现步骤</strong>：<ul>
+<li>统计序列中奇数的数量</li>
+<li>计算奇数数量与偶数数量的乘积</li>
+<li>返回乘积对 998244353 取模的结果</li>
+</ul>
+</li>
+</ol>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> endl <span class="string">&#x27;\n&#x27;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FASTIO ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// const int N=1e6+10;</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MOD = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) cin&gt;&gt;a[i];</span><br><span class="line">    <span class="type">int</span> t=*<span class="built_in">min_element</span>(a.<span class="built_in">begin</span>(),a.<span class="built_in">end</span>());</span><br><span class="line">    <span class="type">int</span> b=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i:a) <span class="keyword">if</span> ((i-t)%<span class="number">2</span>) b++;</span><br><span class="line">    cout&lt;&lt;((b%MOD)*((n-b)%MOD)%MOD)&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    FASTIO</span><br><span class="line">    <span class="type">int</span> _=<span class="number">1</span>;</span><br><span class="line">    <span class="comment">// cin&gt;&gt;_;</span></span><br><span class="line">    <span class="keyword">while</span> (_--) <span class="built_in">solve</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><ul>
+<li><strong>时间复杂度</strong>：($O(n)$)，仅需一次遍历统计奇数数量</li>
+</ul>
+<h1 id="Problem-G-Nice-Doppelgnger"><a href="#Problem-G-Nice-Doppelgnger" class="headerlink" title="Problem G. Nice Doppelgnger"></a>Problem G. Nice Doppelgnger</h1><h2 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一个正偶数 n，构造集合 (${1, 2, \ldots, n}$) 的子集 S，满足：</p>
+<ol>
+<li>($|S| &#x3D; \frac{n}{2}$)；</li>
+<li>对任意 ($x, y, z \in S$)（可重复），乘积 $xyz$ 不是完全平方数。</li>
+</ol>
+<p>输入包含 t 个测试用例，每个测试用例给定 n，输出满足条件的子集 S。</p>
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>通过分析完全平方数的质因数特征（所有质因数指数为偶数），结合 Liouville 函数 ($\lambda(x)$) 的性质实现构造：</p>
+<ul>
+<li><strong>Liouville 函数定义</strong>：对 ($x &#x3D; p_1^{e_1}p_2^{e_2}\cdots p_k^{e_k}$)，($\lambda(x) &#x3D; (-1)^{\sum e_i}$)。</li>
+<li>关键性质<ol>
+<li>完全积性：($\lambda(xy) &#x3D; \lambda(x)\lambda(y)$)；</li>
+<li>平方数的 ($\lambda$) 值为 1（因指数和为偶数）。</li>
+</ol>
+</li>
+</ul>
+<h3 id="构造策略"><a href="#构造策略" class="headerlink" title="构造策略"></a>构造策略</h3><p>选择所有 ($\lambda(x) &#x3D; -1$) 的元素组成子集 S：</p>
+<ul>
+<li>对任意 ($x, y, z \in S$)，($\lambda(xyz) &#x3D; \lambda(x)\lambda(y)\lambda(z) &#x3D; (-1)^3 &#x3D; -1$)；</li>
+<li>因平方数的 ($\lambda$) 值为 1，故 $xyz$ 不可能是平方数，满足条件。</li>
+</ul>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAX_N = <span class="number">1e6</span> + <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> lambda[MAX_N];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; candidates;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">preprocess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">min_prime</span><span class="params">(MAX_N)</span></span>;</span><br><span class="line">    <span class="built_in">iota</span>(min_prime.<span class="built_in">begin</span>(), min_prime.<span class="built_in">end</span>(), <span class="number">0</span>);</span><br><span class="line">    lambda[<span class="number">1</span>] = <span class="number">1</span>;  <span class="comment">// 1的质因数和为0，λ=1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">2</span>; p &lt; MAX_N; ++p) &#123;</span><br><span class="line">        <span class="keyword">if</span> (min_prime[p] == p) &#123;  <span class="comment">// p是质数</span></span><br><span class="line">            lambda[p] = <span class="number">-1</span>;  <span class="comment">// 质数指数和为1，λ=-1</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> multiple = <span class="number">2</span> * p; multiple &lt; MAX_N; multiple += p) &#123;</span><br><span class="line">                <span class="keyword">if</span> (min_prime[multiple] == multiple) &#123;</span><br><span class="line">                    min_prime[multiple] = p;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 合数，利用完全积性计算</span></span><br><span class="line">            <span class="type">int</span> p = min_prime[p];</span><br><span class="line">            lambda[p] = lambda[p / p] * lambda[p];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 收集λ(x) = -1的元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> x = <span class="number">1</span>; x &lt; MAX_N; ++x) &#123;</span><br><span class="line">        <span class="keyword">if</span> (lambda[x] == <span class="number">-1</span>) &#123;</span><br><span class="line">            candidates.<span class="built_in">push_back</span>(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">preprocess</span>();</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> t;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        <span class="type">int</span> n, k = n / <span class="number">2</span>;</span><br><span class="line">        cin &gt;&gt; n;</span><br><span class="line">        <span class="comment">// 选取前k个不超过n的候选元素</span></span><br><span class="line">        <span class="keyword">auto</span> it = <span class="built_in">upper_bound</span>(candidates.<span class="built_in">begin</span>(), candidates.<span class="built_in">end</span>(), n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; k; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i) cout &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">            cout &lt;&lt; candidates[i];</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>时间复杂度</strong>：预处理 ($O(N \log \log N)$)，单次查询 ($O(\log N)$)，适用于 ($n \leq 10^6$) 的约束。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>mohan</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span><strong>Learning</strong> is a kind of <strong>FAITH</strong>!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%AE%97%E6%B3%95/"># 算法</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/07/29/%E7%89%9B%E5%AE%A27-31/">牛客7.31</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© mohan | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
