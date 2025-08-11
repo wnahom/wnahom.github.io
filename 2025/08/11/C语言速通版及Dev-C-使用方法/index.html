@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="mohan">
+
+
+
+
+
+<title>C语言速通版及Dev-C++使用方法 | nahom&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">nahom&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">nahom&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">C语言速通版及Dev-C++使用方法</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">mohan</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 11, 2025&nbsp;&nbsp;23:00:41</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="C-语言基础速通版及Dev-C"><a href="#C-语言基础速通版及Dev-C" class="headerlink" title="C 语言基础速通版及Dev-C++"></a>C 语言基础速通版及Dev-C++</h3><p><strong>这是一份基础版的c语言学习笔记<br>在这里你可以快速学习到<br>如何使用devc++来实现c语言的绝大部分功能<br>由于是速通基础版<br>所以其中出现不理解其中原理的部分很正常<br>(建议学习时记好自己的疑惑，先学完所有内容记住其用法即可，在后面进阶版笔记以及b站课程</strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1dr4y1n7vA/?spm_id_from=333.337.search-card.all.click">https://www.bilibili.com/video/BV1dr4y1n7vA/?spm_id_from=333.337.search-card.all.click</a></strong></p>
+<p><strong>中你可以更加深入了解其中原理)</strong></p>
+<h4 id="一、Dev-C-快速上手"><a href="#一、Dev-C-快速上手" class="headerlink" title="一、Dev-C++ 快速上手"></a>一、Dev-C++ 快速上手</h4><ol>
+<li><strong>下载安装</strong>：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_54158068/article/details/124080083">DevC++ 软件下载及安装教程（详细、具体）_devc++下载-CSDN博客</a></li>
+<li><strong>新建 C 语言文件</strong>：打开 Dev-C++ → 左上角菜单栏 “文件”→“新建”→“源代码”→ 弹出编辑区。</li>
+<li><strong>编译运行</strong>：写完代码后，点菜单栏 “运行”→“编译运行”（或按 F11），弹出黑窗口看结果。</li>
+</ol>
+<h4 id="二、第一个程序：输出文字"><a href="#二、第一个程序：输出文字" class="headerlink" title="二、第一个程序：输出文字"></a>二、第一个程序：输出文字</h4><p><strong>代码</strong>（注意符号使用英文！尤其是“；”）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span>  <span class="comment">// 必须加，否则不能输出</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;  <span class="comment">// 程序入口，固定格式</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;你好，世界！\n&quot;</span>);  <span class="comment">// 输出文字，\n是换行</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">// 固定结尾</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//的意思为注释，即//后的内容不会算作代码内容</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>操作</strong>：F11 运行，黑窗口会显示 “你好，世界！”。</p>
+<h4 id="三、变量与输入输出"><a href="#三、变量与输入输出" class="headerlink" title="三、变量与输入输出"></a>三、变量与输入输出</h4><p><strong>功能</strong>：定义变量，从键盘输入内容，再输出。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a;  <span class="comment">// 定义整数变量a</span></span><br><span class="line">    <span class="type">float</span> b;  <span class="comment">// 定义小数变量b</span></span><br><span class="line">    <span class="type">char</span> c;  <span class="comment">// 定义字符变量c（单个字母/符号）</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从键盘输入（按提示输入，用空格或回车分隔）</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;输入一个整数、一个小数、一个字符：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%f%c&quot;</span>, &amp;a, &amp;b, &amp;c);  <span class="comment">// %d对应int，%f对应float，%c对应char，&amp;不能漏</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;整数：%d\n小数：%f\n字符：%c\n&quot;</span>, a, b, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>操作</strong>：F11 运行，按提示输入（例如：<code>10 3.14 a</code>），黑窗口会显示你输入的内容。</p>
+<h4 id="四、条件判断（if-else）"><a href="#四、条件判断（if-else）" class="headerlink" title="四、条件判断（if-else）"></a>四、条件判断（if-else）</h4><p><strong>功能</strong>：根据条件执行不同代码。</p>
+<p><strong>代码</strong>（判断成绩等级）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> score;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;输入成绩：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;score);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (score &gt;= <span class="number">90</span>) &#123;  <span class="comment">// 如果分数≥90</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;优秀\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (score &gt;= <span class="number">60</span>) &#123;  <span class="comment">// 如果分数不≥90，且≥60 则</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;及格\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 否则（&lt;60）  //  如果分数不≥90，且不≥60 则</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;不及格\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="五、循环（for-while）"><a href="#五、循环（for-while）" class="headerlink" title="五、循环（for&#x2F;while）"></a>五、循环（for&#x2F;while）</h4><p><strong>功能</strong>：重复执行{}内的代码。</p>
+<h5 id="1-for-循环：输出-1-10"><a href="#1-for-循环：输出-1-10" class="headerlink" title="1. for 循环：输出 1-10"></a>1. for 循环：输出 1-10</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;  <span class="comment">// 从i=1开始，i≤10时进行循环，每运行完成&#123;&#125;中内容后i+1</span></span><br><span class="line">        <span class="comment">//用 ；分开的三个部分不能调换顺序</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, i);  <span class="comment">// 输出当前i值，加空格</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-while-循环：输入数字直到-0"><a href="#2-while-循环：输入数字直到-0" class="headerlink" title="2. while 循环：输入数字直到 0"></a>2. while 循环：输入数字直到 0</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;输入数字（0结束）：&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (num != <span class="number">0</span>) &#123;  <span class="comment">// 只要num不是0，就重复</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;你输入了：%d\n&quot;</span>, num);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;继续输入（0结束）：&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;结束\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="六、数组（批量存数据）"><a href="#六、数组（批量存数据）" class="headerlink" title="六、数组（批量存数据）"></a>六、数组（批量存数据）</h4><p><strong>功能</strong>：储存多个同类型数据（如 5 个整数）。</p>
+<p><strong>代码</strong>（存 5 个成绩，求平均分）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> scores[<span class="number">5</span>];  <span class="comment">// 定义能存5个整数的数组（下标0-4）scores为该数组的名字</span></span><br><span class="line">    <span class="type">int</span> i, sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输入5个成绩</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;输入第%d个成绩：&quot;</span>, i+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;scores[i]);  <span class="comment">// 存到数组第i个位置</span></span><br><span class="line">        sum += scores[i];  <span class="comment">// 累加</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;平均分：%d\n&quot;</span>, sum / <span class="number">5</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="七、函数（复用代码）"><a href="#七、函数（复用代码）" class="headerlink" title="七、函数（复用代码）"></a>七、函数（复用代码）</h4><p><strong>功能</strong>：把一段代码封装成函数，多次调用。</p>
+<p><strong>代码</strong>（用函数求两数之和）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义函数：求a+b的和，返回结果</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;  <span class="comment">// int是返回类型，a、b是参数</span></span><br><span class="line">    <span class="keyword">return</span> a + b;  <span class="comment">// 返回计算结果</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">3</span>, y = <span class="number">5</span>;</span><br><span class="line">    <span class="type">int</span> s = add(x, y);  <span class="comment">// 调用函数，传x和y</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d+%d=%d\n&quot;</span>, x, y, s);  <span class="comment">// 输出3+5=8</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="八、指针"><a href="#八、指针" class="headerlink" title="八、指针"></a>八、指针</h4><p><strong>功能</strong>：通过指针修改变量的值。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> *p;  <span class="comment">// 定义指针p（指向int类型）</span></span><br><span class="line">    p = &amp;a;  <span class="comment">// p指向a的地址（&amp;是取地址）</span></span><br><span class="line"></span><br><span class="line">    *p = <span class="number">20</span>;  <span class="comment">// 通过指针修改a的值（*是“指向的值”）</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a现在是：%d\n&quot;</span>, a);  <span class="comment">// 输出20</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="九、结构体（把多个不同类型数据储存在一起）"><a href="#九、结构体（把多个不同类型数据储存在一起）" class="headerlink" title="九、结构体（把多个不同类型数据储存在一起）"></a>九、结构体（把多个不同类型数据储存在一起）</h4><p><strong>功能</strong>：存一个学生的信息（学号、姓名、成绩）。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义结构体（固定格式）</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> id;  <span class="comment">// 学号</span></span><br><span class="line">    <span class="type">char</span> name[<span class="number">20</span>];  <span class="comment">// 姓名（最多19个字符）</span></span><br><span class="line">    <span class="type">float</span> score;  <span class="comment">// 成绩</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 定义结构体变量并赋值</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">stu</span> =</span> &#123;<span class="number">1001</span>, <span class="string">&quot;张三&quot;</span>, <span class="number">92.5</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出信息</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;学号：%d\n姓名：%s\n成绩：%f\n&quot;</span>, stu.id, stu.name, stu.score);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="关键注意事项"><a href="#关键注意事项" class="headerlink" title="关键注意事项"></a>关键注意事项</h4><ol>
+<li>所有代码必须有 <code>#include &lt;stdio.h&gt;</code> 和 <code>int main()&#123;...return 0;&#125;</code>。</li>
+<li>代码里的括号、分号必须是英文半角（中文符号会报错）。</li>
+<li>编译报错时，看黑窗口提示的 “第几行”，回去检查拼写或格式。</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>mohan</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span><strong>Learning</strong> is a kind of <strong>FAITH</strong>!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C%E8%AF%AD%E8%A8%80/"># C语言</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/08/05/%E7%89%9B%E5%AE%A28-5/">牛客8.5</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© mohan | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
