@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="mohan">
+
+
+
+
+
+<title>足球游戏 | nahom&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">nahom&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">nahom&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">足球游戏</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">mohan</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 14, 2026&nbsp;&nbsp;0:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="从最佳球会到足球游戏"><a href="#从最佳球会到足球游戏" class="headerlink" title="从最佳球会到足球游戏"></a>从最佳球会到足球游戏</h1><p>本文将尽量详细地，从最佳球会这个游戏写出我对于足球游戏的理解。</p>
+<p>抛开了球员个人能力差异，足球游戏和现实足球存在很大差距。最吸引我的部分在于：足球本来是11个人的游戏，但在游戏中可以做到11人齐心，听从一个人的战术打法。</p>
+<p>抛开养成部分，仅讨论足球游戏内的战术选择，我们先来理清足球获胜的逻辑：即拿到球权，推进到得分区域（创造绝对机会），射门得分。当对方拿到球权，我们不希望敌人得分，则需要阻断推进或射门的过程，显然阻断推进更加安全，可以认识到：球权是获胜的第一步。下面我们针对如何获得球权，拆分为如下由难到易的四点后分开讨论：一、前场抢断 二、中场抢断三、门球（以及后场抢断） 四、中场开球</p>
+<p>一、前场抢断</p>
+<p>如果造成前场抢断，基本等同于获得绝对机会，此时你的球员很容易获得直面门将的机会，但其实抢断本身就依赖于对手的失误，而人在高压情况下更容易失误。于是想要造成前场的抢断应该给对手后场传递时更多的压力，从对手的视角来看，后卫或门将拿球时，面临多种选择：中后卫和门将间的短距离传递、分边推进、传递至中场、大脚给前锋。首先看短距离传递，后场短传难以对敌人造成进攻威胁，故在手拉前锋逼抢时也不应当投入过多球员，否则很容易导致我方中场的空挡过大、前中后场脱节而被快速推进压死，所以只需要做象征性逼抢，不宜上头，同时应该防备对手，利用宽度传递拉开空间后，通过边路攻击弱侧或转移至中路。然后是大脚找前锋，此方法为最稳妥的后场出球方法（在有高中锋的情况下），也是高位逼抢战术下次优解。最后来看分边和传球找中前卫，这是应该重点逼抢和压迫的方向。多数情况下，控球倾向于形成局部三人传递，于是每个人持球时都有两个短传目标。那么前场逼抢最优情况，就是通过协防封锁两个传球线路造成抢断或回传；次优情况为，协防难以到位单人逼抢，封住一侧传球线路，逼迫对手向边路发展，从而做到占据中路的控制权。</p>
+<p>逼迫对手向边路发展：从得分区域（绝对机会）角度考虑，显然在禁区内或单刀直面门将是射门得分的前一步，那么再往前推导，禁区前中路的传球更容易造成上述绝对机会，而边路难以直接对球门造成威胁（专业头球另说），所以逼迫对手向边路发展相对更优。</p>
+<p> 二、中场抢断</p>
+<p>中场是攻防枢纽，但面对对手进攻时，切记核心是保持中后场连接的情况下拦截，避免盲目上抢失位造成中后场脱节。针对对手中场控球时的出球方式，应对策略如下：中路慢速控制则收缩退防，防止对手从正面突破我方中场（及其危险）；直塞中前场则需预判拦截配合拉人跟防，让后腰保持防守站位逼迫对手向边路发展；分边则根据我方后场人数，选择双人进行边后卫、中场协防或者一人从中向边路压迫，避免中路弧顶前出现空挡。</p>
+<p>三、后场抢断</p>
+<p>此时对手推进至我方后场，常见如下几种情况，按危险度由高至低排序（单刀没啥可说的了）：对方中场突破我方中场，存在巨大直塞和挑传的威胁，此时快速拉人往后，跟住跑得最快的球员有一线生机，同时堤防对手中场远射能力；快马边锋打到边路的禁区前沿，直面我方后卫线，此时应用协防跟防防止对手下底，另一后卫占据内侧防止内切弧线；对手边路下底无果后传递中场球员，于禁区外一格草皮掌控球权，我方中场已被压回禁区线，此时我方边路仍有空挡，对方既可以选择分边继续找机会将我方中后线压缩后下底传中或迂回内切兜射，又可以迂回传递至中场，尝试越过我方中场短传中锋后转身射门。此时对手得分存在难度，但我方阵型被压缩，即使抢断也难以组织有效反击。从防守角度考虑，我们应该贯彻：紧收中路不给对手中路短传射门（有远射技能也得小心）机会，边后卫配合一个中场防守边路，时刻做好切人防守准备。若完成抢断则就地反击，若对手中圈附近有五人左右则较难以快攻打穿，需要更有耐心做二过一、呼人等配合进攻。</p>
+<p>四、中场开球</p>
+<p>此时我们站在对方角度思考：可以有如下几种选择：首先是打一波快攻（敌方逼抢较急躁且中前场抢断能力不强时），开局时敌我阵型尚未摆开，此时打一个快速配合，如：第三人跑位接长传，快速配合后呼人前插等方法，可能会起到意想不到的作用。其次是稳妥地（敌方收缩防线，或快攻无作用时）控制球权，将球传至后场甚至门将，然后进行稳健的推进或快速进攻。此时不难发现，最稳妥的做法是提前切换到后场，将中场和后防往后拉防止被快攻打穿。激进的做法则是中前场前压逼抢，尝试做到前场抢断创造绝对机会。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>mohan</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span><strong>Learning</strong> is a kind of <strong>FAITH</strong>!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%B8%B8%E6%88%8F%E8%AF%84%E6%B5%8B/"># 游戏评测</a>
+                    
+                        <a href="/tags/%E8%B6%B3%E7%90%83/"># 足球</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2026/04/19/%E6%B4%9B%E5%85%8B%E7%8E%8B%E5%9B%BDpvp2026.4.19/">洛克王国PVP</a>
+            
+            
+            <a class="next" rel="next" href="/2026/02/27/%E6%9C%80%E4%BD%B3%E7%90%83%E4%BC%9A/">最佳球会</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© mohan | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

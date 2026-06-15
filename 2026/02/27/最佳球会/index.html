@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="mohan">
+
+
+
+
+
+<title>最佳球会 | nahom&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">nahom&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">nahom&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">最佳球会</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">mohan</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 27, 2026&nbsp;&nbsp;23:53:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="最佳球会-从3232阵型到球会足球战术"><a href="#最佳球会-从3232阵型到球会足球战术" class="headerlink" title="最佳球会 从3232阵型到球会足球战术"></a>最佳球会 从3232阵型到球会足球战术</h1><h3 id="论3232-进攻"><a href="#论3232-进攻" class="headerlink" title="论3232(进攻)"></a>论3232(进攻)</h3><p>​	我在22年底入坑球会，从23年初便开始使用3232进攻这一阵型，下面我会谈一谈我为什么会选择3232以及我对于3232阵型的浅薄认识：我是一个几乎不氪金的玩家，不太可能获得且养成很多、很强力的球员，所以我希望我的阵型能用人数和我的操作尽量弥补球员质量上的差距，我认为3232(进攻)是一个相对完美的阵型。</p>
+<p>​	第一个问题是，球员整体能力弱，应该选择什么样的战术：控球还是防反？我的答案是：控球，游戏与现实不同。如果选择防反，先不谈你能不能守住，对手比你强一个档次的球员的进攻。在反击理想情况下，难道你的前锋就能稳定三打四得分吗？更何况对手大概率在你断球想发起反击时，就通过中场扼杀了。</p>
+<p>​	所以就像瓜迪奥拉所说的“控球是最好的防守“，球在你的球员脚下，对方球员就没办法拿球射门得分。3232可以做到，每个部分的球员都成三角站位配合控球，既然保持控球没有问题，现在问题就来到了，如果我进攻没得分，被对手反击时怎么守住呢？首先要明确，绝大多数的进球来源于中路。</p>
+<p>​	3中卫2后腰极大加强了在中路的防守能力，对手中路进攻时，两人包夹搭配控制站位拦截传球，可以很好的扼杀对手中路的进攻。而对手进攻边路时，也可以通过回防的边中场和后腰或边中卫进行双人包夹。要考虑对手有没有侧面搓射或是传中头球的得分能力，如果没有则防守重心在中路，边路有人干扰即可。</p>
+<p>​	传控足球一定要牢记一点：连续的传球控制不是目的，而是为了得分。此时基本解决了防守问题，现在我们需要的就是稳定的得分手段，或者说进攻套路。首先考虑运动战得分：在对手不犯大错误的情况下，可以说是不可能做到的，因为运动战主要得靠球员自己的ai跑位，你的球队算上替补都没对面一个前锋值钱，这种情况下想要依靠球员跑位来快攻是不现实的。所以我们下面要讨论的进攻战术，是阵地战对手后防落位完成时的进攻套路。</p>
+<p>​	以我现在球员为例，进攻基础是中路姆巴佩哈兰德和贝林厄姆可以相互二过一配合（中路等同于442菱形进攻战术），两中场维尼修斯阿森西奥，二人均有得分能力，可以和两后腰、前腰以及中锋做二过一配合，同时可以长传撕扯对手防线。在控球找机会时，传球的目的不是移动皮球，而是移动你对手的后卫。</p>
+<p>​	在控球左右拉扯的过程中，对手中路便可能出现空挡，此时便可以通过中锋单打的套路进攻；其次是中路无破绽但边卫被拉扯开，此时可以通过中路三人配合在短时间形成3打2的多打少机会；最后是中锋尝试内切搓射或是二过一和前腰配合得分。</p>
+<p>​	若对手中路人数众多、难以找到机会，则可以考虑在边路做文章，首先是广受诟病下底传中砸头球，操作简单得分效率低，此处不过多赘述；其次是边中场或中锋的内切，但要注意单纯的内切很难有得分机会，更容易做到的是扯开边路空间，为边路的队友创造下底边路压缩防线的机会；最后就是下底压缩对手防线纵深，随后和中锋或前腰配合形成侧面搓射机会或者是倒三角机会，也可以再反向带球寻找内切搓射机会。</p>
+<p>​	然后展示一下我的站位板：进攻时中锋尽可能前顶，宽度可以视对手情况而定：如果对手边路好打就宽度拉开做配合，尝试从边路打穿；也可以在拉扯宽对手的阵型后，用紧收中路的中锋和前腰尝试攻击对手两中卫之间的空间。中场把宽度拉开，便于利用场地宽度拉扯；也可选择收紧中场并拉宽中锋，用中锋的外侧突破创造对手肋部空间，从而为边中场或前腰创造得分机会。后卫我选择往前顶，压缩后腰和后卫之间的距离，便于在中场扼杀对手的反击。双人协防也可以拖慢对手进攻，以便于回防的边中场和后腰配合后卫进行联合绞杀。</p>
+<p>​	防守时要注意，不能低位蹲在禁区，很容易被远射技能在弧顶打成筛子。后卫紧缩中路，最重要的就是防守中路和肋部，视对手情况决定边路防守的人数和强度，一般使用边中场和一名后腰或中卫协访边路。中场位置往后拉，宽度同样拉开，便于在长传找中锋高点后，摆渡给前腰或边路后做配合推进。战术选择快速反击（尽量让自己球员跑一跑）、TIKITAKA（控球）；密集防守（紧密防守不给中路突破机会）、边锋回撤（边中场回防落位）和高位压迫（丢球后快速反抢或未得分时二次进攻）。</p>
+<p>​	我认为这套战术理论是相对完善的，下面要讨论的是在这套战术体系下的顶级球员和基础能力：顶级双中锋参考97劳尔和96凯恩，劳尔有万花筒般的终结能力，凯恩控球优秀且有金转身便于单打。基础可以为一高一快的模板，快的球员最好有侧翼进攻的搓射或推杆等能力，高大球员可以提升控球和终结能力，头球不再赘述，转身射门是个可以考虑的技能。若为两名高大中锋则最好要有一人能盘带推进，同样需要终结能力。前腰位置选择众多，可参考93欧战贝林：基础能力优先级为盘带推进＞稳定终结＞远射。进攻边中场顶级球员参考96吉格斯和96亚马尔，基础能力优先级为速度盘带＞稳定终结，铁人是加分项。后腰很重要，顶级球员模板为罗德里。主要需要考虑其技能，优先级为拦截专家、铁人＞预判抢断＞远射或终结。中后卫顶级球员模板为范戴克，基础能力要求：身高、速度、防守三项至少有两项且最好能互补，顶级技能为拦截专家、预判抢断。</p>
+<p>​	最后我想说的是，我认为系统局或者说球员状态起伏是客观存在的。但是玩游戏，最重要的是保持良好的心态，尽力去操作，贯彻合理的战术。毕竟偶尔的运气是没办法的事，谋事在人成事在天嘛。</p>
+<p>​     .   .                    .    .  </p>
+<p>.      .      .             .    .    .</p>
+<p>​    .     .                       .</p>
+<p>.      .     .           .     .      .     .</p>
+<h3 id="杂谈"><a href="#杂谈" class="headerlink" title="杂谈"></a>杂谈</h3><h4 id="大卫比利亚的快反（中前场反击中更多参与进攻）442菱形两中前卫的分析"><a href="#大卫比利亚的快反（中前场反击中更多参与进攻）442菱形两中前卫的分析" class="headerlink" title="大卫比利亚的快反（中前场反击中更多参与进攻）442菱形两中前卫的分析"></a>大卫比利亚的快反（中前场反击中更多参与进攻）442菱形两中前卫的分析</h4><p>从442菱形站位来看，在反击时2中锋占据肋部，前腰在中路，主要负责互相二过一及过顶塞。两中前卫同时会大量参与前插，没有机会时向后分球提供中路的控球支持。</p>
+<p>则快反时推进战术即为：前场五人二过一拉扯空挡，呼叫跑位过顶塞跑位，无法深入时则回传中前卫控球找机会。得分战术为：二过一和第三人传球跑空挡单刀得分（主要方法），中锋肋部顶后卫转身得分，偏边路突破后下底横穿抢点或倒三角。</p>
+<p>战术主要为快速反击，依靠球员个人能力尽量不被拖入阵地战。</p>
+<p>则菱形中场的中前卫（简称菱形）与3232边中场（简称边中）职责对比如下：菱形主中路控球与前插及回撤参与部分防守，边中则需要在边路前插回撤参与边路大量防守。</p>
+<p>那么在游戏中，显然菱形是为中路进攻提供了更多机会，也就是推进战术中提到的大量二过一从中路进行突破，但同时大量传接控球也对球员个人能力提出了工兵类的更高要求。边中则更多利用球场宽度减少球员间的直接对抗，视球员情况而有更多种战术选择。而后场两种均为5人，菱形对后卫整体能力要求更高，边中则对后腰回追能力要求更高。但以上所述并不意味菱形与边中两战术孰优孰劣，仅为针对差异性的讨论、</p>
+<h3 id="从3232阵型到球会足球战术"><a href="#从3232阵型到球会足球战术" class="headerlink" title="从3232阵型到球会足球战术"></a>从3232阵型到球会足球战术</h3><h2 id="是什么what-为什么why-怎么做how"><a href="#是什么what-为什么why-怎么做how" class="headerlink" title="是什么what 为什么why 怎么做how"></a>是什么what 为什么why 怎么做how</h2><h5 id="为什么选择3232"><a href="#为什么选择3232" class="headerlink" title="为什么选择3232"></a>为什么选择3232</h5><p>​	我在22年底入坑球会，从23年初便开始使用3232进攻这一阵型，下面我会谈一谈我为什么会选择3232以及我对于3232阵型的浅薄认识：我是一个几乎不氪金的玩家，不太可能获得且养成很多、很强力的球员，所以我希望我的阵型能用人数和我的操作尽量弥补球员质量上的差距，我认为3232(进攻)是一个相对完美的阵型。</p>
+<p>就像瓜迪奥拉所说的：队员带球的时候只靠一记威胁性极强的纵向<strong>传球</strong>是不太可能获得破门机会的，因为单凭一记纵向<strong>传球</strong>是难以突破对手严密的防线，这时就需要球员一边带球一边左右传球调度。 有时长传，有时短传，“长短结合，横纵交替”，只有这样才能更好的<strong>撕扯</strong>对方防线，从而寻找破门得分机会。 </p>
+<p>，3、2、3、2分别代表了三中后卫，两后腰，两边中场，一前腰和双中锋。而</p>
+<p>​	首先，在我开始玩这个游戏一段时间后，我希望找到一个进攻稳定、可操作性高，同时防守也不弱的阵型，同时作为一个几乎不氪金的玩家，我不太可能获得多么强力的球员，所以我希望我的阵型能用人数和我的操作尽量填补球员质量上的差距。</p>
+<p>​	首先让我们聚焦于进攻，最初体验过433窄后，该阵型的优点和弊病是显而易见的，在中路，两根大禁区线中间的部分有三名中锋用以进攻，于是该阵型的进攻思路很明确：三中场直塞球、三中锋之前互相做配合及直塞以创造射门机会。而433的弊病也显而易见，在对手后卫不犯错，或是强度高于你的前锋时，很容易进攻乏术。此时我们不难认识到，如果想要打开局面，我们需要利用场地宽度进攻。</p>
+<p>​	于是我们看到了424，将进攻两字贯穿的阵型，投入四名前锋以进攻。在4对4面对对方后卫时，哪怕前锋实力稍差，仍能得到更多进攻机会，同时在无法从中路突破时，也可以在边路做配合完成进球，于是进攻初步明确了：我们需要中锋进攻中路，同时能攻击对手的边路，最好还有前腰能做配合（如442菱形）。</p>
+<p>​	但是424的问题是明显的，2中前卫很难做到拦截和回追，那此时后卫面临一对一便容易被诸如433等中路进攻阵型打穿。</p>
+<p>​	所以现在让我们聚焦防守，而想要懂得防守就要先明白进攻套路，从刚才的进攻分析不难看出，我们在考虑中路打不穿的情况下才会考虑边路进攻，而很明显，单纯边路的进攻，难以直接造成进球</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>mohan</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span><strong>Learning</strong> is a kind of <strong>FAITH</strong>!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%B8%B8%E6%88%8F%E8%AF%84%E6%B5%8B/"># 游戏评测</a>
+                    
+                        <a href="/tags/%E6%9C%80%E4%BD%B3%E7%90%83%E4%BC%9A/"># 最佳球会</a>
+                    
+                        <a href="/tags/%E8%B6%B3%E7%90%83/"># 足球</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2026/04/14/%E8%B6%B3%E7%90%83%E6%B8%B8%E6%88%8F2026.4.14/">足球游戏</a>
+            
+            
+            <a class="next" rel="next" href="/2025/11/10/%E9%80%83%E7%A6%BB%E9%B8%AD%E7%A7%91%E5%A4%AB2025.11.10/">逃离鸭科夫</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© mohan | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

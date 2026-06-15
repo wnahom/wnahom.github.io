@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="mohan">
+
+
+
+
+
+<title>洛克王国PVP | nahom&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">nahom&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">nahom&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">洛克王国PVP</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">mohan</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 19, 2026&nbsp;&nbsp;0:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>洛克王国也玩了一段时间，从剧情、PVE到PVP，整体来说洛克王国的人机强度、PVP平衡控制的都很出色（看见对面掏出来个路边野狗就得小心是什么没见过的套路，其实见过的也可能有新套路（））。下面将会由浅入深的分析洛克王国PVP的玩法逻辑：</p>
+<p>作为类宝可梦的回合制战斗游戏，基础的逻辑就像石头剪刀布的嵌套：从技能角度看，攻防状态三种技能类型相互针对克制，防御作为洛克王国与宝可梦不同点出现了；随后是属性，水火草三个属性相互克制，这就构成了最底层的博弈关系，这种底层逻辑的设计很容易导致变成无聊的联防轮转游戏（1），于是他抛开了宝可梦存在感极低的pp点设置，而采取每个精灵十点能量，每个技能有其对应能耗，使用聚能回复5点，从而提升了使用技能的消耗，进而避免了长时间轮转无法出现破局点；此外，可携带六只精灵但只有四点血量也帮助控制了对局时间的长短，避免时间过长导致几局PVP下来打得心力交瘁，也不会因为血量少而一次博弈失误直接大劣势崩盘。</p>
+<p>能量</p>
+<p>而洛克王国通过能量的设计，增加了需要多回合规划的博弈。前文我们提到，洛克王国抛弃了宝可梦单技能独立 PP 值的设置，改用全技能通用的 10 点能量池，配合聚能回能的机制，而这套设计的核心就是：让技能的选择，成为一次有成本的资源选择。</p>
+<p>聚能，需要一个回合的时间，回复 5 点能量，是最核心的能量补给方式。洛克王国的博弈会大量针对能量，如：当我方精灵属性更多占优，但对手有一只能克制我方大多数精灵时，我方就可以通过卖状态、防御联防等手段，通过耗干该精灵的能量（2），从而更稳的解决战斗。</p>
+<p>数值</p>
+<p>每只精灵所独特的属性为：血量双攻双防速度，不同的性格、个体值，不同种的精灵有不同种族值、技能池、特性。首先要明确“速度决定回合主动权” 仍旧是回合制铁律。在对局中，速度线决定精灵的先手权（同速度看运气），能先一步出手打伤害、挂控场、开 buff；但这并不意味着高速是唯一选择，对不同精灵，甚至同种精灵的不同玩法而言，高耐久、高伤害可能要优于高速。洛克王国的精灵特性可谓是多种多样，较难以归类分析，此处按下不表。</p>
+<p>BUFF DEBUFF 状态 印记</p>
+<p>精灵拥有攻击、状态、防御三种类型的技能。防御在使用后有一回合冷却，而状态在对局中具有最多的可能性，主要有如下几类：BUFF DEBUFF 状态 印记，前两者即提升或降低精灵的对应属性，还有一项额外的吸血；此处的状态则单独指代中毒烧伤冻伤三类特殊状态，烧伤容易叠但会每回合损失；中毒优势在于可以转化为印记传递存在；冻伤则会永久削减该精灵血量上限。前面提到的这些状态，都无法在一方精灵切换时传递给下一个上场的精灵，而印记则可以在不同精灵切换时永久保留，但是仅能存在一种，分别是：中毒，减速，星陨，湿润等。</p>
+<p>愿力冲击、首领化</p>
+<p>类似于宝可梦中的钛晶化、mega进化，洛克王国拥有愿力和首领化机制，你可以从中二选一使用：愿力即：你可以通过更改血脉的方式学习一个任意属性的特定技能（对于同种族精灵相同），随后你可以在对局中使用愿力，在1号位使用你的血脉属性的大威力技能，从而起到补充打击面、利用信息差偷袭的作用。而首领化则可以全方面强化一只精灵的种族值、特性，从而以该精灵为核心来进攻或轮转。</p>
+<p>基础博弈简述</p>
+<p>通过前文的内容，你已经大致了解了洛克王国PVP的各项内容，那么我们看到的UP所说的博弈是什么？什么是博弈呢？让我们跳过最基础的情况开始设想（石头剪刀布）：此时我方首发精灵劣势，考虑双方都有攻防状态技能，如果不考虑换一只精灵，我们应该怎么做？我们可以站在对手角度考虑：对手当前占有优势，直接攻击拿下我们显然是个不错的选择，所以我们可以选择防御；换一个角度想，对方当然也会想到我方会这样想，所以如果他认为我方会防御，那么选择强化对他拥有最大的收益；这个时候我们也想到了他可能会选择强化，于是我们可以用其他方法处理；如带有应对：打断（3）的攻击技能或是提升对手能耗、中毒烧伤等手段……</p>
+<p>所以博弈就是，在你考虑自己收益的时候，同时思考对手的选择会如何影响你；而且你不仅需要站在对手的立场思考他的收益是什么样的，并且一层层套娃；而更重要的是，站在别人的立场思考，他们同样思考的时候有多老练，并且你需要考虑到他们认为你有多老练。</p>
+<p> 博弈中还有很重要的一点是利用信息差以及反向利用信息差（4），举个例子，一般人不知道你这只火系精灵有一个电系大威力技能，那么在你火系对位草系时，对手很可能会切出后备的水系进行联防，那么此时你就可以利用信息差使用电系攻击技能拿到巨大优势；但如果对手了解该信息差，也可能利用该信息差从而选择让草系站场强化、施加DEBUFF或状态技能，亦或是稳妥的切出地面系精灵抵抗。</p>
+<p>常见队伍的类型</p>
+<p>自主配队</p>
+<p>【从不会PVP到自研阵容的心理历程】<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yCQjBUEBr?vd_source=89ee9c0333eed94fc15ad7bfeda6fb8c">https://www.bilibili.com/video/BV1yCQjBUEBr?vd_source=89ee9c0333eed94fc15ad7bfeda6fb8c</a></p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>（1）：比如，当对手水系我方火系，对手场面优势则我方可以稳妥地选择切换出草系抵抗对手水系进攻技能，从而使我方场面占优，这就是联防轮转。</p>
+<p>（2）在洛克王国里，0能量基本等同于该精灵死了。如果联防上场后聚能，则意味着亏出对手两回合，卖精灵后上场聚能，则会亏一血的同时亏一回合。</p>
+<p>（3）应对：三角克制关系，即攻击应对状态，状态应对防御，防御应对攻击。打断：使对手当次技能使用失败且消耗能量。</p>
+<p>（4）信息差，即在双方中，该信息属于私人知识，反向利用即为嵌套知识。</p>
+<p><strong>私人知识</strong></p>
+<p><strong>英文名</strong>：Private Knowledge（别名：Individual Knowledge）</p>
+<p><strong>通俗示例</strong>：A 偷听到老板说 “公司本月奖金将缩水”，B 及其他同事对此完全不知情，该信息即为 A 的私人知识。</p>
+<p><strong>相互知识</strong></p>
+<p><strong>英文名</strong>：Mutual Knowledge</p>
+<p><strong>通俗示例</strong>：B 也偷听到老板说 “公司本月奖金将缩水”，但 A 不知道 B 也发现了这件事，B 也不知道 A 也发现了这件事，此时 “本月奖金将缩水” 就是 A、B 二人组的相互知识。</p>
+<p><strong>高阶嵌套知识</strong></p>
+<p><strong>英文名</strong>：Higher-order Nested Knowledge（别名：Reciprocal Knowledge）</p>
+<p><strong>核心边界</strong>：有限阶的嵌套，只要存在明确的嵌套终点，就不属于共同知识。</p>
+<p><strong>通俗示例</strong>：A 和 B 都发现了 “公司本月奖金将缩水”，二人对视点头，双向确认了对方知道这件事，但并不能确定对方明白自己点头的意思。所以此时 A 知道 B 知道，B 知道 A 知道，但 A 不确定 B 是否知道 “A 知道 B 知道”，B 也不确定 A 是否知道 “B 知道 A 知道”，这就是典型的二阶高阶嵌套知识。</p>
+<p><strong>共同知识</strong></p>
+<p><strong>英文名</strong>：Common Knowledge（标准学术译法为公共知识，避免与日常语境的 “常识” Common sense混淆）</p>
+<p><strong>通俗示例</strong>：在公开的全员大会上，领导当众宣布 “公司本月奖金将缩水”，此时在场所有员工都听到了宣告，也看到了其他人都在场听到了宣告，该命题就直接升级为全员的共同知识。</p>
+<p><strong>红眼睛蓝眼睛悖论</strong></p>
+<p>一个封闭小岛上有 100 名逻辑能力完美的岛民，其中 5 人是红眼睛、95 人是蓝眼睛。岛上有三条严格的规则：</p>
+<ol>
+<li>岛民禁止以任何方式谈论眼睛颜色，禁止通过照镜子等方式查看自己的眼睛颜色；</li>
+<li>每个岛民都能看到其他所有岛民的眼睛颜色，且知道所有人都具备完美的逻辑推理能力；</li>
+<li>一旦岛民通过推理确定了自己的眼睛颜色是红色，必须在当天夜里自杀。</li>
+</ol>
+<p>原本，“岛上有红眼睛的人” 是全体岛民的<strong>相互知识</strong>：每个岛民都能看到其他红眼睛的人，都知道这件事，但它不是共同知识。</p>
+<p>当一名外来者<strong>当着全体岛民的面，公开宣告</strong>：“你们这座岛上有红眼睛的人”。这句看似所有人都知道的 “废话”，直接将 “岛上有红眼睛的人” 这个命题，从相互知识升级为了全体岛民的<strong>共同知识</strong>。</p>
+<p>最终，在宣告后的第 5 天夜里，5 名红眼睛岛民集体自杀。</p>
+<p>用数学归纳法递推：仅有 1 个红眼则会直接自杀，若第一夜结束无人自杀则证明红眼人数大于1人，故此时若仅有两名红眼，他们互相看到对方没有自杀则证明自己是红眼；故没有n 个红眼见前 n-1 晚无人自杀，便确认自己是红眼，会在第 n 晚集体自杀。而外来者的公开宣告，则是将 “有红眼” 从相互知识升级为共同知识。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>mohan</span>
+                    </p>
+                
+                
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span><strong>Learning</strong> is a kind of <strong>FAITH</strong>!</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%B8%B8%E6%88%8F%E8%AF%84%E6%B5%8B/"># 游戏评测</a>
+                    
+                        <a href="/tags/%E6%B4%9B%E5%85%8B%E7%8E%8B%E5%9B%BD/"># 洛克王国</a>
+                    
+                        <a href="/tags/PVP/"># PVP</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2026/06/15/%E7%8C%8E%E4%BA%BA%20%E8%8D%92%E9%87%8E%E7%9A%84%E5%8F%AC%E5%94%A4/">猎人 荒野的召唤</a>
+            
+            
+            <a class="next" rel="next" href="/2026/04/14/%E8%B6%B3%E7%90%83%E6%B8%B8%E6%88%8F2026.4.14/">足球游戏</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© mohan | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
