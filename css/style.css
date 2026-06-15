@@ -1361,3 +1361,34 @@ header label {
 .post-content pre .javascript .function {
   color: #8959a8;
 }
+[data-audio-viz] {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  margin: 24px auto;
+  border-radius: 12px;
+  background: rgba(10,20,40,0.85);
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+[data-audio-viz] audio {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 400px;
+  opacity: 0.85;
+  z-index: 2;
+}
+[data-audio-viz] canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.dark-theme [data-audio-viz] {
+  background: rgba(5,10,25,0.9);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+}
