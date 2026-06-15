@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="mohan">
+
+
+
+
+
+<title>音乐播放器 | nahom&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">nahom&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/music">Music</a>
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">nahom&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/music">Music</a>
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    <article class="post-wrap page">
+        
+        <h2 class="post-title">音乐播放器</h2>
+        
+        <section class="post-content">
+            
+<style>
+html,body{margin:0;height:100%;overflow:hidden}
+.container{max-width:100%!important;padding:0!important;height:100%}
+.post-wrap.page{max-width:100%!important;width:100%!important;height:100%!important;padding:0!important;margin:0!important;background:0!important}
+.post-content{height:100%!important}
+.main{max-width:100%!important;padding:0!important;height:100%}
+.wrapper{height:100%}
+
+/* ═══════════════════════════════════ */
+body{background:linear-gradient(135deg,#061126,#0e2d63,#2f89ff,#08152d);font-family:system-ui,sans-serif}
+#bg{position:fixed;inset:0;z-index:1}
+.player{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(850px,92vw);
+  display:grid;grid-template-columns:280px 1fr;gap:24px;
+  padding:28px;border-radius:30px;z-index:2;
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  color:#fff
+}
+.disc-wrap{display:flex;align-items:center;justify-content:center}
+.disc{
+  width:240px;height:240px;border-radius:50%;overflow:hidden;
+  background:#111;box-shadow:0 0 50px rgba(0,0,0,.4)
+}
+.disc img{width:100%;height:100%;object-fit:cover}
+.playing{animation:spin 10s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+.info{display:flex;flex-direction:column;justify-content:center}
+.tag{opacity:.7;letter-spacing:4px;font-size:11px;margin-bottom:2px}
+h1{margin:0 0 2px;font-size:22px;font-weight:700}
+#artist{margin-bottom:16px;opacity:.8;font-size:13px}
+
+.progress{height:8px;background:rgba(255,255,255,.15);border-radius:99px;cursor:pointer;margin-bottom:12px}
+.fill{height:100%;width:0;background:#8edbff;border-radius:99px;box-shadow:0 0 8px rgba(142,219,255,.4)}
+.time{display:flex;justify-content:space-between;margin-bottom:16px;font-size:12px;opacity:.8}
+
+.controls{display:flex;gap:10px}
+.controls button{
+  width:56px;height:56px;border-radius:50%;border:none;
+  background:rgba(255,255,255,.15);color:white;font-size:20px;
+  cursor:pointer;transition:all .2s
+}
+.controls button:hover{background:rgba(255,255,255,.25);transform:scale(1.06)}
+#play{background:#8edbff;color:#0a1a3a;box-shadow:0 4px 18px rgba(142,219,255,.3)}
+
+@media(max-width:700px){
+ .player{grid-template-columns:1fr;text-align:center}
+ .disc{width:180px;height:180px}
+ h1{font-size:24px}
+}
+</style>
+
+<canvas id="bg"></canvas>
+
+<div class="player">
+  <div class="disc-wrap">
+    <div class="disc" id="disc">
+      <img id="cover" src="" alt="cover">
+    </div>
+  </div>
+
+  <div class="info">
+    <div class="tag">NOW PLAYING</div>
+    <h1 id="title">--</h1>
+    <div id="artist">--</div>
+
+    <div class="progress" id="progressBar">
+      <div class="fill" id="fill"></div>
+    </div>
+
+    <div class="time">
+      <span id="current">0:00</span>
+      <span id="total">0:00</span>
+    </div>
+
+    <div class="controls">
+      <button id="prev">⏮</button>
+      <button id="play">▶</button>
+      <button id="next">⏭</button>
+    </div>
+  </div>
+</div>
+
+<audio id="audio"></audio>
+
+<script src="/music/playlist.js"></script>
+<script>
+(function(){
+  'use strict';
+  if(typeof LOCAL_SONGS==='undefined'){LOCAL_SONGS=[];}
+
+  var audio=document.getElementById('audio');
+  var cover=document.getElementById('cover');
+  var disc=document.getElementById('disc');
+  var titleEl=document.getElementById('title');
+  var artistEl=document.getElementById('artist');
+  var fill=document.getElementById('fill');
+  var curEl=document.getElementById('current');
+  var totEl=document.getElementById('total');
+  var playBtn=document.getElementById('play');
+  var progressBar=document.getElementById('progressBar');
+
+  var playlist=LOCAL_SONGS;
+  var index=0;
+
+  function fmt(s){
+    if(!s||!isFinite(s))return'0:00';
+    return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+  }
+
+  function coverSrc(song){
+    var n=song.src.replace(/\.mp3$/i,'').replace(/^audio\//,'');
+    return 'cover/'+n+'.jpg';
+  }
+  function fallbackCover(song){
+    return 'cover/'+(song.title||song.name||'default')+'.jpg';
+  }
+
+  function loadSong(i){
+    if(playlist.length===0){titleEl.textContent='无歌曲';return}
+    index=(i+playlist.length)%playlist.length;
+    var s=playlist[index];
+    titleEl.textContent=s.title||s.name||'';
+    artistEl.textContent=s.artist||'';
+    audio.src=s.src;
+    cover.src=coverSrc(s);
+    cover.onerror=function(){cover.src=fallbackCover(s)};
+    fill.style.width='0%';curEl.textContent='0:00';totEl.textContent='0:00';
+    disc.classList.remove('playing');playBtn.textContent='▶';
+  }
+
+  playBtn.addEventListener('click',async function(){
+    if(playlist.length===0)return;
+    if(!audio.src)loadSong(0);
+    if(audio.paused){
+      try{await audio.play()}catch(e){return}
+      disc.classList.add('playing');playBtn.textContent='❚❚';
+    }else{
+      audio.pause();disc.classList.remove('playing');playBtn.textContent='▶';
+    }
+  });
+
+  document.getElementById('next').addEventListener('click',function(){
+    if(playlist.length===0)return;
+    loadSong(index+1);
+    audio.play().then(function(){disc.classList.add('playing');playBtn.textContent='❚❚'}).catch(function(){});
+  });
+
+  document.getElementById('prev').addEventListener('click',function(){
+    if(playlist.length===0)return;
+    if(audio.currentTime>3){audio.currentTime=0;return}
+    loadSong(index-1);
+    audio.play().then(function(){disc.classList.add('playing');playBtn.textContent='❚❚'}).catch(function(){});
+  });
+
+  audio.addEventListener('loadedmetadata',function(){totEl.textContent=fmt(audio.duration)});
+  audio.addEventListener('timeupdate',function(){
+    if(!audio.duration)return;
+    fill.style.width=(audio.currentTime/audio.duration*100)+'%';
+    curEl.textContent=fmt(audio.currentTime);
+    totEl.textContent=fmt(audio.duration);
+  });
+  audio.addEventListener('ended',function(){
+    disc.classList.remove('playing');playBtn.textContent='▶';
+    loadSong(index+1);
+    audio.play().then(function(){disc.classList.add('playing');playBtn.textContent='❚❚'}).catch(function(){});
+  });
+
+  progressBar.addEventListener('click',function(e){
+    if(!audio.duration)return;
+    var r=progressBar.getBoundingClientRect();
+    audio.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*audio.duration;
+  });
+
+  /* ═══ 星空 + 水波 ═══ */
+  var c=document.getElementById('bg');
+  var ctx=c.getContext('2d');
+  var stars=[],ripples=[];
+
+  function resize(){
+    c.width=innerWidth;c.height=innerHeight;
+  }
+  resize();window.addEventListener('resize',resize);
+
+  for(var i=0;i<120;i++)stars.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2});
+
+  window.addEventListener('mousemove',function(e){
+    ripples.push({x:e.clientX,y:e.clientY,r:0,a:.3});
+  });
+
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i];
+      ctx.fillStyle='rgba(255,255,255,.8)';
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fill();
+    }
+    for(var i=ripples.length-1;i>=0;i--){
+      var r=ripples[i];r.r+=2;r.a*=.97;
+      ctx.strokeStyle='rgba(180,220,255,'+r.a+')';
+      ctx.beginPath();ctx.arc(r.x,r.y,r.r,0,7);ctx.stroke();
+      if(r.a<.02)ripples.splice(i,1);
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();loadSong(0);
+})();
+</script>
+
+
+
+        </section>
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© mohan | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
