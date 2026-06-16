@@ -277,8 +277,11 @@
 </ul>
 <p>我们需要通过提前摘花瓣（设数量为 <code>x</code>），使剩余花瓣 <code>m = n - x</code>（<code>m &gt; 0</code>）满足：最后一片花瓣在某轮的后 <code>b</code> 片中。</p>
 <h3 id="分情况"><a href="#分情况" class="headerlink" title="分情况"></a>分情况</h3><ol>
-<li><strong>当 <code>n ≤ a</code> 时</strong>：<br>Yuki 第一轮就会摘完所有花瓣（因 <code>n ≤ a</code>，最后一片在前 <code>a</code> 片中），她会离开。<br>若提前摘 <code>x</code> 片（<code>x &gt; 0</code>，<code>m = n - x &gt; 0</code>），则 <code>m &lt; n ≤ a</code>，同样最后一片在前 <code>a</code> 片中，无法让她留下。故输出 “Sayonara”。</li>
-<li><strong>当 <code>n &gt; a</code> 时</strong>：<br>计算 <code>n</code> 除以 <code>T</code> 的商 <code>k = n // T</code> 和余数 <code>r = n % T</code>（即 <code>n = k*T + r</code>，<code>0 ≤ r &lt; T</code>）：<ul>
+<li><strong>当 <code>n ≤ a</code> 时</strong>：
+Yuki 第一轮就会摘完所有花瓣（因 <code>n ≤ a</code>，最后一片在前 <code>a</code> 片中），她会离开。
+若提前摘 <code>x</code> 片（<code>x &gt; 0</code>，<code>m = n - x &gt; 0</code>），则 <code>m &lt; n ≤ a</code>，同样最后一片在前 <code>a</code> 片中，无法让她留下。故输出 “Sayonara”。</li>
+<li><strong>当 <code>n &gt; a</code> 时</strong>：
+计算 <code>n</code> 除以 <code>T</code> 的商 <code>k = n // T</code> 和余数 <code>r = n % T</code>（即 <code>n = k*T + r</code>，<code>0 ≤ r &lt; T</code>）：<ul>
 <li>若 <code>r = 0</code>：刚好 <code>k</code> 轮摘完，最后一片在第 <code>k</code> 轮的后 <code>b</code> 片中 → 无需提前摘，<code>x = 0</code>。</li>
 <li>若 <code>r &gt; a</code>：最后一轮先摘 <code>a</code> 片，剩余 <code>r - a</code> 片（<code>&gt; 0</code>），再摘 <code>b</code> 片（摘完 <code>r - a</code> 片），最后一片在后 <code>b</code> 片中 → 无需提前摘，<code>x = 0</code>。</li>
 <li>若 <code>0 &lt; r ≤ a</code>：最后一轮仅摘 <code>r</code> 片（前 <code>a</code> 片中），Yuki 会离开。需提前摘 <code>x = r</code> 片，剩余 <code>m = k*T</code>（刚好 <code>k</code> 轮，最后一片在后 <code>b</code> 片中）→ <code>x = r</code>。</li>

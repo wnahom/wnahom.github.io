@@ -1,403 +1,2174 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nahom's Blog - Music</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-<head>
-    <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+      :root {
+        --color-bg: #f5f1ec;
+        --color-text: #2a2520;
+        --color-text-muted: rgba(42, 37, 32, 0.55);
+        --color-text-light: rgba(42, 37, 32, 0.45);
+        --color-text-dark: rgba(42, 37, 32, 0.75);
+        --color-border: rgba(153, 204, 230, 0.2);
+        --color-overlay: rgba(42, 37, 32, 0.25);
+        --color-accent: #194c73;
+        --transition-fast: 0.2s ease;
+        --transition-medium: 0.25s ease;
+      }
 
-    <meta name="author" content="mohan">
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: var(--color-bg);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      }
 
+      body {
+        display: flex;
+        flex-direction: column;
+      }
 
+      /* ─ Header ─────────────────────────────────────────────────────── */
+      .header-container {
+        padding: clamp(1rem, 2vw, 2rem);
+        z-index: 10;
+        max-width: 100%;
+      }
 
+      .header-content {
+        width: clamp(200px, 88vw, 900px);
+        margin: 0 auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding-top: 1.5rem;
+        padding-bottom: 0.5rem;
+        gap: 1.5rem;
+      }
 
+      .logo {
+        flex-shrink: 0;
+        padding-right: 56px;
+      }
 
-<title>音乐播放器 | nahom&#39;s Blog</title>
+      .logo h1 {
+        font-family: "PP Mori", Georgia, serif;
+        font-weight: 500;
+        font-size: clamp(11px, 1.5vw, 12px);
+        color: var(--color-text);
+        letter-spacing: -0.5px;
+      }
 
+      .nav-container {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-grow: 1;
+      }
 
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        flex-grow: 1;
+      }
 
-    <link rel="icon" href="/favicon.ico">
+      .nav-btn {
+        font-family: "PP Mori", Georgia, serif;
+        font-size: 12px;
+        color: var(--color-text-muted);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color var(--transition-fast);
+        padding: 0;
+      }
 
+      .nav-btn:hover {
+        color: rgba(42, 37, 32, 0.85);
+      }
 
+      .social-links {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
 
+      .social-link {
+        color: var(--color-text-light);
+        transition: color var(--transition-fast);
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
 
-    <!-- stylesheets list from _config.yml -->
-    
-    <link rel="stylesheet" href="/css/style.css">
-    
+      .social-link:hover {
+        color: var(--color-text-dark);
+      }
 
+      .social-link svg {
+        width: 14px;
+        height: 14px;
+        stroke-width: 2;
+      }
 
+      /* ─ Pond Section ───────────────────────────────────────────────── */
+      .pond-section {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(1rem, 2vw, 2.5rem);
+        box-sizing: border-box;
+      }
 
-    <!-- scripts list from _config.yml -->
-    
-    <script src="/js/script.js"></script>
-    
-    <script src="/js/tocbot.min.js"></script>
-    
+      .pond-container {
+        position: relative;
+        width: 100%;
+        max-width: 1100px;
+        aspect-ratio: 5 / 3;
+        filter: drop-shadow(0 30px 50px rgba(45, 90, 135, 0.18));
+      }
 
+      .pond-container canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
 
+      .pond-canvas-webgl {
+        border-radius: clamp(12px, 3vw, 28px);
+        z-index: 10;
+      }
 
-    
-    
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
+      .pond-canvas-anim {
+        z-index: 20;
+        cursor: crosshair;
+      }
+
+      .pond-canvas-reeds {
+        z-index: 30;
+        pointer-events: none;
+      }
+
+      /* ─ Modal ──────────────────────────────────────────────────────── */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background-color: var(--color-overlay);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        backdrop-filter: blur(3px);
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .modal-overlay.open {
+        display: flex;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
+        to {
+          opacity: 1;
+        }
+      }
 
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-    
+      .modal-content {
+        background-color: #faf7f2;
+        border-radius: 20px;
+        padding: 2.5rem;
+        max-width: 520px;
+        width: 90%;
+        box-shadow: 0 16px 48px rgba(42, 37, 32, 0.12);
+        animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        font-family: "PP Mori", Georgia, serif;
+        border: 1px solid var(--color-border);
+      }
 
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+      }
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+      .modal-header h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--color-text);
+        letter-spacing: -0.8px;
+      }
 
-<body>
+      .modal-close {
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        color: rgba(42, 37, 32, 0.35);
+        padding: 0 0 0 1rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition-medium);
+        line-height: 1;
+      }
+
+      .modal-close:hover {
+        color: rgba(42, 37, 32, 0.65);
+        transform: scale(1.1);
+      }
+
+      .modal-body {
+        color: var(--color-text-dark);
+        line-height: 1.7;
+        font-size: 15px;
+      }
+
+      .qr-container {
+        text-align: center;
+      }
+
+      .qr-box {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 1.5rem;
+        background-color: #f0ebe2;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed rgba(120, 160, 105, 0.3);
+      }
+
+      .qr-box img {
+        width: 200px;
+        height: 200px;
+        border: 1px solid rgba(120, 160, 105, 0.3);
+        border-radius: 8px;
+      }
+
+      .qr-text {
+        margin: 0 0 1rem 0;
+        font-size: 15px;
+        color: rgba(42, 37, 32, 0.7);
+        line-height: 1.6;
+      }
+
+      .qr-text strong {
+        color: var(--color-text);
+      }
+
+      .contact-box {
+        background-color: rgba(153, 204, 230, 0.08);
+        padding: 1.5rem;
+        border-radius: 14px;
+        text-align: center;
+        border: 1px solid rgba(153, 204, 230, 0.25);
+      }
+
+      .contact-label {
+        margin: 0 0 1rem 0;
+        font-size: 14px;
+        color: rgba(42, 37, 32, 0.65);
+      }
+
+      .contact-id {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+        color: rgba(25, 76, 115, 0.85);
+        font-family: monospace;
+        letter-spacing: 2px;
+      }
+
+      /* ─ Mobile Responsive ──────────────────────────────────────────── */
+      @media (max-width: 640px) {
+        .pond-container {
+          aspect-ratio: 5 / 4;
+        }
+
+        .header-content {
+          flex-direction: column-reverse;
+          align-items: flex-end;
+          gap: 0.625rem;
+        }
+
+        .nav-container {
+          flex-direction: column;
+          gap: 0;
+          align-items: flex-end;
+          width: 100%;
+        }
+
+        .nav-links {
+          flex-direction: column;
+          gap: 0.625rem;
+          align-items: flex-end;
+        }
+
+        .nav-btn {
+          font-size: 11px;
+        }
+
+        .social-links {
+          gap: 0.625rem;
+        }
+
+        .social-link svg {
+          width: 13px;
+          height: 13px;
+        }
+
+        .logo {
+          padding-right: 0;
+        }
+
+        .logo h1 {
+          font-size: 11px;
+        }
+      }
+        /* ─ Music Player ───────────────────────────────────────────────── */
+      .music-player {
+        position: fixed;
+        bottom: clamp(1rem, 3vw, 2rem);
+        left: clamp(1rem, 3vw, 2rem);
+        z-index: 100;
+        font-family: "PP Mori", Georgia, serif;
+      }
+
+      .mp-card {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        width: clamp(248px, 78vw, 312px);
+        padding: 0.75rem 0.875rem;
+        background-color: #faf7f2;
+        border: 1px solid var(--color-border);
+        border-radius: 18px;
+        box-shadow: 0 14px 36px rgba(45, 90, 135, 0.16);
+        transform-origin: bottom left;
+        transition:
+          opacity var(--transition-medium),
+          transform var(--transition-medium);
+      }
+
+      /* 播放模式按钮样式 */
+      .mp-mode {
+        position: relative;
+        width: 26px;
+        height: 26px;
+        border: none;
+        background: none;
+        color: var(--color-text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 6px;
+        transition:
+          color var(--transition-fast),
+          background-color var(--transition-fast);
+      }
+      .mp-mode:hover {
+        color: var(--color-text-dark);
+        background-color: rgba(42, 37, 32, 0.05);
+      }
+      .mp-mode svg {
+        width: 14px;
+        height: 14px;
+      }
+      .mp-mode-tooltip {
+        position: absolute;
+        bottom: calc(100% + 6px);
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--color-text);
+        color: #faf7f2;
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--transition-fast);
+        z-index: 10;
+      }
+      .mp-mode:hover .mp-mode-tooltip {
+        opacity: 1;
+      }
+
+      /* 播放列表按钮样式 */
+      .mp-playlist-btn {
+        position: relative;
+        width: 26px;
+        height: 26px;
+        border: none;
+        background: none;
+        color: var(--color-text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 6px;
+        transition:
+          color var(--transition-fast),
+          background-color var(--transition-fast);
+      }
+      .mp-playlist-btn:hover {
+        color: var(--color-text-dark);
+        background-color: rgba(42, 37, 32, 0.05);
+      }
+      .mp-playlist-btn svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* 播放列表容器 */
+      .mp-playlist {
+        max-height: 0;
+        overflow-y: auto;
+        margin: 0 0 0.75rem 0;
+        padding: 0;
+        list-style: none;
+        transition: max-height var(--transition-medium);
+      }
+      .mp-playlist.open {
+        max-height: 180px;
+        margin-bottom: 0.75rem;
+      }
+
+      /* 播放列表项 */
+      .mp-playlist-item {
+        padding: 0.4rem 0.6rem;
+        font-size: 11px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+        border-radius: 6px;
+        transition:
+          background-color var(--transition-fast),
+          color var(--transition-fast);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .mp-playlist-item:hover {
+        background-color: rgba(42, 37, 32, 0.05);
+        color: var(--color-text-dark);
+      }
+      .mp-playlist-item.active {
+        background-color: rgba(25, 76, 115, 0.1);
+        color: var(--color-accent);
+        font-weight: 500;
+      }
+
+      /* 播放列表滚动条 */
+      .mp-playlist::-webkit-scrollbar {
+        width: 4px;
+      }
+      .mp-playlist::-webkit-scrollbar-track {
+        background: rgba(42, 37, 32, 0.05);
+        border-radius: 4px;
+      }
+      .mp-playlist::-webkit-scrollbar-thumb {
+        background: rgba(42, 37, 32, 0.2);
+        border-radius: 4px;
+      }
+      .mp-playlist::-webkit-scrollbar-thumb:hover {
+        background: rgba(42, 37, 32, 0.3);
+      }
+
+      /* 播放主体容器（播放按钮+信息） */
+      .mp-main {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+      }
+
+      .music-player.collapsed .mp-card {
+        opacity: 0;
+        transform: scale(0.85) translateY(8px);
+        pointer-events: none;
+      }
+
+      .mp-toggle {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 48px;
+        height: 48px;
+        border: 1px solid var(--color-border);
+        border-radius: 50%;
+        background-color: #faf7f2;
+        color: var(--color-accent);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 10px 28px rgba(45, 90, 135, 0.18);
+        transition: transform var(--transition-fast);
+      }
+
+      .music-player.collapsed .mp-toggle {
+        display: flex;
+      }
+      .mp-toggle:hover {
+        transform: scale(1.06);
+      }
+      .mp-toggle svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .mp-play {
+        flex-shrink: 0;
+        width: 42px;
+        height: 42px;
+        border: none;
+        border-radius: 50%;
+        background-color: var(--color-accent);
+        color: #faf7f2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition:
+          transform var(--transition-fast),
+          background-color var(--transition-fast);
+      }
+
+      .mp-play:hover {
+        transform: scale(1.06);
+        background-color: #1f5c8a;
+      }
+      .mp-play svg {
+        width: 18px;
+        height: 18px;
+      }
+      .mp-icon-pause {
+        display: none;
+      }
+      .music-player.playing .mp-icon-play {
+        display: none;
+      }
+      .music-player.playing .mp-icon-pause {
+        display: block;
+      }
+
+      .mp-body {
+        flex-grow: 1;
+        min-width: 0;
+      }
+
+      .mp-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .mp-title {
+        font-size: 12.5px;
+        color: var(--color-text);
+        letter-spacing: -0.3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .mp-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        flex-shrink: 0;
+      }
+
+      .mp-btn {
+        width: 26px;
+        height: 26px;
+        border: none;
+        background: none;
+        color: var(--color-text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 6px;
+        transition:
+          color var(--transition-fast),
+          background-color var(--transition-fast);
+      }
+
+      .mp-btn:hover {
+        color: var(--color-text-dark);
+        background-color: rgba(42, 37, 32, 0.05);
+      }
+      .mp-btn svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .mp-progress {
+        position: relative;
+        height: 4px;
+        border-radius: 4px;
+        background-color: rgba(42, 37, 32, 0.12);
+        cursor: pointer;
+        touch-action: none;
+      }
+
+      .mp-progress-fill {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 0%;
+        border-radius: 4px;
+        background: linear-gradient(90deg, var(--color-accent), #99cce6);
+      }
+
+      .mp-progress-handle {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #faf7f2;
+        border: 2px solid var(--color-accent);
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity var(--transition-fast);
+      }
+
+      .mp-progress:hover .mp-progress-handle {
+        opacity: 1;
+      }
+
+      .mp-time {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.375rem;
+        font-size: 10.5px;
+        color: var(--color-text-light);
+        font-variant-numeric: tabular-nums;
+      }
+
+      @media (max-width: 640px) {
+        .music-player {
+          bottom: 1rem;
+          left: 1rem;
+        }
+        .mp-card {
+          width: clamp(220px, 70vw, 280px);
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header-container">
+      <div class="header-content">
+        <div class="logo">
+          <h1>nahom</h1>
+        </div>
+
+        <div class="nav-container" id="desktopNav">
+          <div class="nav-links">
+            <a class="nav-btn" href="https://wnahom.github.io/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">关于我</a>
+          </div>
+          <div class="social-links">
+            <a
+              href="https://github.com/wnahom"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-container" id="mobileNav" style="display: none">
+          <div class="social-links">
+            <a
+              href=" https://github.com/wnahom"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="https://x.com/Niakd3"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pond-section">
+      <div class="pond-container" id="pondContainer">
+        <canvas class="pond-canvas-webgl" id="webglCanvas"></canvas>
+        <canvas class="pond-canvas-anim" id="animCanvas"></canvas>
+        <canvas class="pond-canvas-reeds" id="reedsCanvas"></canvas>
+      </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+      
+      <div class="mp-card">
+        <!-- 播放列表 -->
+        <ul class="mp-playlist" id="mpPlaylist"></ul>
+        
+        <!-- 播放主体 -->
+        <div class="mp-main">
+          <button class="mp-play" id="mpPlay" aria-label="播放/暂停">
+            <svg class="mp-icon-play" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7 5.5v13a.5.5 0 0 0 .77.42l10-6.5a.5.5 0 0 0 0-.84l-10-6.5A.5.5 0 0 0 7 5.5z"/>
+            </svg>
+            <svg class="mp-icon-pause" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="5" width="4" height="14" rx="1"/>
+              <rect x="14" y="5" width="4" height="14" rx="1"/>
+            </svg>
+          </button>
+
+          <div class="mp-body">
+            <div class="mp-info">
+              <span class="mp-title" id="mpTitle">未播放</span>
+              <div class="mp-controls">
+                <button class="mp-btn" id="mpPrev" aria-label="上一首">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="19 20 9 12 19 4 19 20"/>
+                    <line x1="5" y1="19" x2="5" y2="5"/>
+                  </svg>
+                </button>
+                <button class="mp-btn" id="mpNext" aria-label="下一首">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="5 4 15 12 5 20 5 4"/>
+                    <line x1="19" y1="5" x2="19" y2="19"/>
+                  </svg>
+                </button>
+                <!-- 播放模式按钮 -->
+                <button class="mp-mode" id="mpMode" aria-label="播放模式">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="21 12 6 12 6 12 6 12"/>
+                    <path d="M18 12c0 1.66-4 3-9 3s-9-1.34-9-3s4-3 9-3s9 1.34 9 3z"/>
+                  </svg>
+                  <span class="mp-mode-tooltip">顺序播放</span>
+                </button>
+                <!-- 播放列表按钮 -->
+                <button class="mp-playlist-btn" id="mpPlaylistBtn" aria-label="播放列表">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="8" y1="6" x2="21" y2="6"/>
+                    <line x1="8" y1="12" x2="21" y2="12"/>
+                    <line x1="8" y1="18" x2="21" y2="18"/>
+                    <line x1="3" y1="6" x2="3.01" y2="6"/>
+                    <line x1="3" y1="12" x2="3.01" y2="12"/>
+                    <line x1="3" y1="18" x2="3.01" y2="18"/>
+                  </svg>
+                </button>
+                <button class="mp-btn" id="mpCollapse" aria-label="收起">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="mp-progress" id="mpProgress">
+              <div class="mp-progress-fill" id="mpProgressFill"></div>
+              <div class="mp-progress-handle" id="mpProgressHandle"></div>
+            </div>
+
+            <div class="mp-time">
+              <span id="mpCurrent">0:00</span>
+              <span id="mpDuration">0:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="mp-toggle" id="mpToggle" aria-label="展开播放器">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13"/>
+          <circle cx="6" cy="18" r="3"/>
+          <circle cx="18" cy="16" r="3"/>
+        </svg>
+      </button>
+
+      <audio id="mpAudio" preload="metadata"></audio>
+    </div>
+
     <script>
-        // this function is used to check current theme before page loaded.
-        (() => {
-            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
-            const isDark = currentTheme === 'dark';
-            const pagebody = document.getElementsByTagName('body')[0]
-            if (isDark) {
-                pagebody.classList.add('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
-            } else {
-                pagebody.classList.remove('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Light"
-            }
-        })();
-    </script>
+      // ──────────────────────────────────────────────────────────────────
+      // Responsive Navigation
+      // ──────────────────────────────────────────────────────────────────
+      function updateNavigation() {
+        const isMobile = window.innerWidth < 640;
+        const desktopNav = document.getElementById("desktopNav");
+        const mobileNav = document.getElementById("mobileNav");
 
-    <div class="wrapper">
-        <header>
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-header header-logo"><a href="/">nahom&#39;s Blog</a></div>
-            <div class="menu navbar-right">
-                
-                    <a class="menu-item" href="/music">Music</a>
-                
-                    <a class="menu-item" href="/archives">Posts</a>
-                
-                    <a class="menu-item" href="/category">Categories</a>
-                
-                    <a class="menu-item" href="/tag">Tags</a>
-                
-                    <a class="menu-item" href="/about">About</a>
-                
-                <input id="switch_default" type="checkbox" class="switch_default">
-                <label for="switch_default" class="toggleBtn"></label>
-            </div>
-        </div>
-    </nav>
-
-    
-    <nav class="navbar-mobile" id="nav-mobile">
-        <div class="container">
-            <div class="navbar-header">
-                <div>
-                    <a href="/">nahom&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
-                </div>
-                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
-            </div>
-            <div class="menu" id="mobile-menu">
-                
-                    <a class="menu-item" href="/music">Music</a>
-                
-                    <a class="menu-item" href="/archives">Posts</a>
-                
-                    <a class="menu-item" href="/category">Categories</a>
-                
-                    <a class="menu-item" href="/tag">Tags</a>
-                
-                    <a class="menu-item" href="/about">About</a>
-                
-            </div>
-        </div>
-    </nav>
-
-</header>
-<script>
-    var mobileBtn = function f() {
-        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
-        var mobileMenu = document.getElementById("mobile-menu");
-        if(toggleMenu.classList.contains("active")){
-           toggleMenu.classList.remove("active")
-            mobileMenu.classList.remove("active")
-        }else{
-            toggleMenu.classList.add("active")
-            mobileMenu.classList.add("active")
+        if (isMobile) {
+          desktopNav.style.display = "none";
+          mobileNav.style.display = "flex";
+        } else {
+          desktopNav.style.display = "flex";
+          mobileNav.style.display = "none";
         }
-    }
-</script>
-            <div class="main">
-                <div class="container">
-    <article class="post-wrap page">
-        
-        <h2 class="post-title">音乐播放器</h2>
-        
-        <section class="post-content">
-            
-<style>
-html,body{margin:0;height:100%;overflow:hidden}
-.container{max-width:100%!important;padding:0!important;height:100%}
-.post-wrap.page{max-width:100%!important;width:100%!important;height:100%!important;padding:0!important;margin:0!important;background:0!important}
-.post-content{height:100%!important}
-.main{max-width:100%!important;padding:0!important;height:100%}
-.wrapper{height:100%}
+      }
 
-/* ═══════════════════════════════════ */
-body{background:linear-gradient(135deg,#061126,#0e2d63,#2f89ff,#08152d);font-family:system-ui,sans-serif}
-#bg{position:fixed;inset:0;z-index:1}
-.player{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:min(850px,92vw);
-  display:grid;grid-template-columns:280px 1fr;gap:24px;
-  padding:28px;border-radius:30px;z-index:2;
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-  color:#fff
-}
-.disc-wrap{display:flex;align-items:center;justify-content:center}
-.disc{
-  width:240px;height:240px;border-radius:50%;overflow:hidden;
-  background:#111;box-shadow:0 0 50px rgba(0,0,0,.4)
-}
-.disc img{width:100%;height:100%;object-fit:cover}
-.playing{animation:spin 10s linear infinite}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+      window.addEventListener("resize", updateNavigation);
+      updateNavigation();
 
-.info{display:flex;flex-direction:column;justify-content:center}
-.tag{opacity:.7;letter-spacing:4px;font-size:11px;margin-bottom:2px}
-h1{margin:0 0 2px;font-size:22px;font-weight:700}
-#artist{margin-bottom:16px;opacity:.8;font-size:13px}
+      // ──────────────────────────────────────────────────────────────────
+      // Pond Animation System
+      // ──────────────────────────────────────────────────────────────────
 
-.progress{height:8px;background:rgba(255,255,255,.15);border-radius:99px;cursor:pointer;margin-bottom:12px}
-.fill{height:100%;width:0;background:#8edbff;border-radius:99px;box-shadow:0 0 8px rgba(142,219,255,.4)}
-.time{display:flex;justify-content:space-between;margin-bottom:16px;font-size:12px;opacity:.8}
+      const REED_COLORS = [
+        "rgba(120, 160, 105, 0.72)",
+        "rgba(130, 168, 112, 0.68)",
+        "rgba(112, 152, 100, 0.65)",
+        "rgba(135, 172, 118, 0.62)",
+        "rgba(125, 164, 108, 0.68)",
+      ];
 
-.controls{display:flex;gap:10px}
-.controls button{
-  width:56px;height:56px;border-radius:50%;border:none;
-  background:rgba(255,255,255,.15);color:white;font-size:20px;
-  cursor:pointer;transition:all .2s
-}
-.controls button:hover{background:rgba(255,255,255,.25);transform:scale(1.06)}
-#play{background:#8edbff;color:#0a1a3a;box-shadow:0 4px 18px rgba(142,219,255,.3)}
+      const FISH_COLORS = [
+        "#FF5722",
+        "#FF9800",
+        "#F44336",
+        "#FFFFFF",
+        "#FFC107",
+      ];
 
-@media(max-width:700px){
- .player{grid-template-columns:1fr;text-align:center}
- .disc{width:180px;height:180px}
- h1{font-size:24px}
-}
-</style>
+      const REED_CLUSTERS = [
+        {
+          edge: "bottom",
+          along: 0.06,
+          bladeCount: 12,
+          spread: 0.03,
+          heightRange: [80, 150],
+          cattailChance: 0.25,
+        },
+        {
+          edge: "bottom",
+          along: 0.12,
+          bladeCount: 10,
+          spread: 0.025,
+          heightRange: [70, 130],
+          cattailChance: 0.2,
+        },
+        {
+          edge: "bottom",
+          along: 0.18,
+          bladeCount: 8,
+          spread: 0.025,
+          heightRange: [55, 110],
+          cattailChance: 0.15,
+        },
+        {
+          edge: "bottom",
+          along: 0.24,
+          bladeCount: 6,
+          spread: 0.02,
+          heightRange: [42, 90],
+          cattailChance: 0.1,
+        },
+        {
+          edge: "bottom",
+          along: 0.3,
+          bladeCount: 4,
+          spread: 0.018,
+          heightRange: [35, 70],
+          cattailChance: 0.1,
+        },
+        {
+          edge: "bottom",
+          along: 0.42,
+          bladeCount: 3,
+          spread: 0.02,
+          heightRange: [28, 55],
+          cattailChance: 0.15,
+        },
+        {
+          edge: "bottom",
+          along: 0.55,
+          bladeCount: 3,
+          spread: 0.018,
+          heightRange: [25, 50],
+          cattailChance: 0.2,
+        },
+        {
+          edge: "bottom",
+          along: 0.7,
+          bladeCount: 4,
+          spread: 0.018,
+          heightRange: [35, 70],
+          cattailChance: 0.1,
+        },
+        {
+          edge: "bottom",
+          along: 0.76,
+          bladeCount: 5,
+          spread: 0.02,
+          heightRange: [38, 85],
+          cattailChance: 0.1,
+        },
+        {
+          edge: "bottom",
+          along: 0.82,
+          bladeCount: 7,
+          spread: 0.025,
+          heightRange: [52, 105],
+          cattailChance: 0.15,
+        },
+        {
+          edge: "bottom",
+          along: 0.88,
+          bladeCount: 9,
+          spread: 0.025,
+          heightRange: [62, 125],
+          cattailChance: 0.2,
+        },
+        {
+          edge: "bottom",
+          along: 0.94,
+          bladeCount: 11,
+          spread: 0.03,
+          heightRange: [75, 145],
+          cattailChance: 0.25,
+        },
+        {
+          edge: "left",
+          along: 0.22,
+          bladeCount: 3,
+          spread: 0.01,
+          heightRange: [32, 62],
+          cattailChance: 0.3,
+        },
+        {
+          edge: "left",
+          along: 0.35,
+          bladeCount: 3,
+          spread: 0.012,
+          heightRange: [35, 70],
+          cattailChance: 0.3,
+        },
+        {
+          edge: "left",
+          along: 0.5,
+          bladeCount: 4,
+          spread: 0.012,
+          heightRange: [42, 84],
+          cattailChance: 0.35,
+        },
+        {
+          edge: "left",
+          along: 0.65,
+          bladeCount: 5,
+          spread: 0.015,
+          heightRange: [48, 98],
+          cattailChance: 0.3,
+        },
+        {
+          edge: "left",
+          along: 0.8,
+          bladeCount: 6,
+          spread: 0.018,
+          heightRange: [55, 110],
+          cattailChance: 0.3,
+        },
+        {
+          edge: "right",
+          along: 0.25,
+          bladeCount: 3,
+          spread: 0.01,
+          heightRange: [32, 62],
+          cattailChance: 0.3,
+        },
+        {
+          edge: "right",
+          along: 0.38,
+          bladeCount: 3,
+          spread: 0.012,
+          heightRange: [35, 70],
+          cattailChance: 0.35,
+        },
+        {
+          edge: "right",
+          along: 0.52,
+          bladeCount: 4,
+          spread: 0.012,
+          heightRange: [38, 76],
+          cattailChance: 0.3,
+        },
+        {
+          edge: "right",
+          along: 0.68,
+          bladeCount: 5,
+          spread: 0.015,
+          heightRange: [45, 90],
+          cattailChance: 0.3,
+        },
+        {
+          edge: "right",
+          along: 0.82,
+          bladeCount: 6,
+          spread: 0.018,
+          heightRange: [52, 105],
+          cattailChance: 0.25,
+        },
+        {
+          edge: "top",
+          along: 0.08,
+          bladeCount: 6,
+          spread: 0.02,
+          heightRange: [48, 98],
+          cattailChance: 0.2,
+        },
+        {
+          edge: "top",
+          along: 0.15,
+          bladeCount: 4,
+          spread: 0.018,
+          heightRange: [38, 76],
+          cattailChance: 0.15,
+        },
+        {
+          edge: "top",
+          along: 0.35,
+          bladeCount: 3,
+          spread: 0.018,
+          heightRange: [28, 55],
+          cattailChance: 0.2,
+        },
+        {
+          edge: "top",
+          along: 0.6,
+          bladeCount: 3,
+          spread: 0.018,
+          heightRange: [25, 52],
+          cattailChance: 0.25,
+        },
+        {
+          edge: "top",
+          along: 0.85,
+          bladeCount: 4,
+          spread: 0.018,
+          heightRange: [35, 70],
+          cattailChance: 0.15,
+        },
+        {
+          edge: "top",
+          along: 0.92,
+          bladeCount: 5,
+          spread: 0.02,
+          heightRange: [45, 90],
+          cattailChance: 0.2,
+        },
+      ];
 
-<canvas id="bg"></canvas>
+      function mulberry32(seed) {
+        return function () {
+          let a = seed;
+          let t = (a += 0x6d2b79f5);
+          t = Math.imul(t ^ (t >>> 15), t | 1);
+          t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
 
-<div class="player">
-  <div class="disc-wrap">
-    <div class="disc" id="disc">
-      <img id="cover" src="" alt="cover">
-    </div>
-  </div>
+      function valueNoise2(x, y, freq) {
+        const fx = x * freq,
+          fy = y * freq;
+        const ix = Math.floor(fx),
+          iy = Math.floor(fy);
+        const ux = fx - ix,
+          uy = fy - iy;
+        const sx = ux * ux * (3 - 2 * ux),
+          sy = uy * uy * (3 - 2 * uy);
 
-  <div class="info">
-    <div class="tag">NOW PLAYING</div>
-    <h1 id="title">--</h1>
-    <div id="artist">--</div>
+        const h = (a, b) => {
+          let v = Math.imul(a * 127 + b * 311, 0x45d9f3b);
+          v = Math.imul(v ^ (v >>> 16), 0x45d9f3b);
+          return ((v ^ (v >>> 16)) >>> 0) / 0x100000000;
+        };
 
-    <div class="progress" id="progressBar">
-      <div class="fill" id="fill"></div>
-    </div>
+        return (
+          (h(ix, iy) * (1 - sx) + h(ix + 1, iy) * sx) * (1 - sy) +
+          (h(ix, iy + 1) * (1 - sx) + h(ix + 1, iy + 1) * sx) * sy
+        );
+      }
 
-    <div class="time">
-      <span id="current">0:00</span>
-      <span id="total">0:00</span>
-    </div>
+      function fractalNoise(x, y) {
+        return (
+          0.6 * valueNoise2(x, y, 0.004) +
+          0.25 * valueNoise2(x, y, 0.01) +
+          0.15 * valueNoise2(x, y, 0.025)
+        );
+      }
 
-    <div class="controls">
-      <button id="prev">⏮</button>
-      <button id="play">▶</button>
-      <button id="next">⏭</button>
-    </div>
-  </div>
-</div>
+      function makeSDF(pw, ph, dpr, edgeMargin, cornerRadius) {
+        const minSide = Math.min(pw, ph);
+        const margin = (edgeMargin / 100) * minSide;
+        const radius = (cornerRadius / 100) * (minSide / 2);
+        const hw = pw / 2 - margin,
+          hh = ph / 2 - margin;
+        const cx = pw / 2,
+          cy = ph / 2;
 
-<audio id="audio"></audio>
+        return (x, y) => {
+          const px = x * dpr - cx,
+            py = y * dpr - cy;
+          const dx = Math.abs(px) - (hw - radius);
+          const dy = Math.abs(py) - (hh - radius);
+          return (
+            (Math.sqrt(Math.max(dx, 0) ** 2 + Math.max(dy, 0) ** 2) +
+              Math.min(Math.max(dx, dy), 0) -
+              radius) /
+            dpr
+          );
+        };
+      }
 
-<script src="/music/playlist.js"></script>
-<script>
-(function(){
-  'use strict';
-  if(typeof LOCAL_SONGS==='undefined'){LOCAL_SONGS=[];}
+      function drawBlade(ctx, blade, W, H, time) {
+        const ox = blade.baseX * W;
+        const oy = blade.baseY * H;
+        const wind =
+          8 * Math.sin(0.8 * time + blade.windPhase) * blade.windFlex +
+          3 *
+            Math.sin(0.3 * time + 0.7 * blade.windPhase + 0.01 * ox) *
+            blade.windFlex;
+        const s = blade.lean + (wind / blade.height) * 0.5;
+        const tx = ox + Math.sin(s) * blade.height + wind * blade.curve;
+        const ty = oy - Math.cos(s) * blade.height;
+        const cx =
+          ox +
+          Math.sin(0.4 * s) * blade.height * 0.55 +
+          wind * blade.curve * 0.3;
+        const cy = oy - Math.cos(0.4 * s) * blade.height * 0.55;
+        const hw = 0.5 * blade.width;
+        const nx = Math.cos(0.3 * s),
+          ny = Math.sin(0.3 * s);
 
-  var audio=document.getElementById('audio');
-  var cover=document.getElementById('cover');
-  var disc=document.getElementById('disc');
-  var titleEl=document.getElementById('title');
-  var artistEl=document.getElementById('artist');
-  var fill=document.getElementById('fill');
-  var curEl=document.getElementById('current');
-  var totEl=document.getElementById('total');
-  var playBtn=document.getElementById('play');
-  var progressBar=document.getElementById('progressBar');
+        ctx.beginPath();
+        ctx.moveTo(ox - nx * hw, oy - ny * hw);
+        ctx.quadraticCurveTo(cx - nx * hw * 0.5, cy, tx, ty);
+        ctx.quadraticCurveTo(
+          cx + nx * hw * 0.5,
+          cy,
+          ox + nx * hw,
+          oy + ny * hw,
+        );
+        ctx.closePath();
+        ctx.fillStyle = blade.color;
+        ctx.fill();
 
-  var playlist=LOCAL_SONGS;
-  var index=0;
+        if (blade.type === "cattail" && blade.headHeight) {
+          const hx =
+            ox +
+            Math.sin(0.72 * s) * blade.height * 0.72 +
+            wind * blade.curve * 0.36;
+          const hy = oy - Math.cos(0.72 * s) * blade.height * 0.72;
+          const rot = 0.6 * s;
+          const rA = 1.3 * blade.width;
+          const rB = 0.55 * blade.headHeight;
 
-  function fmt(s){
-    if(!s||!isFinite(s))return'0:00';
-    return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
-  }
+          ctx.save();
+          ctx.translate(hx, hy);
+          ctx.rotate(rot);
 
-  function coverSrc(song){
-    var n=song.src.replace(/\.mp3$/i,'').replace(/^audio\//,'');
-    return 'cover/'+n+'.jpg';
-  }
-  function fallbackCover(song){
-    return 'cover/'+(song.title||song.name||'default')+'.jpg';
-  }
+          ctx.beginPath();
+          ctx.ellipse(0, 0, rA + 1.2, rB + 1.5, 0, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(140,118,98,0.25)";
+          ctx.fill();
 
-  function loadSong(i){
-    if(playlist.length===0){titleEl.textContent='无歌曲';return}
-    index=(i+playlist.length)%playlist.length;
-    var s=playlist[index];
-    titleEl.textContent=s.title||s.name||'';
-    artistEl.textContent=s.artist||'';
-    audio.src=s.src;
-    cover.src=coverSrc(s);
-    cover.onerror=function(){cover.src=fallbackCover(s)};
-    fill.style.width='0%';curEl.textContent='0:00';totEl.textContent='0:00';
-    disc.classList.remove('playing');playBtn.textContent='▶';
-  }
+          const grad = ctx.createRadialGradient(
+            0,
+            0,
+            0,
+            0,
+            0,
+            Math.max(rA, rB),
+          );
+          grad.addColorStop(0, "rgba(95,68,52,0.75)");
+          grad.addColorStop(0.6, "rgba(120,92,72,0.55)");
+          grad.addColorStop(1, "rgba(125,108,92,0.08)");
+          ctx.beginPath();
+          ctx.ellipse(0, 0, rA, rB, 0, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.fill();
 
-  playBtn.addEventListener('click',async function(){
-    if(playlist.length===0)return;
-    if(!audio.src)loadSong(0);
-    if(audio.paused){
-      try{await audio.play()}catch(e){return}
-      disc.classList.add('playing');playBtn.textContent='❚❚';
-    }else{
-      audio.pause();disc.classList.remove('playing');playBtn.textContent='▶';
-    }
-  });
+          ctx.strokeStyle = "rgba(65,48,38,0.12)";
+          ctx.lineWidth = 0.3;
+          for (let yy = -0.6 * rB; yy < 0.6 * rB; yy += 3.5) {
+            const rx = rA * Math.sqrt(Math.max(0, 1 - (yy / rB) ** 2)) * 0.85;
+            ctx.beginPath();
+            ctx.moveTo(-rx, yy);
+            ctx.lineTo(rx, yy);
+            ctx.stroke();
+          }
 
-  document.getElementById('next').addEventListener('click',function(){
-    if(playlist.length===0)return;
-    loadSong(index+1);
-    audio.play().then(function(){disc.classList.add('playing');playBtn.textContent='❚❚'}).catch(function(){});
-  });
+          const spike = 0.8 * blade.headHeight;
+          ctx.beginPath();
+          ctx.moveTo(0, -rB);
+          ctx.lineTo(-0.35, -rB - 0.35 * spike);
+          ctx.lineTo(0, -rB - spike);
+          ctx.lineTo(0.35, -rB - 0.35 * spike);
+          ctx.closePath();
+          ctx.fillStyle = "rgba(125,160,108,0.6)";
+          ctx.fill();
+          ctx.restore();
+        }
+      }
 
-  document.getElementById('prev').addEventListener('click',function(){
-    if(playlist.length===0)return;
-    if(audio.currentTime>3){audio.currentTime=0;return}
-    loadSong(index-1);
-    audio.play().then(function(){disc.classList.add('playing');playBtn.textContent='❚❚'}).catch(function(){});
-  });
+      const VERTEX_SHADER = `
+            attribute vec2 a_position;
+            void main() { gl_Position = vec4(a_position, 0.0, 1.0); }
+        `;
 
-  audio.addEventListener('loadedmetadata',function(){totEl.textContent=fmt(audio.duration)});
-  audio.addEventListener('timeupdate',function(){
-    if(!audio.duration)return;
-    fill.style.width=(audio.currentTime/audio.duration*100)+'%';
-    curEl.textContent=fmt(audio.currentTime);
-    totEl.textContent=fmt(audio.duration);
-  });
-  audio.addEventListener('ended',function(){
-    disc.classList.remove('playing');playBtn.textContent='▶';
-    loadSong(index+1);
-    audio.play().then(function(){disc.classList.add('playing');playBtn.textContent='❚❚'}).catch(function(){});
-  });
+      const FRAGMENT_SHADER = `
+            precision highp float;
+            uniform float u_time;
+            uniform vec2  u_resolution;
+            uniform vec4  u_ripples[12];
+            uniform vec3  u_deepColor;
+            uniform vec3  u_shallowColor;
+            uniform float u_contrast;
+            uniform float u_waveStr;
+            uniform float u_rippleSpread;
+            uniform float u_rippleFreq;
+            uniform float u_rippleDecay;
+            uniform float u_rippleOpacity;
+            uniform float u_edgeSoftness;
+            uniform float u_margin;
+            uniform float u_radius;
+            uniform float u_grain;
+            uniform float u_irregularity;
 
-  progressBar.addEventListener('click',function(e){
-    if(!audio.duration)return;
-    var r=progressBar.getBoundingClientRect();
-    audio.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*audio.duration;
-  });
+            float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1,311.7))) * 43758.5453123); }
+            float noise(vec2 p) {
+                vec2 i = floor(p); vec2 f = fract(p);
+                vec2 u = f*f*(3.0-2.0*f);
+                return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);
+            }
+            float fbm(vec2 p) {
+                float v=0.0,a=0.5;
+                for(int i=0;i<4;i++){v+=a*noise(p);p=p*2.1+vec2(1.7,9.2);a*=0.5;}
+                return v;
+            }
+            float sdRoundRect(vec2 p,vec2 b,float r){
+                vec2 d=abs(p)-b+r;
+                return min(max(d.x,d.y),0.0)+length(max(d,0.0))-r;
+            }
+            float sea_octave(vec2 uv){
+                uv+=noise(uv);
+                vec2 wv=1.0-abs(sin(uv));
+                return pow(1.0-pow(wv.x*wv.y,0.65),4.0);
+            }
+            float ripple(vec2 pos,vec2 center,float time,float dropTime,float amp){
+                float age=time-dropTime;
+                if(age<0.0||age>5.0)return 0.0;
+                float dist=length(pos-center);
+                float wavefront=age*u_rippleSpread;
+                float envelope=exp(-pow(dist-wavefront,2.0)/(1.5+age));
+                float decay=exp(-age*u_rippleDecay);
+                return amp*envelope*decay*cos(dist*u_rippleFreq-age*(u_rippleFreq*1.5));
+            }
+            void main(){
+                vec2 uv_raw=gl_FragCoord.xy/u_resolution;
+                vec2 uv_zoom=(gl_FragCoord.xy/min(u_resolution.x,u_resolution.y))*25.0;
+                float h=0.0;
+                h+=sea_octave((uv_zoom+vec2( u_time,       u_time*0.8))*0.25)*u_waveStr;
+                h+=sea_octave((uv_zoom+vec2(-u_time*0.6,   u_time    ))*0.5 )*u_waveStr*0.25;
+                h+=sea_octave((uv_zoom+vec2( u_time*0.3,  -u_time*0.5))*1.0 )*u_waveStr*0.0625;
+                for(int i=0;i<12;i++){
+                    vec2 mUV=(u_ripples[i].xy/min(u_resolution.x,u_resolution.y))*25.0;
+                    h+=ripple(uv_zoom,mUV,u_time,u_ripples[i].z,u_ripples[i].w)*u_rippleOpacity;
+                }
+                float finalH=pow(smoothstep(-1.0,2.5,h),u_contrast*2.0);
+                vec3 waterCol=mix(u_deepColor,u_shallowColor,finalH);
+                vec2 pixelPos=gl_FragCoord.xy-u_resolution*0.5;
+                vec2 halfSize=u_resolution*0.5-u_margin;
+                float baseDist=sdRoundRect(pixelPos,halfSize,u_radius);
+                float minSide=min(u_resolution.x,u_resolution.y);
+                float organicNoise=fbm(uv_raw*6.0)-0.5;
+                float edgeWeight=exp(-abs(baseDist)/(minSide*0.08));
+                float d=baseDist+organicNoise*u_irregularity*minSide*edgeWeight;
+                float edgeAlpha=smoothstep(u_edgeSoftness*minSide,0.0,d);
+                float g1=hash(gl_FragCoord.xy);
+                float g2=hash(gl_FragCoord.xy*1.3+vec2(17.0,43.0));
+                float grainOffset=(mix(g1,g2,0.5)-0.5)*2.0*u_grain;
+                vec3 finalCol=clamp(waterCol+grainOffset,0.0,1.0);
+                gl_FragColor=vec4(finalCol*edgeAlpha,edgeAlpha);
+            }
+        `;
 
-  /* ═══ 星空 + 水波 ═══ */
-  var c=document.getElementById('bg');
-  var ctx=c.getContext('2d');
-  var stars=[],ripples=[];
+      class Pond {
+        constructor() {
+          this.container = document.getElementById("pondContainer");
+          this.webglCanvas = document.getElementById("webglCanvas");
+          this.animCanvas = document.getElementById("animCanvas");
+          this.reedsCanvas = document.getElementById("reedsCanvas");
 
-  function resize(){
-    c.width=innerWidth;c.height=innerHeight;
-  }
-  resize();window.addEventListener('resize',resize);
+          this.W = 800;
+          this.H = 480;
+          this.dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-  for(var i=0;i<120;i++)stars.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2});
+          this.gl = null;
+          this.prog = null;
+          this.uLocs = {};
 
-  window.addEventListener('mousemove',function(e){
-    ripples.push({x:e.clientX,y:e.clientY,r:0,a:.3});
-  });
+          this.ctxAnim = null;
+          this.ctxReeds = null;
 
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    for(var i=0;i<stars.length;i++){
-      var s=stars[i];
-      ctx.fillStyle='rgba(255,255,255,.8)';
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fill();
-    }
-    for(var i=ripples.length-1;i>=0;i--){
-      var r=ripples[i];r.r+=2;r.a*=.97;
-      ctx.strokeStyle='rgba(180,220,255,'+r.a+')';
-      ctx.beginPath();ctx.arc(r.x,r.y,r.r,0,7);ctx.stroke();
-      if(r.a<.02)ripples.splice(i,1);
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();loadSong(0);
-})();
-</script>
+          this.startTime = 0;
+          this.ripples = [];
+          this.fishes = [];
+          this.reedData = [];
+          this.getDist = null;
 
+          this.water = {
+            speed: 0.56,
+            contrast: 0.75,
+            waveStrength: 0.55,
+            rippleOpacity: 0.2,
+            grain: 0.08,
+            deepColor: { r: 25, g: 76, b: 115 },
+            shallowColor: { r: 153, g: 204, b: 230 },
+          };
 
+          this.pond = {
+            blendDistance: 15,
+            maxDepthDistance: 60,
+            edgeMargin: 10,
+            cornerRadius: 28,
+            edgeSoftness: 0.05,
+            irregularity: 0.06,
+          };
 
-        </section>
-    </article>
-</div>
+          this.reeds = { density: 0.6, windSpeed: 3.0 };
 
-            </div>
-            <footer id="footer" class="footer">
-    <div class="copyright">
-        <span>© mohan | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
-    </div>
-</footer>
+          this.init();
+        }
 
-    </div>
-</body>
+        init() {
+          this.setupSize();
+          this.setupWebGL();
+          this.setupCanvases();
+          this.buildReedData();
+          this.initFishes();
+          this.startTime = performance.now();
+          this.animate();
+          this.animateReeds();
+          this.setupEventListeners();
+          this.setupResizeObserver();
+        }
 
+        setupSize() {
+          const rect = this.container.getBoundingClientRect();
+          this.W = rect.width || 800;
+          this.H = rect.height || 480;
+          const pw = Math.round(this.W * this.dpr);
+          const ph = Math.round(this.H * this.dpr);
+
+          this.webglCanvas.width = pw;
+          this.webglCanvas.height = ph;
+          this.animCanvas.width = pw;
+          this.animCanvas.height = ph;
+          this.reedsCanvas.width = pw;
+          this.reedsCanvas.height = ph;
+        }
+
+        setupWebGL() {
+          this.gl = this.webglCanvas.getContext("webgl", { alpha: true });
+          const gl = this.gl;
+
+          gl.enable(gl.BLEND);
+          gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+          gl.clearColor(0, 0, 0, 0);
+          gl.viewport(0, 0, this.webglCanvas.width, this.webglCanvas.height);
+
+          const mkShader = (type, src) => {
+            const s = gl.createShader(type);
+            gl.shaderSource(s, src);
+            gl.compileShader(s);
+            return s;
+          };
+
+          this.prog = gl.createProgram();
+          gl.attachShader(this.prog, mkShader(gl.VERTEX_SHADER, VERTEX_SHADER));
+          gl.attachShader(
+            this.prog,
+            mkShader(gl.FRAGMENT_SHADER, FRAGMENT_SHADER),
+          );
+          gl.linkProgram(this.prog);
+          gl.useProgram(this.prog);
+
+          const buf = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+          gl.bufferData(
+            gl.ARRAY_BUFFER,
+            new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+            gl.STATIC_DRAW,
+          );
+          const aPos = gl.getAttribLocation(this.prog, "a_position");
+          gl.enableVertexAttribArray(aPos);
+          gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+          const uniformNames = [
+            "u_time",
+            "u_resolution",
+            "u_deepColor",
+            "u_shallowColor",
+            "u_contrast",
+            "u_waveStr",
+            "u_rippleSpread",
+            "u_rippleFreq",
+            "u_rippleDecay",
+            "u_rippleOpacity",
+            "u_edgeSoftness",
+            "u_margin",
+            "u_radius",
+            "u_grain",
+            "u_irregularity",
+          ];
+          uniformNames.forEach((n) => {
+            this.uLocs[n] = gl.getUniformLocation(this.prog, n);
+          });
+          for (let i = 0; i < 12; i++) {
+            this.uLocs[`u_ripples_${i}`] = gl.getUniformLocation(
+              this.prog,
+              `u_ripples[${i}]`,
+            );
+          }
+          gl.uniform2f(
+            this.uLocs["u_resolution"],
+            this.webglCanvas.width,
+            this.webglCanvas.height,
+          );
+        }
+
+        setupCanvases() {
+          this.ctxAnim = this.animCanvas.getContext("2d");
+          this.ctxAnim.scale(this.dpr, this.dpr);
+
+          this.ctxReeds = this.reedsCanvas.getContext("2d");
+          this.ctxReeds.scale(this.dpr, this.dpr);
+
+          this.getDist = makeSDF(
+            this.webglCanvas.width,
+            this.webglCanvas.height,
+            this.dpr,
+            this.pond.edgeMargin,
+            this.pond.cornerRadius,
+          );
+        }
+
+        // 使用逻辑坐标系统计算距离（用于芦苇定位）
+        getDistLogical(x, y) {
+          const pp = this.pond;
+          const minSide = Math.min(this.W, this.H);
+          const margin = (pp.edgeMargin / 100) * minSide;
+          const radius = (pp.cornerRadius / 100) * (minSide / 2);
+          const hw = this.W / 2 - margin;
+          const hh = this.H / 2 - margin;
+          const cx = this.W / 2;
+          const cy = this.H / 2;
+
+          const dx = Math.abs(x - cx) - (hw - radius);
+          const dy = Math.abs(y - cy) - (hh - radius);
+          return (
+            Math.sqrt(Math.max(dx, 0) ** 2 + Math.max(dy, 0) ** 2) +
+            Math.min(Math.max(dx, dy), 0) -
+            radius
+          );
+        }
+
+        buildReedData() {
+          const rand = mulberry32(42);
+          this.reedData = [];
+          const pp = this.pond;
+
+          const findEdgeY = (edge, along) => {
+            if (edge === "bottom") {
+              const bx = along * this.W;
+              let lo = this.H * 0.5,
+                hi = this.H;
+              for (let i = 0; i < 20; i++) {
+                const mid = (lo + hi) / 2;
+                const dist = this.getDistLogical(bx, mid);
+                dist < 0 ? (lo = mid) : (hi = mid);
+              }
+              return { x: along, y: (lo + hi) / 2 / this.H };
+            } else if (edge === "top") {
+              const bx = along * this.W;
+              let lo = 0,
+                hi = this.H * 0.5;
+              for (let i = 0; i < 20; i++) {
+                const mid = (lo + hi) / 2;
+                const dist = this.getDistLogical(bx, mid);
+                dist < 0 ? (hi = mid) : (lo = mid);
+              }
+              return { x: along, y: (lo + hi) / 2 / this.H };
+            } else if (edge === "left") {
+              const by = along * this.H;
+              let lo = 0,
+                hi = this.W * 0.5;
+              for (let i = 0; i < 20; i++) {
+                const mid = (lo + hi) / 2;
+                const dist = this.getDistLogical(mid, by);
+                dist < 0 ? (hi = mid) : (lo = mid);
+              }
+              return { x: (lo + hi) / 2 / this.W, y: along };
+            } else {
+              const by = along * this.H;
+              let lo = this.W * 0.5,
+                hi = this.W;
+              for (let i = 0; i < 20; i++) {
+                const mid = (lo + hi) / 2;
+                const dist = this.getDistLogical(mid, by);
+                dist < 0 ? (lo = mid) : (hi = mid);
+              }
+              return { x: (lo + hi) / 2 / this.W, y: along };
+            }
+          };
+
+          for (const cluster of REED_CLUSTERS) {
+            const edge = findEdgeY(cluster.edge, cluster.along);
+            const blades = [];
+            const count = Math.max(
+              1,
+              Math.round(cluster.bladeCount * this.reeds.density),
+            );
+            for (let i = 0; i < count; i++) {
+              const t = count > 1 ? i / (count - 1) : 0.5;
+              const isCattail = rand() < cluster.cattailChance;
+              const spreadX = (rand() - 0.5) * cluster.spread;
+              const spreadY = (rand() - 0.5) * cluster.spread * 0.3;
+              const [bx, by] =
+                cluster.edge === "left" || cluster.edge === "right"
+                  ? [edge.x + spreadY, edge.y + spreadX]
+                  : [edge.x + spreadX, edge.y + spreadY];
+              const height =
+                cluster.heightRange[0] +
+                rand() * (cluster.heightRange[1] - cluster.heightRange[0]);
+              blades.push({
+                baseX: bx,
+                baseY: by,
+                height,
+                lean: (t - 0.5) * 0.8 + (rand() - 0.5) * 0.3,
+                curve: 0.15 + 0.35 * rand(),
+                width: isCattail ? 1.2 + 0.6 * rand() : 0.6 + 0.9 * rand(),
+                color: REED_COLORS[Math.floor(rand() * REED_COLORS.length)],
+                windPhase: rand() * Math.PI * 2,
+                windFlex: 0.3 + 0.5 * rand(),
+                type: isCattail ? "cattail" : "reed",
+                headHeight: isCattail ? 8 + 7 * rand() : undefined,
+              });
+            }
+            blades.sort((a, b) => b.height - a.height);
+            this.reedData.push({ x: edge.x, y: edge.y, blades });
+          }
+        }
+
+        initFishes() {
+          this.fishes = Array.from({ length: 3 }, (_, i) => ({
+            id: Date.now() + i,
+            x: this.W / 2 + (Math.random() - 0.5) * 100,
+            y: this.H / 2 + (Math.random() - 0.5) * 100,
+            angle: Math.random() * Math.PI * 2,
+            targetAngle: Math.random() * Math.PI * 2,
+            speed: 0.8 + Math.random() * 0.6,
+            size: 10 + Math.random() * 5,
+            turnSpeed: 0.03 + Math.random() * 0.03,
+            color: FISH_COLORS[Math.floor(Math.random() * FISH_COLORS.length)],
+            isLeaving: false,
+            wiggleOffset: Math.random() * Math.PI * 2,
+          }));
+        }
+
+        addRipple(x, y, amp) {
+          const time = (performance.now() - this.startTime) / 1000;
+          this.ripples.push({ x, y, time, amp });
+          if (this.ripples.length > 12) this.ripples.shift();
+        }
+
+        drawFish(fish) {
+          const ctx = this.ctxAnim;
+          const sz = fish.size;
+          const wiggle = Math.sin(fish.wiggleOffset) * 0.3;
+
+          ctx.save();
+          ctx.globalAlpha = fish.alpha;
+          ctx.translate(fish.x, fish.y);
+          ctx.rotate(fish.angle);
+
+          ctx.fillStyle = "rgba(0,0,0,0.2)";
+          ctx.beginPath();
+          ctx.ellipse(2, 5, sz, sz * 0.4, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = fish.color;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, sz, sz * 0.4, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = fish.color === "#FFFFFF" ? "#FF5722" : "white";
+          ctx.beginPath();
+          ctx.ellipse(sz * 0.2, 0, sz * 0.3, sz * 0.2, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.save();
+          ctx.translate(-sz * 0.8, 0);
+          ctx.rotate(wiggle);
+          ctx.fillStyle = fish.color;
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(-sz * 0.6, -sz * 0.4);
+          ctx.lineTo(-sz * 0.6, sz * 0.4);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+
+          [1, -1].forEach((s) => {
+            ctx.beginPath();
+            ctx.moveTo(0, s * sz * 0.3);
+            ctx.quadraticCurveTo(
+              -sz * 0.2,
+              s * sz * 0.8,
+              -sz * 0.5,
+              s * sz * 0.3,
+            );
+            ctx.fill();
+          });
+
+          ctx.fillStyle = "black";
+          [0.15, -0.15].forEach((s) => {
+            ctx.beginPath();
+            ctx.arc(sz * 0.6, s * sz, sz * 0.1, 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          ctx.restore();
+        }
+
+        animate() {
+          const rawTime = (performance.now() - this.startTime) / 1000;
+          const w = this.water;
+          const pp = this.pond;
+          const t = rawTime * w.speed;
+
+          const gl = this.gl;
+          gl.useProgram(this.prog);
+          gl.uniform1f(this.uLocs["u_time"], t);
+          gl.uniform3f(
+            this.uLocs["u_deepColor"],
+            w.deepColor.r / 255,
+            w.deepColor.g / 255,
+            w.deepColor.b / 255,
+          );
+          gl.uniform3f(
+            this.uLocs["u_shallowColor"],
+            w.shallowColor.r / 255,
+            w.shallowColor.g / 255,
+            w.shallowColor.b / 255,
+          );
+          gl.uniform1f(this.uLocs["u_contrast"], w.contrast);
+          gl.uniform1f(this.uLocs["u_waveStr"], w.waveStrength);
+          gl.uniform1f(this.uLocs["u_rippleSpread"], 4.0);
+          gl.uniform1f(this.uLocs["u_rippleFreq"], 15.0);
+          gl.uniform1f(this.uLocs["u_rippleDecay"], 2.2);
+          gl.uniform1f(this.uLocs["u_rippleOpacity"], w.rippleOpacity);
+          gl.uniform1f(this.uLocs["u_edgeSoftness"], pp.edgeSoftness);
+          gl.uniform1f(this.uLocs["u_grain"], w.grain);
+          gl.uniform1f(this.uLocs["u_irregularity"], pp.irregularity);
+
+          const minSide = Math.min(
+            this.webglCanvas.width,
+            this.webglCanvas.height,
+          );
+          gl.uniform1f(this.uLocs["u_margin"], (pp.edgeMargin / 100) * minSide);
+          gl.uniform1f(
+            this.uLocs["u_radius"],
+            (pp.cornerRadius / 100) * minSide * 0.5,
+          );
+
+          for (let i = 0; i < 12; i++) {
+            const r = this.ripples[i];
+            if (r) {
+              gl.uniform4f(
+                this.uLocs[`u_ripples_${i}`],
+                r.x,
+                r.y,
+                r.time * w.speed,
+                r.amp,
+              );
+            } else {
+              gl.uniform4f(this.uLocs[`u_ripples_${i}`], 0, 0, -10, 0);
+            }
+          }
+
+          gl.clear(gl.COLOR_BUFFER_BIT);
+          gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+          this.ctxAnim.clearRect(0, 0, this.W, this.H);
+
+          this.fishes = this.fishes.filter((fish) => {
+            fish.wiggleOffset += 0.2 * fish.speed;
+
+            if (!fish.isLeaving) {
+              const lx = fish.x + Math.cos(fish.angle) * 20;
+              const ly = fish.y + Math.sin(fish.angle) * 20;
+              if (this.getDist(lx, ly) > -5) {
+                fish.targetAngle =
+                  Math.atan2(this.H / 2 - fish.y, this.W / 2 - fish.x) +
+                  (Math.random() - 0.5);
+              } else if (Math.random() < 0.02) {
+                fish.targetAngle += ((Math.random() - 0.5) * Math.PI) / 2;
+              }
+            }
+
+            let diff = fish.targetAngle - fish.angle;
+            while (diff > Math.PI) diff -= Math.PI * 2;
+            while (diff < -Math.PI) diff += Math.PI * 2;
+            fish.angle += diff * fish.turnSpeed * (fish.isLeaving ? 1.5 : 1);
+
+            if (
+              Math.random() < 0.02 &&
+              this.getDist(fish.x, fish.y) < pp.blendDistance
+            ) {
+              this.addRipple(
+                fish.x * this.dpr,
+                (this.H - fish.y) * this.dpr,
+                0.8,
+              );
+            }
+
+            fish.x += Math.cos(fish.angle) * fish.speed;
+            fish.y += Math.sin(fish.angle) * fish.speed;
+
+            const dist = this.getDist(fish.x, fish.y);
+            fish.alpha =
+              dist > 0
+                ? Math.max(0, 1 - dist / pp.blendDistance)
+                : 0.85 -
+                  0.5 * Math.min(1, Math.max(0, -dist) / pp.maxDepthDistance);
+
+            this.drawFish(fish);
+            return !(fish.isLeaving && dist > pp.blendDistance);
+          });
+
+          requestAnimationFrame(() => this.animate());
+        }
+
+        animateReeds() {
+          const time = (performance.now() - this.startTime) / 1000;
+          const wSpeed = this.reeds.windSpeed;
+          this.ctxReeds.clearRect(0, 0, this.W, this.H);
+
+          for (const cluster of this.reedData) {
+            for (const blade of cluster.blades) {
+              drawBlade(this.ctxReeds, blade, this.W, this.H, time * wSpeed);
+            }
+          }
+
+          requestAnimationFrame(() => this.animateReeds());
+        }
+
+        setupEventListeners() {
+          this.animCanvas.addEventListener("click", (e) => {
+            const rect = this.animCanvas.getBoundingClientRect();
+            const scaleX = this.W / rect.width;
+            const scaleY = this.H / rect.height;
+            const x = (e.clientX - rect.left) * scaleX;
+            const y = (e.clientY - rect.top) * scaleY;
+
+            if (this.getDist(x, y) > this.pond.blendDistance) return;
+
+            this.addRipple(x * this.dpr, (this.H - y) * this.dpr, 1.2);
+
+            this.fishes.push({
+              id: Date.now() + Math.random(),
+              x,
+              y,
+              angle: Math.random() * Math.PI * 2,
+              targetAngle: Math.random() * Math.PI * 2,
+              speed: 0.8 + Math.random() * 0.6,
+              size: 10 + Math.random() * 5,
+              turnSpeed: 0.03 + Math.random() * 0.03,
+              color:
+                FISH_COLORS[Math.floor(Math.random() * FISH_COLORS.length)],
+              isLeaving: false,
+              wiggleOffset: Math.random() * Math.PI * 2,
+            });
+
+            const active = this.fishes.filter((f) => !f.isLeaving);
+            if (active.length > 6) {
+              const old = active[0];
+              old.isLeaving = true;
+              old.targetAngle = Math.atan2(
+                old.y - this.H / 2,
+                old.x - this.W / 2,
+              );
+            }
+          });
+        }
+
+        setupResizeObserver() {
+          const ro = new ResizeObserver(() => {
+            const rect = this.container.getBoundingClientRect();
+            if (rect.width > 0 && rect.height > 0) {
+              this.W = rect.width;
+              this.H = rect.height;
+              this.setupSize();
+
+              // 更新 WebGL viewport 和 resolution uniform
+              const pw = Math.round(this.W * this.dpr);
+              const ph = Math.round(this.H * this.dpr);
+              this.gl.viewport(0, 0, pw, ph);
+              this.gl.useProgram(this.prog);
+              this.gl.uniform2f(this.uLocs["u_resolution"], pw, ph);
+
+              this.setupCanvases();
+              this.buildReedData();
+            }
+          });
+          ro.observe(this.container);
+        }
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          new Pond();
+        });
+      } else {
+        new Pond();
+      }
+      // ──────────────────────────────────────────────────────────────────
+      // Music Player with Play Modes & Playlist
+      // ──────────────────────────────────────────────────────────────────
+      class MusicPlayer {
+        constructor() {
+          // 播放列表
+          this.TRACKS = [
+            { title: "Travelers' Encore", artist: "Andrew Prahlow", src: "./audio/Andrew Prahlow - Travelers' encore.mp3" },
+            { title: "Variations On The Canon By Pachelbel", artist: "George Winston", src: "./audio/George Winston - Variations On The Canon By Pachelbel.mp3" },
+            { title: "Promise", artist: "山岡晃", src: "./audio/山岡晃 - Promise.mp3" }
+          ];
+
+          // 状态管理
+          this.currentTrackIndex = 0;
+          this.playbackMode = "order"; // order:顺序, random:随机, single:单曲循环
+          this.isPlaying = false;
+          this.isPlaylistOpen = false;
+          this.shuffledTracks = [...this.TRACKS]; // 随机播放的打乱列表
+
+          // DOM 元素
+          this.playerEl = document.getElementById("musicPlayer");
+          this.audioEl = document.getElementById("mpAudio");
+          this.playBtn = document.getElementById("mpPlay");
+          this.prevBtn = document.getElementById("mpPrev");
+          this.nextBtn = document.getElementById("mpNext");
+          this.collapseBtn = document.getElementById("mpCollapse");
+          this.toggleBtn = document.getElementById("mpToggle");
+          this.progressEl = document.getElementById("mpProgress");
+          this.progressFillEl = document.getElementById("mpProgressFill");
+          this.progressHandleEl = document.getElementById("mpProgressHandle");
+          this.currentTimeEl = document.getElementById("mpCurrent");
+          this.durationEl = document.getElementById("mpDuration");
+          this.titleEl = document.getElementById("mpTitle");
+          this.modeBtn = document.getElementById("mpMode");
+          this.modeTooltipEl = this.modeBtn.querySelector(".mp-mode-tooltip");
+          this.playlistBtn = document.getElementById("mpPlaylistBtn");
+          this.playlistEl = document.getElementById("mpPlaylist");
+
+          // 初始化
+          this.initEventListeners();
+          this.initPlaylist();
+          this.updateModeUI();
+          this.updatePlaylistHighlight();
+        }
+
+        // 初始化播放列表DOM
+        initPlaylist() {
+          this.playlistEl.innerHTML = "";
+          this.TRACKS.forEach((track, index) => {
+            const li = document.createElement("li");
+            li.className = `mp-playlist-item ${index === this.currentTrackIndex ? "active" : ""}`;
+            li.textContent = track.title;
+            li.dataset.index = index;
+            li.addEventListener("click", () => this.playTrack(index));
+            this.playlistEl.appendChild(li);
+          });
+        }
+
+        // 初始化事件监听
+        initEventListeners() {
+          // 播放/暂停
+          this.playBtn.addEventListener("click", () => this.togglePlay());
+
+          // 上一首/下一首
+          this.prevBtn.addEventListener("click", () => this.prevTrack());
+          this.nextBtn.addEventListener("click", () => this.nextTrack());
+
+          // 收起/展开播放器
+          this.collapseBtn.addEventListener("click", () => this.playerEl.classList.add("collapsed"));
+          this.toggleBtn.addEventListener("click", () => this.playerEl.classList.remove("collapsed"));
+
+          // 进度条交互
+          this.progressEl.addEventListener("click", (e) => this.setProgress(e));
+          this.audioEl.addEventListener("timeupdate", () => this.updateProgress());
+          this.audioEl.addEventListener("loadedmetadata", () => this.updateDuration());
+          this.audioEl.addEventListener("ended", () => this.handleTrackEnd());
+
+          // 播放模式切换
+          this.modeBtn.addEventListener("click", () => this.cyclePlaybackMode());
+
+          // 播放列表切换
+          this.playlistBtn.addEventListener("click", () => this.togglePlaylist());
+        }
+
+        // 切换播放/暂停
+        togglePlay() {
+          if (this.isPlaying) {
+            this.audioEl.pause();
+            this.playerEl.classList.remove("playing");
+          } else {
+            // 如果当前音频未加载，先加载
+            if (!this.audioEl.src) {
+              this.loadTrack(this.currentTrackIndex);
+            }
+            this.audioEl.play();
+            this.playerEl.classList.add("playing");
+          }
+          this.isPlaying = !this.isPlaying;
+        }
+
+        // 加载指定索引的曲目
+        loadTrack(index) {
+          this.currentTrackIndex = index;
+          const track = this.TRACKS[index];
+          this.audioEl.src = track.src;
+          this.titleEl.textContent = track.title;
+          this.updatePlaylistHighlight();
+          // 如果正在播放，加载后自动播放
+          if (this.isPlaying) {
+            this.audioEl.play();
+          }
+        }
+
+        // 播放指定索引的曲目
+        playTrack(index) {
+          this.loadTrack(index);
+          this.audioEl.play();
+          this.playerEl.classList.add("playing");
+          this.isPlaying = true;
+        }
+
+        // 上一首
+        prevTrack() {
+          if (this.playbackMode === "random") {
+            // 随机模式：取上一个随机索引（避免重复）
+            const currentShuffleIndex = this.shuffledTracks.findIndex(t => t === this.TRACKS[this.currentTrackIndex]);
+            let prevIndex = currentShuffleIndex - 1;
+            if (prevIndex < 0) prevIndex = this.shuffledTracks.length - 1;
+            this.playTrack(this.TRACKS.findIndex(t => t === this.shuffledTracks[prevIndex]));
+          } else {
+            // 顺序/单曲循环：索引减1，越界则回到最后
+            let prevIndex = this.currentTrackIndex - 1;
+            if (prevIndex < 0) prevIndex = this.TRACKS.length - 1;
+            this.playTrack(prevIndex);
+          }
+        }
+
+        // 下一首
+        nextTrack() {
+          if (this.playbackMode === "single") {
+            // 单曲循环：重新播放当前曲目
+            this.audioEl.currentTime = 0;
+            this.audioEl.play();
+            return;
+          }
+
+          if (this.playbackMode === "random") {
+            // 随机模式：取下一个随机索引（避免重复）
+            const currentShuffleIndex = this.shuffledTracks.findIndex(t => t === this.TRACKS[this.currentTrackIndex]);
+            let nextIndex = currentShuffleIndex + 1;
+            if (nextIndex >= this.shuffledTracks.length) nextIndex = 0;
+            this.playTrack(this.TRACKS.findIndex(t => t === this.shuffledTracks[nextIndex]));
+          } else {
+            // 顺序模式：索引加1，越界则回到开头
+            let nextIndex = this.currentTrackIndex + 1;
+            if (nextIndex >= this.TRACKS.length) nextIndex = 0;
+            this.playTrack(nextIndex);
+          }
+        }
+
+        // 处理曲目播放结束
+        handleTrackEnd() {
+          this.nextTrack();
+        }
+
+        // 切换播放模式（顺序→随机→单曲循环）
+        cyclePlaybackMode() {
+          const modes = ["order", "random", "single"];
+          const currentModeIndex = modes.indexOf(this.playbackMode);
+          const nextModeIndex = (currentModeIndex + 1) % modes.length;
+          this.playbackMode = modes[nextModeIndex];
+
+          // 随机模式时打乱播放列表
+          if (this.playbackMode === "random") {
+            this.shuffledTracks = this.shuffleArray([...this.TRACKS]);
+          }
+
+          this.updateModeUI();
+        }
+
+        // 更新播放模式UI（图标+提示）
+        updateModeUI() {
+          const modeIcons = {
+            order: '<polyline points="21 12 6 12 6 12 6 12"/><path d="M18 12c0 1.66-4 3-9 3s-9-1.34-9-3s4-3 9-3s9 1.34 9 3z"/>',
+            random: '<path d="M20 9.999V8h-4V5l-6 8-6-8v3H4v1.999L12 18l8-8.001z"/>',
+            single: '<path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3s4-3 9-3v9l7-6-7-6v9c-4.42 0-8-1.79-8-4s3.58-4 8-4 8 1.79 8 4z"/>'
+          };
+          const modeTooltips = {
+            order: "顺序播放",
+            random: "随机播放",
+            single: "单曲循环"
+          };
+
+          // 更新图标
+          this.modeBtn.querySelector("svg").innerHTML = modeIcons[this.playbackMode];
+          // 更新提示文本
+          this.modeTooltipEl.textContent = modeTooltips[this.playbackMode];
+        }
+
+        // 切换播放列表显示/隐藏
+        togglePlaylist() {
+          this.isPlaylistOpen = !this.isPlaylistOpen;
+          this.playlistEl.classList.toggle("open", this.isPlaylistOpen);
+        }
+
+        // 更新播放列表高亮当前曲目
+        updatePlaylistHighlight() {
+          const items = this.playlistEl.querySelectorAll(".mp-playlist-item");
+          items.forEach((item, index) => {
+            item.classList.toggle("active", index === this.currentTrackIndex);
+          });
+        }
+
+        // 设置进度条
+        setProgress(e) {
+          const rect = this.progressEl.getBoundingClientRect();
+          const pos = (e.clientX - rect.left) / rect.width;
+          this.audioEl.currentTime = pos * this.audioEl.duration;
+          this.updateProgress();
+        }
+
+        // 更新进度条显示
+        updateProgress() {
+          const percent = (this.audioEl.currentTime / this.audioEl.duration) * 100 || 0;
+          this.progressFillEl.style.width = `${percent}%`;
+          this.progressHandleEl.style.left = `${percent}%`;
+          this.currentTimeEl.textContent = this.formatTime(this.audioEl.currentTime);
+        }
+
+        // 更新总时长显示
+        updateDuration() {
+          this.durationEl.textContent = this.formatTime(this.audioEl.duration);
+        }
+
+        // 格式化时间（秒→分:秒）
+        formatTime(seconds) {
+          if (isNaN(seconds)) return "0:00";
+          const mins = Math.floor(seconds / 60);
+          const secs = Math.floor(seconds % 60);
+          return `${mins}:${secs.toString().padStart(2, "0")}`;
+        }
+
+        // 打乱数组（Fisher-Yates 洗牌算法）
+        shuffleArray(array) {
+          const newArray = [...array];
+          for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+          }
+          return newArray;
+        }
+      }
+
+      // 实例化音乐播放器
+      document.addEventListener("DOMContentLoaded", () => {
+        new MusicPlayer();
+      });
+    </script>
+  </body>
 </html>

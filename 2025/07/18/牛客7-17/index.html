@@ -290,13 +290,15 @@
 <p>累加每个位置作为起始点的次数即为答案。</p>
 <h4 id="1-预处理"><a href="#1-预处理" class="headerlink" title="1. 预处理"></a>1. 预处理</h4><p>由于 - 1 可替换为 0 或 1，总共有$2^k$种可能数组（<code>k</code>是 - 1 的数量）。预计算v[i] &#x3D; $2^i$ mod 998244353，可以快速得到当前位置的贡献的大小。</p>
 <h4 id="2-遍历每个位置计算贡献"><a href="#2-遍历每个位置计算贡献" class="headerlink" title="2. 遍历每个位置计算贡献"></a>2. 遍历每个位置计算贡献</h4><p>对每个位置<code>i</code>，计算起始点次数：</p>
-<p><strong>1.<code>i=0</code>（第一个元素）</strong><br>只需满足 i 位置为 1 ：</p>
+<p><strong>1.<code>i=0</code>（第一个元素）</strong>
+只需满足 i 位置为 1 ：</p>
 <ul>
 <li>若原数组<code>a[0] = 1</code>：所有<code>k</code>个 - 1 可任意替换，贡献为<code>v[k]</code>；</li>
 <li>若原数组<code>a[0] = -1</code>：需将其固定为 1，剩余<code>k-1</code>个 - 1 可任意替换，贡献为<code>v[k-1]</code>（若<code>k≥1</code>）；</li>
 <li>若原数组<code>a[0] = 0</code>：无法作为起始点，贡献为 0。</li>
 </ul>
-<p><strong>2.<code>i&gt;0</code>（非第一个元素）</strong><br>需满足  i 位置为 1 且 <code>i-1</code>不为 1 ：</p>
+<p><strong>2.<code>i&gt;0</code>（非第一个元素）</strong>
+需满足  i 位置为 1 且 <code>i-1</code>不为 1 ：</p>
 <ul>
 <li>若前一个位置<code>a[i-1] = 1</code>：无法作为起始点，贡献为 0；</li>
 <li>否则，计算 “固定 - 1 的数量”：<ul>
