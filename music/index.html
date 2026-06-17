@@ -25,12 +25,25 @@
             --transition-medium: 0.25s ease;
         }
 
+        /* Dark theme variables */
+        .theme-dark {
+            --color-bg: #1a1a2e;
+            --color-text: #e0e0e0;
+            --color-text-muted: rgba(224, 224, 224, 0.55);
+            --color-text-light: rgba(224, 224, 224, 0.45);
+            --color-text-dark: rgba(224, 224, 224, 0.75);
+            --color-border: rgba(100, 150, 200, 0.25);
+            --color-overlay: rgba(224, 224, 224, 0.15);
+            --color-accent: #4a90d9;
+        }
+
         html,
         body {
             width: 100%;
             height: 100%;
             background: var(--color-bg);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+            transition: background-color 0.4s ease;
         }
 
         body {
@@ -92,6 +105,7 @@
             cursor: pointer;
             transition: color var(--transition-fast);
             padding: 0;
+            text-decoration: none;
         }
 
         .nav-btn:hover {
@@ -117,6 +131,25 @@
         }
 
         .social-link svg {
+            width: 14px;
+            height: 14px;
+            stroke-width: 2;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-light);
+            display: flex;
+            align-items: center;
+            padding: 0;
+            transition: color var(--transition-fast);
+        }
+        .theme-toggle:hover {
+            color: var(--color-text-dark);
+        }
+        .theme-toggle svg {
             width: 14px;
             height: 14px;
             stroke-width: 2;
@@ -188,7 +221,11 @@
                 transform var(--transition-medium);
         }
 
-        /* 播放模式按钮样式 */
+        .theme-dark .mp-card {
+            background-color: #2a2a3e;
+            border-color: rgba(100, 150, 200, 0.3);
+        }
+
         .mp-mode {
             position: relative;
             width: 26px;
@@ -233,7 +270,6 @@
             opacity: 1;
         }
 
-        /* 播放列表按钮样式 */
         .mp-playlist-btn {
             position: relative;
             width: 26px;
@@ -259,7 +295,6 @@
             height: 14px;
         }
 
-        /* 播放列表容器 */
         .mp-playlist {
             max-height: 0;
             overflow-y: auto;
@@ -272,12 +307,14 @@
             border-radius: 8px;
             background-color: rgba(250, 247, 242, 0.6);
         }
+        .theme-dark .mp-playlist {
+            background-color: rgba(42, 42, 62, 0.6);
+        }
         .mp-playlist.open {
             max-height: 200px;
             margin-bottom: 0.75rem;
         }
 
-        /* 播放列表项 */
         .mp-playlist-item {
             padding: 0.45rem 0.65rem;
             font-size: 11px;
@@ -303,6 +340,9 @@
             color: var(--color-accent);
             font-weight: 500;
         }
+        .theme-dark .mp-playlist-item.active {
+            background-color: rgba(74, 144, 217, 0.15);
+        }
         .mp-playlist-item .mp-pl-index {
             font-size: 9px;
             color: var(--color-text-light);
@@ -315,7 +355,6 @@
             font-weight: 600;
         }
 
-        /* 播放列表滚动条 */
         .mp-playlist::-webkit-scrollbar {
             width: 4px;
         }
@@ -331,7 +370,6 @@
             background: rgba(42, 37, 32, 0.28);
         }
 
-        /* 播放主体容器（播放按钮+信息） */
         .mp-main {
             display: flex;
             align-items: center;
@@ -362,6 +400,9 @@
             transition: transform var(--transition-fast);
         }
 
+        .theme-dark .mp-toggle {
+            background-color: #2a2a3e;
+        }
         .music-player.collapsed .mp-toggle {
             display: flex;
         }
@@ -505,7 +546,7 @@
             color: var(--color-text-light);
             font-variant-numeric: tabular-nums;
         }
-        /* 音量控制 */
+
         .mp-volume {
             position: relative;
             display: flex;
@@ -549,7 +590,9 @@
             transition: opacity var(--transition-fast);
             z-index: 20;
         }
-        /* 不可见桥接区，避免鼠标从按钮移到弹层时悬停中断 */
+        .theme-dark .mp-volume-popup {
+            background-color: #2a2a3e;
+        }
         .mp-volume-popup::after {
             content: "";
             position: absolute;
@@ -591,7 +634,6 @@
             cursor: pointer;
         }
 
-        /* 切歌时标题+艺术家淡入 */
         .mp-title.fade-in {
             animation: mpTitleFade 0.45s ease;
         }
@@ -615,7 +657,6 @@
             }
         }
 
-        /* ─ Mobile Responsive ──────────────────────────────────────────── */
         @media (max-width: 640px) {
             .pond-container {
                 aspect-ratio: 5 / 4;
@@ -648,7 +689,8 @@
                 gap: 0.625rem;
             }
 
-            .social-link svg {
+            .social-link svg,
+            .theme-toggle svg {
                 width: 13px;
                 height: 13px;
             }
@@ -673,7 +715,7 @@
 
             <div class="nav-container" id="desktopNav">
                 <div class="nav-links">
-                    <a class="nav-btn" href="https://wnahom.github.io/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">关于我</a>
+                    <a class="nav-btn" href="https://wnahom.github.io/" target="_blank" rel="noopener noreferrer">关于我</a>
                 </div>
                 <div class="social-links">
                     <a href="https://github.com/wnahom" target="_blank" rel="noopener noreferrer" class="social-link">
@@ -681,6 +723,20 @@
                             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                         </svg>
                     </a>
+
+<button class="theme-toggle" aria-label="切换日/夜模式">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -691,12 +747,20 @@
                             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                         </svg>
                     </a>
-                    <a href="https://x.com/Niakd3" target="_blank" rel="noopener noreferrer" class="social-link">
+
+<button class="theme-toggle" aria-label="切换日/夜模式">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
-                            <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                         </svg>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -713,10 +777,8 @@
     <!-- Music Player -->
     <div class="music-player" id="musicPlayer">
         <div class="mp-card">
-            <!-- 播放列表 -->
             <ul class="mp-playlist" id="mpPlaylist"></ul>
 
-            <!-- 播放主体 -->
             <div class="mp-main">
                 <button class="mp-play" id="mpPlay" aria-label="播放/暂停">
                     <svg class="mp-icon-play" viewBox="0 0 24 24" fill="currentColor">
@@ -744,7 +806,6 @@
                                     <line x1="19" y1="5" x2="19" y2="19" />
                                 </svg>
                             </button>
-                            <!-- 播放模式按钮 -->
                             <button class="mp-mode" id="mpMode" aria-label="播放模式">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="21 12 6 12 6 12 6 12" />
@@ -752,7 +813,6 @@
                                 </svg>
                                 <span class="mp-mode-tooltip">顺序播放</span>
                             </button>
-                            <!-- 播放列表按钮 -->
                             <button class="mp-playlist-btn" id="mpPlaylistBtn" aria-label="播放列表">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="8" y1="6" x2="21" y2="6" />
@@ -763,7 +823,6 @@
                                     <line x1="3" y1="18" x2="3.01" y2="18" />
                                 </svg>
                             </button>
-                            <!-- 音量控制 -->
                             <div class="mp-volume" id="mpVolume">
                                 <button class="mp-volume-btn" id="mpVolumeBtn" aria-label="静音/取消静音">
                                     <svg id="mpVolumeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1140,6 +1199,17 @@
 
                 this.reeds = { density: 0.6, windSpeed: 3.0 };
 
+                // Theme-related state
+                this.theme = {
+                    currentDeep: { r: 25, g: 76, b: 115 },
+                    currentShallow: { r: 153, g: 204, b: 230 },
+                    targetDeep: { r: 25, g: 76, b: 115 },
+                    targetShallow: { r: 153, g: 204, b: 230 },
+                };
+
+                // Audio analysis reference (will be set by init)
+                this.musicPlayer = null;
+
                 this.init();
             }
 
@@ -1154,6 +1224,16 @@
                 this.animateReeds();
                 this.setupEventListeners();
                 this.setupResizeObserver();
+            }
+
+            setTheme(isDark) {
+                if (isDark) {
+                    this.theme.targetDeep = { r: 15, g: 25, b: 50 };
+                    this.theme.targetShallow = { r: 60, g: 110, b: 160 };
+                } else {
+                    this.theme.targetDeep = { r: 25, g: 76, b: 115 };
+                    this.theme.targetShallow = { r: 153, g: 204, b: 230 };
+                }
             }
 
             setupSize() {
@@ -1415,20 +1495,46 @@
                 const pp = this.pond;
                 const t = rawTime * w.speed;
 
+                // Get audio data
+                let audioData = { energy: 0, bass: 0, beat: false };
+                if (this.musicPlayer) {
+                    audioData = this.musicPlayer.getAudioData();
+                }
+
+                // Smooth wave strength based on audio energy
+                const targetWaveStr = 0.55 + audioData.energy * 0.4;
+                w.waveStrength += (targetWaveStr - w.waveStrength) * 0.05;
+
+                // Beat-triggered ripples
+                if (audioData.beat) {
+                    const cx = this.W / 2 + (Math.random() - 0.5) * 200;
+                    const cy = this.H / 2 + (Math.random() - 0.5) * 150;
+                    this.addRipple(cx * this.dpr, (this.H - cy) * this.dpr, 0.9);
+                }
+
+                // Lerp theme colors
+                const lerpFactor = 0.02;
+                this.theme.currentDeep.r += (this.theme.targetDeep.r - this.theme.currentDeep.r) * lerpFactor;
+                this.theme.currentDeep.g += (this.theme.targetDeep.g - this.theme.currentDeep.g) * lerpFactor;
+                this.theme.currentDeep.b += (this.theme.targetDeep.b - this.theme.currentDeep.b) * lerpFactor;
+                this.theme.currentShallow.r += (this.theme.targetShallow.r - this.theme.currentShallow.r) * lerpFactor;
+                this.theme.currentShallow.g += (this.theme.targetShallow.g - this.theme.currentShallow.g) * lerpFactor;
+                this.theme.currentShallow.b += (this.theme.targetShallow.b - this.theme.currentShallow.b) * lerpFactor;
+
                 const gl = this.gl;
                 gl.useProgram(this.prog);
                 gl.uniform1f(this.uLocs["u_time"], t);
                 gl.uniform3f(
                     this.uLocs["u_deepColor"],
-                    w.deepColor.r / 255,
-                    w.deepColor.g / 255,
-                    w.deepColor.b / 255,
+                    this.theme.currentDeep.r / 255,
+                    this.theme.currentDeep.g / 255,
+                    this.theme.currentDeep.b / 255,
                 );
                 gl.uniform3f(
                     this.uLocs["u_shallowColor"],
-                    w.shallowColor.r / 255,
-                    w.shallowColor.g / 255,
-                    w.shallowColor.b / 255,
+                    this.theme.currentShallow.r / 255,
+                    this.theme.currentShallow.g / 255,
+                    this.theme.currentShallow.b / 255,
                 );
                 gl.uniform1f(this.uLocs["u_contrast"], w.contrast);
                 gl.uniform1f(this.uLocs["u_waveStr"], w.waveStrength);
@@ -1458,8 +1564,9 @@
 
                 this.ctxAnim.clearRect(0, 0, this.W, this.H);
 
+                // Energy-driven fish behavior
                 this.fishes = this.fishes.filter((fish) => {
-                    fish.wiggleOffset += 0.2 * fish.speed;
+                    fish.wiggleOffset += 0.2 * fish.speed * (1 + audioData.energy);
 
                     if (!fish.isLeaving) {
                         const lx = fish.x + Math.cos(fish.angle) * 20;
@@ -1468,7 +1575,7 @@
                             fish.targetAngle =
                                 Math.atan2(this.H / 2 - fish.y, this.W / 2 - fish.x) +
                                 (Math.random() - 0.5);
-                        } else if (Math.random() < 0.02) {
+                        } else if (Math.random() < 0.02 + audioData.energy * 0.05) {
                             fish.targetAngle += ((Math.random() - 0.5) * Math.PI) / 2;
                         }
                     }
@@ -1482,8 +1589,8 @@
                         this.addRipple(fish.x * this.dpr, (this.H - fish.y) * this.dpr, 0.8);
                     }
 
-                    fish.x += Math.cos(fish.angle) * fish.speed;
-                    fish.y += Math.sin(fish.angle) * fish.speed;
+                    fish.x += Math.cos(fish.angle) * fish.speed * (1 + audioData.energy * 0.3);
+                    fish.y += Math.sin(fish.angle) * fish.speed * (1 + audioData.energy * 0.3);
 
                     const dist = this.getDist(fish.x, fish.y);
                     fish.alpha =
@@ -1571,7 +1678,7 @@
         }
 
         // ──────────────────────────────────────────────────────────────────
-        // Music Player with Play Modes, Volume, Keyboard Shortcuts & Fade
+        // Music Player with Audio Analysis, Play Modes, Volume, Keyboard
         // ──────────────────────────────────────────────────────────────────
         class MusicPlayer {
             constructor() {
@@ -1590,6 +1697,13 @@
                 this.isPlaylistOpen = false;
                 this.shuffledTracks = [...this.TRACKS];
                 this.lastVolume = 1;
+
+                // Audio analysis state
+                this.audioCtx = null;
+                this.analyser = null;
+                this.freqData = null;
+                this.bassHistory = [];
+                this.lastBeatTime = 0;
 
                 this.playerEl = document.getElementById("musicPlayer");
                 this.audioEl = document.getElementById("mpAudio");
@@ -1617,6 +1731,54 @@
                 this.updateModeUI();
                 this.updateVolumeIcon();
                 this.updatePlaylistHighlight();
+            }
+
+            ensureAudioContext() {
+                if (!this.audioCtx) {
+                    this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    this.analyser = this.audioCtx.createAnalyser();
+                    this.analyser.fftSize = 256;
+                    this.freqData = new Uint8Array(this.analyser.frequencyBinCount);
+                    const source = this.audioCtx.createMediaElementSource(this.audioEl);
+                    source.connect(this.analyser);
+                    this.analyser.connect(this.audioCtx.destination);
+                }
+                if (this.audioCtx.state === 'suspended') {
+                    this.audioCtx.resume();
+                }
+            }
+
+            getAudioData() {
+                if (!this.analyser || !this.freqData) return { energy: 0, bass: 0, beat: false };
+                this.analyser.getByteFrequencyData(this.freqData);
+                // Energy: average of all bins
+                let sum = 0;
+                for (let i = 0; i < this.freqData.length; i++) {
+                    sum += this.freqData[i];
+                }
+                const energy = sum / this.freqData.length / 255;
+                // Bass: low frequency bins (first 20% of bins)
+                const bassCount = Math.floor(this.freqData.length * 0.2);
+                let bassSum = 0;
+                for (let i = 0; i < bassCount; i++) {
+                    bassSum += this.freqData[i];
+                }
+                const bass = bassSum / bassCount / 255;
+                // Moving average for beat detection
+                this.bassHistory.push(bass);
+                if (this.bassHistory.length > 43) this.bassHistory.shift(); // ~1 second at 60fps
+                let avg = 0;
+                for (let i = 0; i < this.bassHistory.length; i++) {
+                    avg += this.bassHistory[i];
+                }
+                avg /= this.bassHistory.length;
+                const now = performance.now();
+                let beat = false;
+                if (bass > avg * 1.35 && bass > 0.22 && now - this.lastBeatTime > 220) {
+                    beat = true;
+                    this.lastBeatTime = now;
+                }
+                return { energy, bass, beat };
             }
 
             initPlaylist() {
@@ -1665,6 +1827,7 @@
 
             togglePlay() {
                 if (this.audioEl.paused) {
+                    this.ensureAudioContext();
                     if (!this.audioEl.src) this.loadTrack(this.currentTrackIndex);
                     this.audioEl.play().catch(() => {});
                 } else {
@@ -1681,6 +1844,7 @@
             }
 
             playTrack(index) {
+                this.ensureAudioContext();
                 this.loadTrack(index);
                 this.audioEl.play().catch(() => {});
             }
@@ -1880,16 +2044,45 @@
         }
 
         // ──────────────────────────────────────────────────────────────────
+        // Theme Controller
+        // ──────────────────────────────────────────────────────────────────
+        function initTheme(pond) {
+            const themeKey = 'nahom-theme';
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const stored = localStorage.getItem(themeKey);
+            const isDark = stored !== null ? stored === 'dark' : prefersDark;
+
+            function applyTheme(dark) {
+                document.documentElement.classList.toggle('theme-dark', dark);
+                if (pond) pond.setTheme(dark);
+                localStorage.setItem(themeKey, dark ? 'dark' : 'light');
+            }
+
+            applyTheme(isDark);
+
+            document.querySelectorAll('.theme-toggle').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const currentlyDark = document.documentElement.classList.contains('theme-dark');
+                    applyTheme(!currentlyDark);
+                });
+            });
+        }
+
+        // ──────────────────────────────────────────────────────────────────
         // 初始化
         // ──────────────────────────────────────────────────────────────────
         if (document.readyState === "loading") {
             document.addEventListener("DOMContentLoaded", () => {
-                new Pond();
-                new MusicPlayer();
+                const pond = new Pond();
+                const musicPlayer = new MusicPlayer();
+                pond.musicPlayer = musicPlayer;
+                initTheme(pond);
             });
         } else {
-            new Pond();
-            new MusicPlayer();
+            const pond = new Pond();
+            const musicPlayer = new MusicPlayer();
+            pond.musicPlayer = musicPlayer;
+            initTheme(pond);
         }
     </script>
 </body>
