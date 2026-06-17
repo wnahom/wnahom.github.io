@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -153,6 +153,16 @@
             width: 14px;
             height: 14px;
             stroke-width: 2;
+        }
+        /* 双图标切换：默认显示太阳，暗色显示月亮 */
+        .theme-toggle .icon-moon {
+            display: none;
+        }
+        .theme-dark .theme-toggle .icon-sun {
+            display: none;
+        }
+        .theme-dark .theme-toggle .icon-moon {
+            display: block;
         }
 
         /* ─ Pond Section ───────────────────────────────────────────────── */
@@ -702,6 +712,19 @@
             .logo h1 {
                 font-size: 11px;
             }
+
+            /* 移动端导航垂直排列 */
+            #mobileNav {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            #mobileNav .nav-links {
+                margin-bottom: 0.5rem;
+            }
+            #mobileNav .social-links {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
         }
     </style>
 </head>
@@ -713,6 +736,7 @@
                 <h1>nahom</h1>
             </div>
 
+            <!-- 桌面导航 -->
             <div class="nav-container" id="desktopNav">
                 <div class="nav-links">
                     <a class="nav-btn" href="https://wnahom.github.io/" target="_blank" rel="noopener noreferrer">关于我</a>
@@ -725,13 +749,27 @@
                     </a>
 
                     <button class="theme-toggle" aria-label="切换日/夜模式">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <!-- 图标将由 JS 动态填充 -->
+                        <!-- 太阳图标（日间） -->
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                        <!-- 月亮图标（夜间） -->
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                         </svg>
                     </button>
                 </div>
             </div>
 
+            <!-- 移动端导航 -->
             <div class="nav-container" id="mobileNav" style="display: none">
                 <div class="nav-links">
                     <a class="nav-btn" href="https://wnahom.github.io/" target="_blank" rel="noopener noreferrer">关于我</a>
@@ -744,8 +782,21 @@
                     </a>
 
                     <button class="theme-toggle" aria-label="切换日/夜模式">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <!-- 图标将由 JS 动态填充 -->
+                        <!-- 太阳图标（日间） -->
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                        <!-- 月亮图标（夜间） -->
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                         </svg>
                     </button>
                 </div>
@@ -795,7 +846,8 @@
                             </button>
                             <button class="mp-mode" id="mpMode" aria-label="播放模式">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <!-- 动态图标 -->
+                                    <polyline points="21 12 6 12 6 12 6 12" />
+                                    <path d="M18 12c0 1.66-4 3-9 3s-9-1.34-9-3s4-3 9-3s9 1.34 9 3z" />
                                 </svg>
                                 <span class="mp-mode-tooltip">顺序播放</span>
                             </button>
@@ -812,7 +864,9 @@
                             <div class="mp-volume" id="mpVolume">
                                 <button class="mp-volume-btn" id="mpVolumeBtn" aria-label="静音/取消静音">
                                     <svg id="mpVolumeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <!-- 动态图标 -->
+                                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
                                     </svg>
                                 </button>
                                 <div class="mp-volume-popup">
@@ -1681,7 +1735,7 @@
                 this.isPlaylistOpen = false;
                 this.shuffledTracks = [...this.TRACKS];
                 this.lastVolume = 1;
-                this.isDragging = false; // 拖动状态标志
+                this.isDragging = false;   // ← 新增：拖动状态标志
 
                 // Audio analysis state
                 this.audioCtx = null;
@@ -1892,7 +1946,7 @@
                 const modeIcons = {
                     order: '<polyline points="21 12 6 12 6 12 6 12"/><path d="M18 12c0 1.66-4 3-9 3s-9-1.34-9-3s4-3 9-3s9 1.34 9 3z"/>',
                     random: '<path d="M20 9.999V8h-4V5l-6 8-6-8v3H4v1.999L12 18l8-8.001z"/>',
-                    single: '<path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3s4-3 9-3v9l7-6-7-6v9c-4.42 0-8-1.79-8-4s3.58-4 8-4 8 1.79 8 4z"/>'
+                    single: '<path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3s3.58-4 8-4 8 1.79 8 4z"/>'
                 };
                 const modeTooltips = { order: "顺序播放", random: "随机播放", single: "单曲循环" };
                 this.modeBtn.querySelector("svg").innerHTML = modeIcons[this.playbackMode];
@@ -1910,7 +1964,10 @@
                 });
             }
 
+            // ── 改进的进度条拖拽：使用 this.isDragging 防止 timeupdate 覆盖 ──
             initProgressDrag() {
+                let rafId = null;
+
                 const seek = (clientX) => {
                     const rect = this.progressEl.getBoundingClientRect();
                     let pos = (clientX - rect.left) / rect.width;
@@ -1920,47 +1977,49 @@
                     }
                     this.progressFillEl.style.width = `${pos * 100}%`;
                     this.progressHandleEl.style.left = `${pos * 100}%`;
-                    this.currentTimeEl.textContent = this.formatTime(pos * (this.audioEl.duration || 0));
                 };
 
-                const onDown = (e) => {
+                const handleMove = (e) => {
+                    if (!this.isDragging) return;
+                    e.preventDefault();
+                    if (rafId) cancelAnimationFrame(rafId);
+                    rafId = requestAnimationFrame(() => {
+                        seek(e.clientX);
+                        rafId = null;
+                    });
+                };
+
+                this.progressEl.addEventListener("pointerdown", (e) => {
                     e.preventDefault();
                     this.isDragging = true;
                     this.progressEl.setPointerCapture(e.pointerId);
                     seek(e.clientX);
-                };
+                });
 
-                const onMove = (e) => {
-                    if (!this.isDragging) return;
-                    e.preventDefault();
-                    seek(e.clientX);
-                };
+                this.progressEl.addEventListener("pointermove", handleMove);
 
-                const onUp = (e) => {
-                    if (this.isDragging) {
-                        this.isDragging = false;
-                        this.progressEl.releasePointerCapture(e.pointerId);
-                        // 拖动结束：直接根据指针抬起位置同步音频进度
-                        const rect = this.progressEl.getBoundingClientRect();
-                        let pos = (e.clientX - rect.left) / rect.width;
-                        pos = Math.min(1, Math.max(0, pos));
-                        if (this.audioEl.duration && isFinite(this.audioEl.duration)) {
-                            this.audioEl.currentTime = pos * this.audioEl.duration;
-                        }
-                        this.progressFillEl.style.width = `${pos * 100}%`;
-                        this.progressHandleEl.style.left = `${pos * 100}%`;
-                        this.currentTimeEl.textContent = this.formatTime(pos * (this.audioEl.duration || 0));
+                this.progressEl.addEventListener("pointerup", (e) => {
+                    this.isDragging = false;
+                    this.progressEl.releasePointerCapture(e.pointerId);
+                    if (rafId) {
+                        cancelAnimationFrame(rafId);
+                        rafId = null;
                     }
-                };
+                    this.updateProgress();
+                });
 
-                this.progressEl.addEventListener("pointerdown", onDown);
-                this.progressEl.addEventListener("pointermove", onMove);
-                this.progressEl.addEventListener("pointerup", onUp);
-                this.progressEl.addEventListener("pointercancel", onUp);
+                this.progressEl.addEventListener("pointercancel", () => {
+                    this.isDragging = false;
+                    if (rafId) {
+                        cancelAnimationFrame(rafId);
+                        rafId = null;
+                    }
+                });
             }
 
             updateProgress() {
-                if (this.isDragging) return; // 拖动期间忽略 timeupdate
+                // 拖动时让 timeupdate 事件跳过，防止回跳
+                if (this.isDragging) return;
                 if (!this.audioEl.duration || !isFinite(this.audioEl.duration)) return;
                 const percent = (this.audioEl.currentTime / this.audioEl.duration) * 100 || 0;
                 this.progressFillEl.style.width = `${percent}%`;
@@ -2048,7 +2107,7 @@
         }
 
         // ──────────────────────────────────────────────────────────────────
-        // Theme Controller (with icon toggle)
+        // Theme Controller（改进：更新 aria-label）
         // ──────────────────────────────────────────────────────────────────
         function initTheme(pond) {
             const themeKey = 'nahom-theme';
@@ -2061,14 +2120,9 @@
                 if (pond) pond.setTheme(dark);
                 localStorage.setItem(themeKey, dark ? 'dark' : 'light');
 
-                // 更新所有主题切换按钮的图标
-                const sunIcon = `<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
-                const moonIcon = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+                // 更新所有主题切换按钮的 aria-label
                 document.querySelectorAll('.theme-toggle').forEach(btn => {
-                    const svg = btn.querySelector('svg');
-                    if (svg) {
-                        svg.innerHTML = dark ? moonIcon : sunIcon;
-                    }
+                    btn.setAttribute('aria-label', dark ? '切换到日间模式' : '切换到夜间模式');
                 });
             }
 
